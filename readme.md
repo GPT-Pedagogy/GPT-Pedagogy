@@ -3,12 +3,15 @@
 ## Out Project
 
 GPT-3 is a Large Language Model which can be used to cheat students out of the 
-opportunity to learn. Our intended use case of GPT enables transparent use of 
+opportunity to learn. Our intended use case of GPT enables the transparent use of 
 the technology between instructor and student, and will (hopefully) create a 
 more active and participatory learning environment. Our long-term goal for 
-higher education is along the lines of the UN SDG 4 i.e. “Ensure inclusive 
-and equitable quality education and promote lifelong learning opportunities 
-for all”. We view GPT as a way to create an adaptive learning experience which 
+higher education is along the lines of the UN SDG 4:
+
+> “Ensure inclusive and equitable quality education and promote lifelong 
+> learning opportunities for all”
+
+We view GPT as a way to create an adaptive learning experience which 
 promotes the educational endeavor rather than detracts from it.
 
 ## Our Goal
@@ -31,5 +34,5 @@ through the course material.
 
 To achieve these goals, we plan to use GPT-3 as a base model, fine-tuning it on
 some selected course material to provide more accurate information and help to students.
-The resulting model tentatively *Mathesis* will maintain its conversational abilities
+The resulting model, tentatively *Mathesis*, will maintain its conversational abilities
 while providing a more helpful teaching experience than the untrained base model.
