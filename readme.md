@@ -1,6 +1,7 @@
 # GPT-Pedagogy
+Group 2, 2023
 
-## Out Project
+## Our Project
 
 GPT-3 is a Large Language Model which can be used to cheat students out of the 
 opportunity to learn. Our intended use case of GPT enables the transparent use of 

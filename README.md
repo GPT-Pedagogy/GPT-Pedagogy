@@ -1,1 +1,0 @@
-# ChatGPT_Pedagogy_Group2_2023
