@@ -5,8 +5,12 @@ import json
 # test: file-u34CD1bxZx1muf8xwtk4KHr9, ft-c7sHj9Jbg47g7SxfebDE5fJ9
 
 
-def model_completion(model: str, prompt: str, **kwargs):
+def completion(model: str, prompt: str, **kwargs):
     return openai.Completion.create(model=model, prompt=prompt, **kwargs)
+
+
+def edit(model: str, instruction: str, editable: str, **kwargs):
+    return openai.Edit.create(model=model, instruction=instruction, input=editable, **kwargs)
 
 
 def fine_tune_request(model: str, tuning_file: str):
