@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #1e1e1e; color: azure">
 <head>
     <meta charset="UTF-8">
     <title>Mathesis</title>
@@ -8,18 +8,20 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mathesis.png') }}">
 </head>
 <body>
-<img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
-<div style="margin: auto; width: 50%">
-    <h2>Welcome to the <i>Mathesis</i> learning assistant</h2>
-    <form action="javascript:hello()">
-        <label for="inputText">Input Text</label><br>
-        <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
-        <input id="submitText" type="submit" value="Send">
-    </form>
-    <br>
-    <span>Output Response</span><br>
-    <div id="output" style="border: 3px solid black; min-height: 20px"></div>
-</div>
+    <img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
+    <div id="sidenav"></div>
+    <div style="margin: auto; width: 50%">
+        <h2>Welcome to the <i>Mathesis</i> learning assistant</h2>
 
+        <span>Output Response</span><br>
+        <div id="output"></div>
+        <br><hr><br>
+
+        <form action="javascript:sendInput()">
+            <label for="inputText">Input Text</label><br>
+            <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
+            <input id="submitText" type="submit" value="Send">
+        </form>
+    </div>
 </body>
 </html>

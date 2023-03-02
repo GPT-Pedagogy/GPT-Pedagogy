@@ -1,3 +1,21 @@
+#sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1e4e45;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-top: 80px;
+}
+
+.navElement {
+    display: block;
+    background-color: #1e5e55;
+}
+
 .speechBubble {
     width: fit-content;
     padding: 5px;
@@ -12,4 +30,16 @@
 
 .mathesisSpeech {
     background-color: lightgray;
+}
+
+#output {
+    border: 3px solid azure;
+    min-height: 20px;
+    margin: 5px;
+}
+
+#inputText {
+    background-color: #1e1e1e;
+    color: azure;
+    margin: 5px;
 }
