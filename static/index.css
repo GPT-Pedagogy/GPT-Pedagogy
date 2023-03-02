@@ -1,0 +1,15 @@
+.speechBubble {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.userSpeech {
+    background-color: lightblue;
+    margin-left: auto;
+}
+
+.mathesisSpeech {
+    background-color: lightgray;
+}

@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <title>Mathesis</title>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
-    <link href="{{ url_for('static', filename='index.css') }}"></link>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mathesis.png') }}">
 </head>
 <body>
-<form action="javascript:hello()">
-    <label for="inputText">Input Text</label><br>
-    <input id="inputText" name="inputText" type="text">
-    <input id="submitText" type="submit">
-</form>
-<span>Output Response</span><br>
-<div id="output" style="border: 3px solid black; min-height: 20px"></div>
+<img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
+<div style="margin: auto; width: 50%">
+    <h2>Welcome to the <i>Mathesis</i> learning assistant</h2>
+    <form action="javascript:hello()">
+        <label for="inputText">Input Text</label><br>
+        <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
+        <input id="submitText" type="submit" value="Send">
+    </form>
+    <br>
+    <span>Output Response</span><br>
+    <div id="output" style="border: 3px solid black; min-height: 20px"></div>
+</div>
 
 </body>
 </html>
