@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mathesis</title>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <link href="{{ url_for('static', filename='index.css') }}"></link>
+</head>
+<body>
+<form action="javascript:hello()">
+    <label for="inputText">Input Text</label><br>
+    <input id="inputText" name="inputText" type="text">
+    <input id="submitText" type="submit">
+</form>
+<span>Output Response</span><br>
+<div id="output" style="border: 3px solid black; min-height: 20px"></div>
+
+</body>
+</html>
