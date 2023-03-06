@@ -12,16 +12,19 @@
     <div id="sidenav"></div>
     <div style="margin: auto; width: 50%">
         <h2>Welcome to the <i>Mathesis</i> learning assistant</h2>
-
-        <span>Output Response</span><br>
+        <h3 id="lessonTitle"></h3><br>
+        <div id="lessons"></div>
+        <span id="outputTitle"></span><br>
         <div id="output"></div>
         <br><hr><br>
+        <div id="mainChat">
+            <form onsubmit="sendChat()">
+                <label for="inputText">Input Text</label><br>
+                <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
+                <input id="submitText" type="submit" value="Send">
+            </form>
+        </div>
 
-        <form action="javascript:sendInput()">
-            <label for="inputText">Input Text</label><br>
-            <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
-            <input id="submitText" type="submit" value="Send">
-        </form>
     </div>
 </body>
 </html>

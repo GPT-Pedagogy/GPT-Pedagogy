@@ -15,7 +15,7 @@ class Chat:
 
     def __init__(self, rcs_id: str):
         self.rcs_id = rcs_id
-        self.model = Model(self.MODEL_NAME)
+        self.model: Model = Model(self.MODEL_NAME)
 
     def submit(self, text: str, mode: str = CHAT_MODE):
         text = text.strip()

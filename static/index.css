@@ -14,6 +14,11 @@
 .navElement {
     display: block;
     background-color: #1e5e55;
+    cursor: pointer;
+}
+
+.navElement:hover{
+    background-color: #348f82;
 }
 
 .speechBubble {
@@ -24,12 +29,12 @@
 }
 
 .userSpeech {
-    background-color: lightblue;
+    background-color: #64abc2;
     margin-left: auto;
 }
 
 .mathesisSpeech {
-    background-color: lightgray;
+    background-color: #8f8f8f;
 }
 
 #output {
