@@ -5,11 +5,11 @@
     "quiz": [
       {
         "q": "What is the airspeed velocity of an unladen swallow?", "type": "mc",
-        "a":  1, "choices":  ["24 mph", "African or European swallow?", "I dont know"]
+        "a":  0, "choices":  ["24 mph", "African or European swallow?", "I dont know"]
       },
       {
         "q": "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", "type": "mc",
-        "a":  2, "choices": ["700 lbs", "I'll chuck you if you ask my something silly again", "threeb"]
+        "a":  1, "choices": ["700 lbs", "I'll chuck you if you ask my something silly again", "threeb"]
       }
     ]
   },

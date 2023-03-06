@@ -3,7 +3,7 @@
 const USER_SPEAKER = 0;
 const MATHESIS_SPEAKER = 1;
 const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
-let LESSONS = null;
+let LESSONS = {};
 const CHAT_HISTORY = {};
 
 function sendChat(){
@@ -26,31 +26,26 @@ function sendChat(){
 }
 
 function sendQuiz(lessonId){
-    let lessonForm = document.getElementById(`lessonForm${lessonId}`);
-    let answers = {};
-    // TODO: Rewrite lessons everywhere as dict instead of list of lessons
-    for(let lesson of LESSONS){
-        if(lesson["id"] === lessonId) {
-            for (let qId in lesson["quiz"]) {
-                answers
-                for(let cId in lesson["quiz"][qId]["choices"]){
-                    quizForm.innerHTML += `<input type="radio" name="${lessonId}".${qId} value="${cId}">
-                        <label>${lesson["quiz"][qId]["choices"][cId]}</label><br>`;
-                }
-            }
-            break;
+    let quiz = LESSONS[lessonId]["quiz"].slice();
+    for (let qId in quiz) {
+        let answer = document.querySelector(`input[name="${lessonId}.${qId}"]:checked`);
+        if(!answer){
+            console.log("No answer for question", qId);
+            return false;
         }
+        quiz[qId]["selected"] = answer.value;
     }
+    document.getElementById("output").innerHTML += TYPING;
     fetch('/evaluate', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-        body: JSON.stringify({ "inputText": inputText })
+        body: JSON.stringify({"lessonId": lessonId, "quiz": quiz})
     }).then(response => response.json()).then(response => {
         console.log(JSON.stringify(response));
         // Remove typing
         let tmp = document.getElementById("output").innerHTML;
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
-        addOutput('chat', MATHESIS_SPEAKER, response["content"]);
+        addOutput(lessonId, MATHESIS_SPEAKER, JSON.stringify(response["content"]));
     });
 }
 
@@ -61,10 +56,10 @@ function loadLessons(){
     }).then(response => response.json()).then(response => {
         console.log("Lessons:", JSON.stringify(response));
         let lessons = response;
-        LESSONS = lessons;
         let sideNav = document.getElementById("sidenav");
         sideNav.innerHTML = `<div class="navElement" onclick="enterLesson('chat');">Main Chat</div>`;
-        for(let lesson of lessons){
+        LESSONS = lessons;
+        for(let lesson of Object.values(lessons)){
             console.log("Lesson:", lesson);
             sideNav.innerHTML += `<div class="navElement" onclick="enterLesson('${lesson.id}');">
                 ${lesson.name}
@@ -96,20 +91,18 @@ function enterLesson(lessonId){
 function formatQuestions(lessonId){
     let quizForm = document.createElement("FORM");
     quizForm.id = `lessonForm${lessonId}`;
+    quizForm.action = "javascript:void(0)";
     quizForm.onsubmit = () => sendQuiz(lessonId);
-    for(let lesson of LESSONS){
-        if(lesson["id"] === lessonId) {
-            for (let qId in lesson["quiz"]) {
-                quizForm.innerHTML += `<p>${lesson["quiz"][qId]["q"]}</p>`;
-                for(let cId in lesson["quiz"][qId]["choices"]){
-                    quizForm.innerHTML += `<input type="radio" name="${lessonId}".${qId} value="${cId}">
-                        <label>${lesson["quiz"][qId]["choices"][cId]}</label><br>`;
-                }
-            }
-            break;
+    let quiz = LESSONS[lessonId]["quiz"];
+    for (let qId in quiz) {
+        quizForm.innerHTML += `<p>${quiz[qId]["q"]}</p>`;
+        for(let cId in quiz[qId]["choices"]){
+            quizForm.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
+                <label>${quiz[qId]["choices"][cId]}</label><br>`;
         }
     }
-    quizForm.innerHTML += `<br><input type="submit" value="Submit">`;
+
+    quizForm.innerHTML += `<br><input type="submit" value="Submit"><br><hr>`;
     return quizForm;
 }
 
