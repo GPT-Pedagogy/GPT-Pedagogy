@@ -6,25 +6,30 @@ const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
 let LESSONS = {};
 const CHAT_HISTORY = {};
 
+/** Sends the content of the input prompt to the backend and appends the generated response to the chat*/
 function sendChat(){
     let inputText = document.getElementById("inputText").value;
     document.getElementById("inputText").value = '';
     addOutput('chat', USER_SPEAKER, inputText);
-    // Add typing
+    // Add typing indicator
     document.getElementById("output").innerHTML += TYPING;
+
     fetch('/input', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({ "inputText": inputText })
     }).then(response => response.json()).then(response => {
         console.log(JSON.stringify(response));
-        // Remove typing
+        // Remove typing indicator
         let tmp = document.getElementById("output").innerHTML;
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
         addOutput('chat', MATHESIS_SPEAKER, response["content"]);
     });
 }
 
+/** Sends the user response to a lesson quiz to the backend and appends the feedback to the chat
+ * @param lessonId {String} The id of the lesson the quiz belongs to
+ * @return {Boolean} If the quiz has been submitted successfully*/
 function sendQuiz(lessonId){
     let quiz = LESSONS[lessonId]["quiz"].slice();
     for (let qId in quiz) {
@@ -36,6 +41,7 @@ function sendQuiz(lessonId){
         quiz[qId]["selected"] = answer.value;
     }
     document.getElementById("output").innerHTML += TYPING;
+
     fetch('/evaluate', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -47,10 +53,13 @@ function sendQuiz(lessonId){
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
         addOutput(lessonId, MATHESIS_SPEAKER, JSON.stringify(response["content"]));
     });
+    return true;
 }
 
+/** Loads in lesson information from the backend and builds the lessons*/
 function loadLessons(){
     console.log("Getting lessons...");
+
     fetch('/lessons', {
         method: 'GET'
     }).then(response => response.json()).then(response => {
@@ -68,6 +77,8 @@ function loadLessons(){
     });
 }
 
+/** Switches the current view to that of the lesson indicated by {@link lessonId}
+ * @param lessonId {String} The id of the lesson to be entered*/
 function enterLesson(lessonId){
     console.log("Entering lesson", lessonId);
     loadChat(lessonId);
@@ -88,11 +99,16 @@ function enterLesson(lessonId){
     lessonElem.appendChild(formatQuestions(lessonId));
 }
 
+/** Creates the quiz detained by the lesson on the front end for the user to interact with
+ * @param lessonId {String} The id of the lesson with the quiz to be displayed
+ * @return {HTMLElement} The HTML form of the quiz*/
 function formatQuestions(lessonId){
+    // TODO: add support for short answer questions and evaluation
     let quizForm = document.createElement("FORM");
     quizForm.id = `lessonForm${lessonId}`;
     quizForm.action = "javascript:void(0)";
     quizForm.onsubmit = () => sendQuiz(lessonId);
+
     let quiz = LESSONS[lessonId]["quiz"];
     for (let qId in quiz) {
         quizForm.innerHTML += `<p>${quiz[qId]["q"]}</p>`;
@@ -106,6 +122,11 @@ function formatQuestions(lessonId){
     return quizForm;
 }
 
+/** Adds text to the chat from a specified entity
+ * @param chatId {String} The id of the chat for saving and loading messages
+ * @param speaker {number} The id of the speaker producing the text
+ * @param text {String} The text to be sent to the chat
+ * @param updateHistory {Boolean} Weather to update the history of the chat with this {@link text}*/
 function addOutput(chatId, speaker, text, updateHistory = true){
     let speakerName = speaker === USER_SPEAKER ? "Me" : "Mathesis";
     let bubbleClass = speaker === USER_SPEAKER ? "userSpeech" : "mathesisSpeech";
@@ -118,6 +139,8 @@ function addOutput(chatId, speaker, text, updateHistory = true){
     }
 }
 
+/** Clears the chat box and loads in the history from the chat with the id {@link chatId}
+ * @param chatId {String} The id of the chat to load*/
 function loadChat(chatId){
     document.getElementById("output").innerHTML = "";
 

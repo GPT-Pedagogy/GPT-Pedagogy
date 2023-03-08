@@ -14,6 +14,7 @@ def home():
 
 @app.route('/lessons', methods=['GET'])
 def get_lessons():
+    """Returns lesson information to the front end"""
 
     if not len(LESSONS):
         with open("data/lessons.json", "r") as file:
@@ -31,6 +32,8 @@ def get_lessons():
 
 @app.route('/input', methods=['POST'])
 def get_input():
+    """Takes in user input and passes it off to the chat"""
+
     input_text = request.json["inputText"]
     print("Input text", input_text)
     chat.submit(input_text)
@@ -39,7 +42,9 @@ def get_input():
 
 
 @app.route('/evaluate', methods=['POST'])
-def evaluate_answer():
+def evaluate_lesson():
+    """Evaluates the submitted user information for a lesson"""
+
     answered_quiz = request.json
     feedback = {}
     for qId, question in enumerate(answered_quiz["quiz"]):

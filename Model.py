@@ -4,6 +4,7 @@ import json
 
 
 class Singleton(type):
+    """Helper singleton metaclass"""
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -13,6 +14,7 @@ class Singleton(type):
 
 
 class Model(metaclass=Singleton):
+    """Class representing an openai model.  Contains low level methods associated with basic model functionality"""
 
     def __init__(self, model_name: str):
         self.model_name = model_name
@@ -21,6 +23,7 @@ class Model(metaclass=Singleton):
                 openai.api_key = json.loads(file.read())["main"]
 
     def complete_chat(self, prompt: str, chat_history: list[dict[str, str]] = None):
+        """Generates a response to the prompt based off of a proper chat history.  Used chat-gpt api"""
         if self.model_name != "gpt-3.5-turbo":
             raise AttributeError(f"The model type {self.model_name} is not compatible with the chat API.  Try using gpt-3.5-turbo")
 
@@ -34,7 +37,7 @@ class Model(metaclass=Singleton):
         return openai.ChatCompletion.create(model=self.model_name, messages=chat_history)["choices"][0]["message"]["content"]
 
     def complete(self, prompt: str, context: dict[str, str] = None, **kwargs):
-        """Completes the prompt with additional context considered"""
+        """Completes the prompt with additional context considered.  Uses fine-tuned model"""
         if not self.model_name.startswith("text-"):
             raise AttributeError(f"The model type {self.model_name} is not compatible with the complete API.  Try using a base model")
 
@@ -50,7 +53,9 @@ class Model(metaclass=Singleton):
         return openai.Completion.create(model=self.model_name, prompt=context_prompt, **kwargs)["choices"][0]["text"]
 
     def edit(self, instruction: str, editable: str, **kwargs):
+        """Generates a corrected version of the ``editable`` parameter"""
         return openai.Edit.create(model=self.model_name, instruction=instruction, input=editable, **kwargs)
 
     def embed(self, text: str):
+        """Creates a vector embedding of the given text"""
         return torch.tensor(openai.Embedding.create(model=self.model_name, input=text)["data"]["embedding"], dtype=torch.float)
