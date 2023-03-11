@@ -10,6 +10,10 @@
       {
         "q": "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", "type": "mc",
         "a":  1, "choices": ["700 lbs", "I'll chuck you if you ask my something silly again", "threeb"]
+      },
+      {
+        "q": "Describe how exactly it feels to chew 5 gum.", "type": "sa",
+        "a":  ""
       }
     ]
   },

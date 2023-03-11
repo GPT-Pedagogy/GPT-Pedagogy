@@ -23,7 +23,7 @@ function sendChat(){
         // Remove typing indicator
         let tmp = document.getElementById("output").innerHTML;
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
-        addOutput('chat', MATHESIS_SPEAKER, response["content"]);
+        addOutput('chat', MATHESIS_SPEAKER, response.content);
     });
 }
 
@@ -31,14 +31,18 @@ function sendChat(){
  * @param lessonId {String} The id of the lesson the quiz belongs to
  * @return {Boolean} If the quiz has been submitted successfully*/
 function sendQuiz(lessonId){
-    let quiz = LESSONS[lessonId]["quiz"].slice();
+    let quiz = LESSONS[lessonId].quiz.slice();
     for (let qId in quiz) {
-        let answer = document.querySelector(`input[name="${lessonId}.${qId}"]:checked`);
+        let answer = "";
+        if(quiz[qId].type === "mc")
+            answer = document.querySelector(`input[name="${lessonId}.${qId}"]:checked`);
+        if(quiz[qId].type === "sa")
+            answer = document.querySelector(`input[name="${lessonId}.${qId}"]`);
         if(!answer){
             console.log("No answer for question", qId);
             return false;
         }
-        quiz[qId]["selected"] = answer.value;
+        quiz[qId].selected = answer.value;
     }
     document.getElementById("output").innerHTML += TYPING;
 
@@ -51,7 +55,11 @@ function sendQuiz(lessonId){
         // Remove typing
         let tmp = document.getElementById("output").innerHTML;
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
-        addOutput(lessonId, MATHESIS_SPEAKER, JSON.stringify(response["content"]));
+
+        for(let fId of Object.keys(response.content)) {
+            let feedback = `Feedback for question ${fId}: ${response.content[fId]}`;
+            addOutput(lessonId, MATHESIS_SPEAKER, JSON.stringify(feedback));
+        }
     });
     return true;
 }
@@ -109,13 +117,16 @@ function formatQuestions(lessonId){
     quizForm.action = "javascript:void(0)";
     quizForm.onsubmit = () => sendQuiz(lessonId);
 
-    let quiz = LESSONS[lessonId]["quiz"];
+    let quiz = LESSONS[lessonId].quiz;
     for (let qId in quiz) {
-        quizForm.innerHTML += `<p>${quiz[qId]["q"]}</p>`;
-        for(let cId in quiz[qId]["choices"]){
-            quizForm.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
-                <label>${quiz[qId]["choices"][cId]}</label><br>`;
-        }
+        quizForm.innerHTML += `<p>${quiz[qId].q}</p>`;
+        if(quiz[qId].type === "mc")
+            for(let cId in quiz[qId].choices){
+                quizForm.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
+                    <label>${quiz[qId].choices[cId]}</label><br>`;
+            }
+        if(quiz[qId].type === "sa")
+            quizForm.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
     }
 
     quizForm.innerHTML += `<br><input type="submit" value="Submit"><br><hr>`;
@@ -128,10 +139,9 @@ function formatQuestions(lessonId){
  * @param text {String} The text to be sent to the chat
  * @param updateHistory {Boolean} Weather to update the history of the chat with this {@link text}*/
 function addOutput(chatId, speaker, text, updateHistory = true){
-    let speakerName = speaker === USER_SPEAKER ? "Me" : "Mathesis";
     let bubbleClass = speaker === USER_SPEAKER ? "userSpeech" : "mathesisSpeech";
     document.getElementById("output").innerHTML += `<p class="speechBubble ${bubbleClass}">
-        ${speakerName}: ${text}
+        ${text}
     </p>`;
     if(updateHistory){
         if(!CHAT_HISTORY[chatId]) CHAT_HISTORY[chatId] = [];
@@ -146,7 +156,7 @@ function loadChat(chatId){
 
     if(CHAT_HISTORY[chatId])
         for(let message of CHAT_HISTORY[chatId])
-            addOutput(chatId, message["speaker"], message["text"], false);
+            addOutput(chatId, message.speaker, message.text, false);
 }
 
 window.onload = () => {

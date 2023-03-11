@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 import json
 import copy
-from Chat import Chat
+from components import Chat
 app = Flask(__name__)
-chat = Chat("0000")
+chat = Chat()
 LESSONS = {}
 
 
@@ -48,10 +48,13 @@ def evaluate_lesson():
     answered_quiz = request.json
     feedback = {}
     for qId, question in enumerate(answered_quiz["quiz"]):
-        if question["selected"] == str(LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["a"]):
-            feedback[qId] = "Repic"
-        else:
-            feedback[qId] = "Not repic"
+        if LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
+            if question["selected"] == str(LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["a"]):
+                feedback[qId] = "Repic"
+            else:
+                feedback[qId] = "Not repic"
+        if LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
+            feedback[qId] = "Short repic"
 
     print("Quiz", answered_quiz)
     return {"content": feedback}

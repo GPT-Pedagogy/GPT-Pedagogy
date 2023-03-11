@@ -13,7 +13,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class Model(metaclass=Singleton):
+class Model:
     """Class representing an openai model.  Contains low level methods associated with basic model functionality"""
 
     def __init__(self, model_name: str):

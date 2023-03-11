@@ -14,11 +14,10 @@ class Chat:
     MODEL_NAME = "text-ada-001"
     chat_history = []
 
-    def __init__(self, rcs_id: str):
-        self.rcs_id = rcs_id
+    def __init__(self):
         self.model: Model = Model(self.MODEL_NAME)
 
-    def submit(self, text: str, mode: str = CHAT_MODE):
+    def submit(self, text: str):
         """Submit user text into the chat"""
         text = text.strip()
         # Add punctuation to avoid bad completions
@@ -26,7 +25,7 @@ class Chat:
             text += "."
         self.chat_history.append({"role": "user", "content": text, "timestamp": time.time()})
 
-    def generate(self, mode: str = CHAT_MODE):
+    def generate(self):
         """Generate an appropriate response from the model"""
         # mode logic
         response = self.model.complete(self.chat_history[-1]["content"])
@@ -49,3 +48,20 @@ class Chat:
     def clear(self):
         """Clears chat history"""
         self.chat_history = []
+
+
+class Evaluate:
+    MODEL_NAME = "text-ada-001"
+
+    def __init__(self):
+        self.model: Model = Model(self.MODEL_NAME)
+
+    def eval_short_answer(self, question: str, answer: str):
+        """Evaluates the answer to a question and provides feedback and a correct example"""
+        prompt = f"A student was asked {question} and they responded with {answer}.  Evaluate this answer."
+        return self.model.complete(prompt)
+
+    def correct_short_answer(self, question: str, answer: str):
+        """Takes in an incorrect answer and corrects it to a better response"""
+        prompt = f"Make this answer better match the question {question}."
+        return self.model.edit(prompt, answer)
