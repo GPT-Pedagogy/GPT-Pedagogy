@@ -50,6 +50,7 @@ class Chat:
         self.chat_history = []
 
     def set_model(self, model_name: str):
+        """Sets the model to be used in the chat"""
         self.MODEL_NAME = model_name
         self.model: Model = Model(self.MODEL_NAME)
 
@@ -71,5 +72,6 @@ class Evaluate:
         return self.model.edit(prompt, answer)
 
     def set_model(self, model_name: str):
+        """Sets the model to be used for evaluation"""
         self.MODEL_NAME = model_name
         self.model: Model = Model(self.MODEL_NAME)

@@ -16,6 +16,7 @@ class Teacher:
         self.evaluate = Evaluate()
 
     def gen_multiple_choice(self, topic: str, max_tokens=MIN_MC_TOKENS, **kwargs):
+        """Generates a multiple choice question based on the given topic and encodes it into json"""
         if kwargs.get("max_tokens", self.MIN_MC_TOKENS) < self.MIN_MC_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_MC_TOKENS}!")
 
@@ -34,6 +35,7 @@ class Teacher:
         return {"q": question, "type": "mc", "a":  answer, "choices": question[1:]}
 
     def gen_short_answer(self, topic: str, max_tokens=MIN_SA_TOKENS, **kwargs):
+        """Generates a short question based on the given topic and encodes it, and its answer, into json"""
         if kwargs.get("max_tokens", self.MIN_SA_TOKENS) < self.MIN_SA_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_SA_TOKENS}!")
 
@@ -42,6 +44,7 @@ class Teacher:
         return {"q": question[0], "type": "sa", "a":  question[1]}
 
     def set_model(self, teacher_model: str = None, chat_model: str = None, eval_model: str = None):
+        """Sets the model name for the specified object(s)"""
         if teacher_model:
             self.MODEL_NAME = teacher_model
             self.model: Model = Model(self.MODEL_NAME)

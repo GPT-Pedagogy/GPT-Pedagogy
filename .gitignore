@@ -1,3 +1,5 @@
 OPENAI_API_KEY.json
 .idea
+.fleet
+venv
 static/*.xcf
