@@ -22,7 +22,7 @@ class Model:
             with open("OPENAI_API_KEY.json", "r") as file:
                 openai.api_key = json.loads(file.read())["main"]
 
-    def complete_chat(self, prompt: str, chat_history: list[dict[str, str]] = None):
+    def complete_chat(self, prompt: str, chat_history: list[dict[str, str]] = None) -> str:
         """Generates a response to the prompt based off of a proper chat history.  Used chat-gpt api"""
         if self.model_name != "gpt-3.5-turbo":
             raise AttributeError(f"The model type {self.model_name} is not compatible with the chat API.  Try using gpt-3.5-turbo")
@@ -36,7 +36,7 @@ class Model:
 
         return openai.ChatCompletion.create(model=self.model_name, messages=chat_history)["choices"][0]["message"]["content"]
 
-    def complete(self, prompt: str, context: dict[str, str] = None, **kwargs):
+    def complete(self, prompt: str, context: dict[str, str] = None, **kwargs) -> str:
         """Completes the prompt with additional context considered.  Uses fine-tuned model"""
         if not self.model_name.startswith("text-"):
             raise AttributeError(f"The model type {self.model_name} is not compatible with the complete API.  Try using a base model")

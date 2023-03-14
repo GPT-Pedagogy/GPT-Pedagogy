@@ -111,7 +111,6 @@ function enterLesson(lessonId){
  * @param lessonId {String} The id of the lesson with the quiz to be displayed
  * @return {HTMLElement} The HTML form of the quiz*/
 function formatQuestions(lessonId){
-    // TODO: add support for short answer questions and evaluation
     let quizForm = document.createElement("FORM");
     quizForm.id = `lessonForm${lessonId}`;
     quizForm.action = "javascript:void(0)";

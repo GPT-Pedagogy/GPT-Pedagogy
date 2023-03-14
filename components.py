@@ -49,6 +49,10 @@ class Chat:
         """Clears chat history"""
         self.chat_history = []
 
+    def set_model(self, model_name: str):
+        self.MODEL_NAME = model_name
+        self.model: Model = Model(self.MODEL_NAME)
+
 
 class Evaluate:
     MODEL_NAME = "text-ada-001"
@@ -65,3 +69,7 @@ class Evaluate:
         """Takes in an incorrect answer and corrects it to a better response"""
         prompt = f"Make this answer better match the question {question}."
         return self.model.edit(prompt, answer)
+
+    def set_model(self, model_name: str):
+        self.MODEL_NAME = model_name
+        self.model: Model = Model(self.MODEL_NAME)

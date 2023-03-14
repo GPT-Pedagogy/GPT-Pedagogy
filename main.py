@@ -1,6 +1,8 @@
 import openai
 import json
 from Model import Model
+from Teacher import Teacher
+
 
 # main: file-Ol4t15mr9T3Wb7cUl4bEtRDj, ft-zJk1gHZzIgGjnNJjMEs7Zbk8
 # test: file-u34CD1bxZx1muf8xwtk4KHr9, ft-c7sHj9Jbg47g7SxfebDE5fJ9
@@ -32,7 +34,9 @@ if __name__ == "__main__":
     # response = openai.File.list()
     # print(response)
 
-    # model = Model("gpt-3.5-turbo")
-    model = Model("text-ada-001")
-    resp = model.complete("How are you.")
-    print(resp)
+    teacher = Teacher("000")
+    teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
+    m_resp = teacher.gen_multiple_choice("dogs")
+    # s_resp = teacher.gen_short_answer("dogs")
+    print(m_resp)
+    # print(s_resp)
