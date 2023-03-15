@@ -1,5 +1,11 @@
 OPENAI_API_KEY.json
+__pycache__
 .idea
 .fleet
 venv
 static/*.xcf
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+docs/*/*.log
