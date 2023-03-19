@@ -54,7 +54,7 @@ class Model:
 
     def edit(self, instruction: str, editable: str, **kwargs):
         """Generates a corrected version of the ``editable`` parameter"""
-        return openai.Edit.create(model=self.model_name, instruction=instruction, input=editable, **kwargs)
+        return openai.Edit.create(model=self.model_name, instruction=instruction, input=editable, **kwargs)["choices"][0]["text"]
 
     def embed(self, text: str):
         """Creates a vector embedding of the given text"""

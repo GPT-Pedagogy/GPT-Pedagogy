@@ -36,7 +36,9 @@ if __name__ == "__main__":
 
     teacher = Teacher("000")
     teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
-    m_resp = teacher.gen_multiple_choice("dogs")
+    print(teacher.evaluate.editor_model.edit("Make into a southern accent", "Hello there"))
+
+    # m_resp = teacher.gen_multiple_choice("dogs")
     # s_resp = teacher.gen_short_answer("dogs")
-    print(m_resp)
+    # print(m_resp)
     # print(s_resp)

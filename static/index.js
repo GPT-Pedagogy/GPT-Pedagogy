@@ -42,7 +42,7 @@ function sendQuiz(lessonId){
             console.log("No answer for question", qId);
             return false;
         }
-        quiz[qId].selected = answer.value;
+        quiz[qId].response = answer.value;
     }
     document.getElementById("output").innerHTML += TYPING;
 
@@ -57,8 +57,8 @@ function sendQuiz(lessonId){
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
 
         for(let fId of Object.keys(response.content)) {
-            let feedback = `Feedback for question ${fId}: ${response.content[fId]}`;
-            addOutput(lessonId, MATHESIS_SPEAKER, JSON.stringify(feedback));
+            let feedback = `Feedback for question ${fId}: ${response.content[fId]}`.replace(/\n/g, "<br>");
+            addOutput(lessonId, MATHESIS_SPEAKER, feedback);
         }
     });
     return true;

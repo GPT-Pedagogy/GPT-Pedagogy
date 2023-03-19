@@ -57,19 +57,21 @@ class Chat:
 
 class Evaluate:
     MODEL_NAME = "text-ada-001"
+    EDITOR_MODEL_NAME = "text-davinci-edit-001"
 
     def __init__(self):
         self.model: Model = Model(self.MODEL_NAME)
+        self.editor_model: Model = Model(self.EDITOR_MODEL_NAME)
 
     def eval_short_answer(self, question: str, answer: str):
         """Evaluates the answer to a question and provides feedback and a correct example"""
-        prompt = f"A student was asked {question} and they responded with {answer}.  Evaluate this answer."
+        prompt = f"A student was asked {question} and they responded with {answer}.  Is this answer correct or incorrect?"
         return self.model.complete(prompt)
 
     def correct_short_answer(self, question: str, answer: str):
         """Takes in an incorrect answer and corrects it to a better response"""
         prompt = f"Make this answer better match the question {question}."
-        return self.model.edit(prompt, answer)
+        return self.editor_model.edit(prompt, answer)
 
     def set_model(self, model_name: str):
         """Sets the model to be used for evaluation"""

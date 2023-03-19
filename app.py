@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 import json
 import copy
-from components import Chat
+from Teacher import Teacher
 app = Flask(__name__)
-chat = Chat()
+teacher = Teacher("000")
+teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
 LESSONS = {}
 
 
@@ -36,8 +37,8 @@ def get_input():
 
     input_text = request.json["inputText"]
     print("Input text", input_text)
-    chat.submit(input_text)
-    resp = chat.generate()
+    teacher.chat.submit(input_text)
+    resp = teacher.chat.generate()
     return {"content": resp}
 
 
@@ -49,12 +50,14 @@ def evaluate_lesson():
     feedback = {}
     for qId, question in enumerate(answered_quiz["quiz"]):
         if LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
-            if question["selected"] == str(LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["a"]):
-                feedback[qId] = "Repic"
+            if question["response"] == str(LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["a"]):
+                feedback[qId] = "Correct"
             else:
-                feedback[qId] = "Not repic"
+                feedback[qId] = "Incorrect"
         if LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
-            feedback[qId] = "Short repic"
+            ques, resp = LESSONS[answered_quiz["lessonId"]]["quiz"][qId]["q"], question["response"]
+            feedback[qId] = teacher.evaluate.eval_short_answer(ques, resp)
+            feedback[qId] += "\n"+teacher.evaluate.correct_short_answer(ques, resp)
 
     print("Quiz", answered_quiz)
     return {"content": feedback}
