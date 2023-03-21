@@ -68,9 +68,7 @@ function sendQuiz(lessonId){
 function loadLessons(){
     console.log("Getting lessons...");
 
-    fetch('/lessons', {
-        method: 'GET'
-    }).then(response => response.json()).then(response => {
+    fetch('/lessons', {method: 'GET'}).then(response => response.json()).then(response => {
         console.log("Lessons:", JSON.stringify(response));
         let lessons = response;
         let sideNav = document.getElementById("sidenav");

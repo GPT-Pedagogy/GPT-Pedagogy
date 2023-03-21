@@ -11,7 +11,7 @@ import time
 class Chat:
     """Class representing a chat instance of a user, keeping track of chat history and managing interactions"""
     CHAT_MODE = 0
-    MODEL_NAME = "text-ada-001"
+    MODEL_NAME = "text-davinci-003"
     chat_history = []
 
     def __init__(self):
@@ -56,7 +56,7 @@ class Chat:
 
 
 class Evaluate:
-    MODEL_NAME = "text-ada-001"
+    MODEL_NAME = "text-davinci-003"
     EDITOR_MODEL_NAME = "text-davinci-edit-001"
 
     def __init__(self):
