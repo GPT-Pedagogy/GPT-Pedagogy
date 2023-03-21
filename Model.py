@@ -16,6 +16,8 @@ class Singleton(type):
 class Model:
     """Class representing an openai model.  Contains low level methods associated with basic model functionality"""
 
+    MAX_CONTEXT_LEN = 500
+
     def __init__(self, model_name: str):
         self.model_name = model_name
         if not openai.api_key:
@@ -36,7 +38,7 @@ class Model:
 
         return openai.ChatCompletion.create(model=self.model_name, messages=chat_history)["choices"][0]["message"]["content"]
 
-    def complete(self, prompt: str, context: dict[str, str] = None, **kwargs) -> str:
+    def complete(self, prompt: str, context: list[dict[str, str]] = None, **kwargs) -> str:
         """Completes the prompt with additional context considered.  Uses fine-tuned model"""
         if not self.model_name.startswith("text-"):
             raise AttributeError(f"The model type {self.model_name} is not compatible with the complete API.  Try using a base model")
@@ -46,8 +48,13 @@ class Model:
 
         # Add context values to prompt so model can include them in current response
         context_prompt = "Please complete using the following information:\n\n"
-        for ctx_prompt, ctx_completion in context.items():
-            context_prompt += f"Q: {ctx_prompt[0]}\nA:{ctx_completion[1]}\n\n"
+        for msg in context[::-1]:
+            context_prompt = ("Q:" if msg["role"] == "assistant" else "A:")+msg["content"]+"\n"+context_prompt
+
+            # Limit context length to not have too many tokens
+            if context_prompt.count(" ") > self.MAX_CONTEXT_LEN:
+                break
+
         context_prompt += f"Q: {prompt}\nA:"
 
         return openai.Completion.create(model=self.model_name, prompt=context_prompt, **kwargs)["choices"][0]["text"]

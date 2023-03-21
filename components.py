@@ -13,6 +13,7 @@ class Chat:
     CHAT_MODE = 0
     MODEL_NAME = "text-davinci-003"
     chat_history = []
+    MIN_CHAT_TOKENS = 30
 
     def __init__(self):
         self.model: Model = Model(self.MODEL_NAME)
@@ -28,7 +29,8 @@ class Chat:
     def generate(self):
         """Generate an appropriate response from the model"""
         # mode logic
-        response = self.model.complete(self.chat_history[-1]["content"])
+        response = self.model.complete(self.chat_history[-1]["content"],
+                       context=self.chat_history[:-1], max_tokens=self.MIN_CHAT_TOKENS)
         self.chat_history.append({"role": "assistant", "content": response, "timestamp": time.time()})
         return response
 
