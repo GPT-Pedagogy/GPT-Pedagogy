@@ -1,11 +1,3 @@
-# TODO: going to play in MongoDB.
-
-# TODO: Query function
-# TODO: Update function
-# TODO: create new user -> add into dbs 
-# TODO: upload the performance to DBS
-
-# mongodb+srv://GPTadmin:xinformatics@localhost/?authMechanism=SCRAM-SHA-1
 import pymongo
 
 # Function to establish connection to MongoDB
@@ -20,12 +12,50 @@ def query_documents(collection):
     return collection.find()
 
 
-myquery = { "RCSid": "liyu123" }
+# Function to check whether a user already exists => Using rcsid to check whether the user exist
+# Parameter is database schema collection
+# Return: False => Not Exist; True => Exist
+def valida_user(collection, rcsid):
+    validate = False
+    query = {'RCSid': rcsid}
+    data = collection.find_one(query)
+    if data:
+        print("The user already exists in the collection")
+        validate = True
+    else:
+        print("The user does not exist in the collection")
+    return validate
+
+
+# Insert a new user into the database 
+def insert_user(collection, rcsid, name):
+    if valida_user(collection, rcsid):
+        return False
+    data = {
+        'RCSid': rcsid,
+        'Name': name,
+        'Chatlog': {
+        
+        },
+        'Performance': {
+        
+        }
+    }
+    result = collection.insert_one(data)
+    print("User inserted with ID:", result.inserted_id)
+
+
+
+# TODO: Update function (update the chatlog, update the performance)
+# TODO: upload the performance to DBS (and chatlog)
+
 
 
 
 if __name__ == '__main__':
-    dbs = connection()
-    mydoc = query_documents(dbs)
-    for x in mydoc:
-        print(x)
+    collection = connection()
+    data = query_documents(collection)
+    # insert_user(collection, "liy123", "Sam")
+
+    for document in data:
+        print(document, "\n")
