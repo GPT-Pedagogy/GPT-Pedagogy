@@ -1,0 +1,94 @@
+[
+    {
+        "RCSid": "heri23",
+        "Name": "Michael Jordan",
+        "Chatlog": {
+            "Homework help on Chapter 1": [
+                "User: xxxxxxx 1-1",
+                "Bot: xxxxxxxx response 1-1",
+                "User: xxxxxxx 2",
+                "Bot: xxxxxxxx response 2",
+                "User: xxxxxxx 3",
+                "Bot: xxxxxxxx response 3"
+            ],
+            "Pop Quiz": [
+                "User: xxxxxxx 1-1",
+                "Bot: xxxxxxxx response 1-1",
+                "User: xxxxxxx 2",
+                "Bot: xxxxxxxx response 2",
+                "User: xxxxxxx 3",
+                "Bot: xxxxxxxx response 3"
+            ]
+        },
+        "Performance": {
+            "Chapter 1": {
+                "Topic": "Pop quiz on Chapter 1",
+                "Outcome": {
+                    "Question 1": "Correct",
+                    "Question 2": "Incorrect",
+                    "Question 3": "Correct",
+                    "Question 4": "Incorrect",
+                    "Question 5": "Correct",
+                    "Question 6": "Incorrect"
+                }
+            },
+            "Chapter 2": {
+                "Topic": "Pop quiz on Chapter 2",
+                "Outcome": {
+                    "Question 1": "Correct",
+                    "Question 2": "Incorrect",
+                    "Question 3": "Correct",
+                    "Question 4": "Incorrect",
+                    "Question 5": "Correct",
+                    "Question 6": "Incorrect"
+                }
+            }
+        }
+    },
+    {
+        "RCSid": "liyu123",
+        "Name": "Will Smiths",
+        "Chatlog": {
+            "Homework help on Chapter 1": [
+                "User: xxxxxxx 1-1",
+                "Bot: xxxxxxxx response 1-1",
+                "User: xxxxxxx 2",
+                "Bot: xxxxxxxx response 2",
+                "User: xxxxxxx 3",
+                "Bot: xxxxxxxx response 3"
+            ],
+            "Pop Quiz": [
+                "User: xxxxxxx 1-1",
+                "Bot: xxxxxxxx response 1-1",
+                "User: xxxxxxx 2",
+                "Bot: xxxxxxxx response 2",
+                "User: xxxxxxx 3",
+                "Bot: xxxxxxxx response 3"
+            ]
+        },
+        "Performance": {
+            "Chapter 1": {
+                "Topic": "Pop quiz on Chapter 1",
+                "Outcome": {
+                    "Question 1": "Correct",
+                    "Question 2": "Incorrect",
+                    "Question 3": "Correct",
+                    "Question 4": "Incorrect",
+                    "Question 5": "Correct",
+                    "Question 6": "Incorrect"
+                }
+            },
+            "Chapter 2": {
+                "Topic": "Pop quiz on Chapter 2",
+                "Outcome": {
+                    "Question 1": "Correct",
+                    "Question 2": "Incorrect",
+                    "Question 3": "Correct",
+                    "Question 4": "Incorrect",
+                    "Question 5": "Correct",
+                    "Question 6": "Incorrect"
+                }
+            }
+        }
+    }
+]
