@@ -14,7 +14,7 @@ class Teacher:
         self.chat = Chat()
         self.evaluate = Evaluate()
 
-    def gen_quiz(self, topics: list[str], composition: list[str], randomize=False):
+    def gen_quiz_questions(self, topics: list[str], composition: list[str], randomize=False):
         """Generates a quiz based on a set of topics and a set of question types"""
         if randomize:
             random.shuffle(topics)
@@ -36,6 +36,9 @@ class Teacher:
         print(f"Generating multiple choice question about {topic}...")
         prompt = f"Generate a multiple choice question about {topic} where the first choice is correct."
         question = self.model.complete(prompt, max_tokens=max_tokens, **kwargs).strip("\n").splitlines()
+        # Remove empty elements
+        question = list(filter(None, question))
+
         answer = random.randint(0, len(question)-2)
         # Swap first, correct answer with the randomly generate answer slot
         tmp = question[answer+1]
@@ -43,7 +46,8 @@ class Teacher:
         question[1] = tmp
         # Get rid of numbering
         for i in range(1, len(question)):
-            if len(question[i]) > 2 and question[i][0].isalpha() and question[i][1] in [".", ")"]:
+            question[i] = question[i].strip()
+            while len(question[i]) > 2 and question[i][0].isalpha() and question[i][1] in [".", ")", ":"]:
                 question[i] = question[i][2:].strip()
 
         question = [elem for elem in question if elem]

@@ -1,10 +1,23 @@
-#sidenav {
+#sidebarLeft {
     height: 100%;
     width: 160px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
+    background-color: #1e4e45;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-top: 80px;
+}
+
+#sidebarRight {
+    height: 100%;
+    width: 360px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
     background-color: #1e4e45;
     overflow-x: hidden;
     padding-top: 20px;

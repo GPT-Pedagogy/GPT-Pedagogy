@@ -16,6 +16,8 @@ if __name__ == "__main__":
     """.with open("OPENAI_API_KEY.json", "r") as file:
         openai.api_key = json.loads(file.read())["main"]"""
 
+    # {'q': 'Q: In which conflict did France suffer major military losses during World War One? ', 'type': 'mc', 'a': 0, 'choices': ['The Battle of Verdun', 'The Battle of Waterloo', 'The Battle of the Somme', 'The Battle of Marne']}
+
     # openai.File.create(file=open("mydata.jsonl", "rb"), purpose='fine-tune')
     # response = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", temperature=0, max_tokens=7)
     # response = openai.FineTune.list()
@@ -27,7 +29,7 @@ if __name__ == "__main__":
     # print(response)
 
     teacher = Teacher("000")
-    result = teacher.gen_multiple_choice("adaptations of birds")
+    result = teacher.gen_multiple_choice("France in World War One")
     print(result)
 
     # m_resp = teacher.gen_multiple_choice("dogs")

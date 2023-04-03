@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Mathesis</title>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
-    <script src="{{ url_for('static', filename='common.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mathesis.png') }}">
 </head>
@@ -12,7 +11,7 @@
     <img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
     <div id="sidebarLeft"></div>
     <div style="margin: auto; width: 50%">
-        <h2>Welcome to the <i>Mathesis</i> learning assistant</h2>
+        <h2><i>Mathesis</i> admin menu</h2>
         <h3 id="lessonTitle"></h3><br>
         <div id="lessons"></div>
         <span id="outputTitle"></span><br>

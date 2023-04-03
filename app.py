@@ -13,6 +13,16 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+
+@app.route('/admin/lessons')
+def admin_lessons():
+    return render_template('admin_lessons.html')
+
+
 @app.route('/lessons', methods=['GET'])
 def get_lessons():
     """Returns lesson information to the front end"""
@@ -57,33 +67,36 @@ def evaluate_lesson():
     return {"content": feedback}
 
 
-@app.route('/quiz_candidates', methods=['GET'])
-def get_quiz_candidates():
+@app.route('/generate_questions', methods=['GET'])
+def generate_questions():
     """Returns several candidate quizzes to be manually reviewed"""
 
+    return """
+    {"1.1":{"lesson_id":"1.1","quiz":[{"a":4,"choices":["Fruit Chill","Fire Wave","Bubble Blast","Frost Byte","Fruit Chill"],"q":"Q: What is the flavor of 5 Gum's latest taste sensation?","type":"mc"},{"a":2,"choices":["35 m/s","0 m/s","11 m/s","72 m/s"],"q":"Q: The average airspeed velocity of an unladen European swallow is:","type":"mc"},{"a":"Answer: A woodchuck can chuck around 35 cubic feet of wood in a day.","q":"Question: How much wood can a woodchuck chuck?","type":"sa"}]}}"""
     try:
-        batch_num = int(request.args["b"])
-        lesson_ids = request.args.get("l", "").split(",")
+        lesson_ids = json.loads(request.args.get("l", "[]"))
+        custom_comps = json.loads(request.args.get("c", "{}"))
     except Exception:
-        return "Missing or malformed b[int] argument"
+        return "Malformed arguments"
 
     if lesson_ids:
         print(f"Limiting to lessons: {lesson_ids}")
 
-    batches = []
-    while len(batches) < batch_num:
-        candidates = []
-        for lesson in LESSONS["content"]:
-            if lesson["id"] not in lesson_ids:
-                continue
-
-            # Retrieve question types for quiz
+    candidates = {}
+    for lesson_id in LESSONS["content"]:
+        lesson = LESSONS["content"][lesson_id]
+        if lesson_ids and lesson["id"] not in lesson_ids:
+            continue
+        # Retrieve question types for quiz
+        if not custom_comps.get(lesson_id):
             composition = lesson["quiz_composition"] if lesson.get("quiz_composition") else LESSONS["quiz_composition"]
-            quiz = {"lesson_id": lesson["id"], "quiz": teacher.gen_quiz(lesson["core_topics"], composition, randomize=True)}
-            candidates.append(quiz)
-        batches.append(candidates)
+        else:
+            composition = custom_comps.get(lesson_id)
 
-    return batches
+        quiz = {"lesson_id": lesson_id, "quiz": teacher.gen_quiz_questions(lesson["core_topics"], composition, randomize=True)}
+        candidates[lesson_id] = quiz
+
+    return candidates
 
 
 @app.route('/modify_quiz_plan', methods=['POST'])
