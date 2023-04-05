@@ -1,4 +1,4 @@
-let GEN_LESSONS = LESSONS;
+let GEN_LESSONS = {};
 let selected_lesson = null;
 
 
@@ -9,25 +9,25 @@ function generateQuestions(){
     }
     console.log(`Generating questions for lesson ${selected_lesson}...`);
     fetch('/generate_questions?l='+JSON.stringify([selected_lesson]),
-            {method: 'GET'}).then(response => response.json()).then(response => {
+        {method: 'GET'}).then(response => response.json()).then(response => {
+        GEN_LESSONS = JSON.parse(JSON.stringify(LESSONS));
         console.log("Questions:", JSON.stringify(response));
         let questions = response;
         let sidebarRight = document.getElementById("sidebarRight");
         for(let lessonId of Object.keys(questions)) {
             for (let question of Object.values(questions[lessonId].quiz)) {
                 question.id = gen_pseudorandom();
-                let addQuestion = () => {
-                    let lessonElem = document.getElementById(`lessonForm${lessonId}`);
-                    formatQuestions(lessonId, [question], false, lessonElem);
-                    GEN_LESSONS[lessonId].quiz.push(question);
-                };
                 console.log("Question:", question);
                 let elem = document.createElement("DIV");
                 elem.classList.add("navElement");
                 elem.style.marginBottom = "10px";
-                //elem.onclick = () => enterLessonFunc(lesson.id);
                 elem.innerText = JSON.stringify(question);
-                elem.onclick = addQuestion;
+                elem.onclick = () => {
+                    let lessonElem = document.getElementById(`lessonForm${lessonId}`);
+                    formatQuestions(lessonId, [question], false, lessonElem);
+                    GEN_LESSONS[lessonId].quiz.push(question);
+                    elem.remove();
+                };
                 sidebarRight.appendChild(elem);
             }
         }
@@ -46,10 +46,11 @@ function enterLesson(lessonId){
     document.getElementById("lessonTitle").innerText = "Lesson "+lessonId;
 
     lessonElem.innerHTML = "";
-    lessonElem.appendChild(formatQuestions(lessonId, LESSONS[lessonId].quiz));
+    lessonElem.appendChild(formatQuestions(lessonId, LESSONS[lessonId].quiz, false));
 }
 
 
 window.onload = () => {
+    setAdmin();
     loadLessons(enterLesson);
 };

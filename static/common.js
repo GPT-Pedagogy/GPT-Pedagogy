@@ -6,6 +6,26 @@ const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
 let LESSONS = {};
 const CHAT_HISTORY = {};
 
+const ADMIN = 1;
+const STUDENT = 0;
+let role = STUDENT;
+
+function setAdmin(){
+    role = ADMIN;
+}
+
+function delQuestion(){
+    console.log("No uiz");
+    //let quesId = quiz[qId].id;
+    //console.log("goodbye to quiz", quesId);
+    /*for(let i=0; i<GEN_LESSONS[lessonId].quiz.length; i++){
+        if(GEN_LESSONS[lessonId].quiz[i].id === question.id){
+            GEN_LESSONS[lessonId].quiz.splice(i);
+        }
+    }
+    quesElem.remove();*/
+}
+
 /** Sends the content of the input prompt to the backend and appends the generated response to the chat*/
 function sendChat(){
     let inputText = document.getElementById("inputText").value;
@@ -77,7 +97,9 @@ function loadLessons(enterLessonFunc){
             let elem = document.createElement("DIV");
             elem.classList.add("navElement");
             elem.onclick = () => enterLessonFunc(lesson.id);
-            elem.innerText = lesson.name;
+            elem.innerHTML = `${lesson.name}<br>Core Topics:<br>`;
+            for(let topic of lesson.core_topics)
+                elem.innerHTML += topic+",<br>";
             sidebarLeft.appendChild(elem);
         }
     });
@@ -87,32 +109,42 @@ function loadLessons(enterLessonFunc){
  * @param lessonId {String} The id of the lesson with the quiz to be displayed
  * @return {HTMLElement} The HTML form of the quiz*/
 function formatQuestions(lessonId, quiz, enabled=true, quizForm=null){
-    let addSubmit = true;
+    let addSubmit = false;
     if(!quizForm){
-        addSubmit = false;
+        addSubmit = true;
         quizForm = document.createElement("FORM");
         quizForm.id = `lessonForm${lessonId}`;
         if(enabled) {
             quizForm.action = "javascript:void(0)";
-            quizForm.onsubmit = () => sendQuiz(lessonId);
+            quizForm.onsubmit = () => {console.log("Submitting quiz for lesson", lessonId);sendQuiz(lessonId);};
         }
     }
     for (let qId in quiz) {
-        let inner = "";
         if(!quiz[qId].id)
             quiz[qId].id = gen_pseudorandom();
+        let quesElem = document.createElement("DIV");
+        quesElem.className = "quizQuestion";
+        quesElem.id = `question${quiz[qId].id}`;
+        quesElem.style.backgroundColor = "#64abc2";
+        if(role === ADMIN){
+            let delButton = document.createElement("BUTTON");
+            delButton.style.backgroundColor = "red";
+            delButton.type = "button";
+            delButton.innerText = "DEL";
+            quesElem.appendChild(delButton);
+            delButton.onclick = delQuestion;
+        }
 
-        inner += `<div id="question${quiz[qId].id}" style="background-color: #64abc2">`;
-        inner += `<p>${quiz[qId].q}</p>`;
+        quesElem.innerHTML += `<p>${quiz[qId].q}</p>`;
         if(quiz[qId].type === "mc")
             for(let cId in quiz[qId].choices){
-                inner += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
+                quesElem.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
                     <label>${quiz[qId].choices[cId]}</label><br>`;
             }
         if(quiz[qId].type === "sa")
-            inner += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
-        inner += "</div>";
-        quizForm.innerHTML += inner;
+            quesElem.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
+        quizForm.appendChild(quesElem);
+
     }
 
     if(addSubmit && enabled)

@@ -28,6 +28,7 @@
     display: block;
     background-color: #1e5e55;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .navElement:hover{
@@ -70,4 +71,9 @@
     background-color: #1e1e1e;
     color: azure;
     margin: 5px;
+}
+
+.quizQuestion {
+    background-color: #64abc2;
+    margin-bottom: 15px;
 }
