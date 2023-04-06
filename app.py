@@ -53,11 +53,16 @@ def evaluate_lesson():
     answered_quiz = request.json
     feedback = {}
     for qId, question in enumerate(answered_quiz["quiz"]):
+        # Multiple choice evaluation
         if LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
-            if question["response"] == str(LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["a"]):
-                feedback[qId] = "Correct"
+            choices = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["choices"]
+            answer_idx = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["a"]
+            if question["response"] == str(answer_idx):
+                feedback[qId] = "Correct!"
             else:
-                feedback[qId] = "Incorrect"
+                feedback[qId] = f"Incorrect, the correct answer was '{choices[answer_idx]}'"
+
+        # Short answer evaluation
         if LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
             ques, resp = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], question["response"]
             feedback[qId] = teacher.evaluate.eval_short_answer(ques, resp)
@@ -71,8 +76,8 @@ def evaluate_lesson():
 def generate_questions():
     """Returns several candidate quizzes to be manually reviewed"""
 
-    return """
-    {"1.1":{"lesson_id":"1.1","quiz":[{"a":4,"choices":["Fruit Chill","Fire Wave","Bubble Blast","Frost Byte","Fruit Chill"],"q":"Q: What is the flavor of 5 Gum's latest taste sensation?","type":"mc"},{"a":2,"choices":["35 m/s","0 m/s","11 m/s","72 m/s"],"q":"Q: The average airspeed velocity of an unladen European swallow is:","type":"mc"},{"a":"Answer: A woodchuck can chuck around 35 cubic feet of wood in a day.","q":"Question: How much wood can a woodchuck chuck?","type":"sa"}]}}"""
+    #return """
+    #{"1.1":{"lesson_id":"1.1","quiz":[{"a":4,"choices":["Fruit Chill","Fire Wave","Bubble Blast","Frost Byte","Fruit Chill"],"q":"Q: What is the flavor of 5 Gum's latest taste sensation?","type":"mc"},{"a":2,"choices":["35 m/s","0 m/s","11 m/s","72 m/s"],"q":"Q: The average airspeed velocity of an unladen European swallow is:","type":"mc"},{"a":"Answer: A woodchuck can chuck around 35 cubic feet of wood in a day.","q":"Question: How much wood can a woodchuck chuck?","type":"sa"}]}}"""
     try:
         lesson_ids = json.loads(request.args.get("l", "[]"))
         custom_comps = json.loads(request.args.get("c", "{}"))

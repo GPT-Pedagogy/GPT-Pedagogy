@@ -1,0 +1,37 @@
+{
+  "quiz_composition": ["mc", "mc", "sa"],
+  "content": {
+    "1.1": {
+      "name":  "Introduction (1.1)",
+      "core_topics": ["swallow velocity", "woodchucks", "5 gum"],
+      "quiz": [
+        {
+          "q": "What is the airspeed velocity of an unladen swallow?", "type": "mc",
+          "a":  0, "choices":  ["24 mph", "African or European swallow?", "I dont know"]
+        },
+        {
+          "q": "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", "type": "mc",
+          "a":  1, "choices": ["700 lbs", "I'll chuck you if you ask my something silly again", "threeb"]
+        },
+        {
+          "q": "Describe how exactly it feels to chew 5 gum.", "type": "sa",
+          "a":  ""
+        }
+      ]
+    },
+    "1.2": {
+      "name":  "ATLANTIS (1.2)",
+      "core_topics": ["soft drinks", "wumbo"],
+      "quiz": [
+        {
+          "q": "Coke or pepsi?", "type": "mc",
+          "a":  1, "choices":  ["Pepsis", "Cola Cola", "Sprite"]
+        },
+        {
+          "q": "If M is for mini then W is for?", "type": "mc",
+          "a":  2, "choices": ["2nd grade spongebob!", "Wumbo", "It's not my wallet"]
+        }
+      ]
+    }
+  }
+}

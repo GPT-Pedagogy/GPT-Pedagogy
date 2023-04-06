@@ -4,6 +4,7 @@ const USER_SPEAKER = 0;
 const MATHESIS_SPEAKER = 1;
 const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
 let LESSONS = {};
+let QUESTION_CANDIDATES = [];
 const CHAT_HISTORY = {};
 
 const ADMIN = 1;
@@ -12,18 +13,6 @@ let role = STUDENT;
 
 function setAdmin(){
     role = ADMIN;
-}
-
-function delQuestion(){
-    console.log("No uiz");
-    //let quesId = quiz[qId].id;
-    //console.log("goodbye to quiz", quesId);
-    /*for(let i=0; i<GEN_LESSONS[lessonId].quiz.length; i++){
-        if(GEN_LESSONS[lessonId].quiz[i].id === question.id){
-            GEN_LESSONS[lessonId].quiz.splice(i);
-        }
-    }
-    quesElem.remove();*/
 }
 
 /** Sends the content of the input prompt to the backend and appends the generated response to the chat*/
@@ -105,36 +94,80 @@ function loadLessons(enterLessonFunc){
     });
 }
 
+
+function addCandidateQuestion(lessonId, question){
+    let sidebarRight = document.getElementById("sidebarRight");
+    let elem = document.createElement("DIV");
+    elem.id = `candidate${question.id}`;
+    elem.classList.add("navElement");
+    elem.style.marginBottom = "10px";
+    elem.innerText = JSON.stringify(question);
+
+    let addButton = document.createElement("BUTTON");
+    addButton.id = `add${question.id}`;
+    addButton.innerText = "<--";
+    addButton.onclick = () => {
+        let lessonElem = document.getElementById(`lessonForm${lessonId}`);
+        formatQuestions(lessonId, [question], false, lessonElem);
+        LESSONS[lessonId].quiz.push(question);
+        elem.remove();
+        addButton.remove();
+    };
+
+    QUESTION_CANDIDATES.push(question);
+    sidebarRight.appendChild(addButton);
+    sidebarRight.appendChild(elem);
+}
+
+
+function removeQuizQuestion(lessonId, quesId) {
+    let found = null;
+    console.log("goodbye to quiz", quesId, "from lesson", lessonId);
+    for(let i=0; i<LESSONS[lessonId].quiz.length; i++){
+        if(LESSONS[lessonId].quiz[i].id === quesId) {
+            found = LESSONS[lessonId].quiz[i];
+            QUESTION_CANDIDATES.push(LESSONS[lessonId].quiz[i]);
+            LESSONS[lessonId].quiz.splice(i, 1);
+        }
+    }
+    if(found) {
+        document.getElementById(`question${quesId}`).remove();
+        document.getElementById(`delete${quesId}`).remove();
+        return found;
+    }
+}
+
+
 /** Creates the quiz detained by the lesson on the front end for the user to interact with
  * @param lessonId {String} The id of the lesson with the quiz to be displayed
  * @return {HTMLElement} The HTML form of the quiz*/
-function formatQuestions(lessonId, quiz, enabled=true, quizForm=null){
+function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null){
     let addSubmit = false;
-    if(!quizForm){
+    if(!quizDiv){
         addSubmit = true;
-        quizForm = document.createElement("FORM");
-        quizForm.id = `lessonForm${lessonId}`;
-        if(enabled) {
-            quizForm.action = "javascript:void(0)";
-            quizForm.onsubmit = () => {console.log("Submitting quiz for lesson", lessonId);sendQuiz(lessonId);};
-        }
+        quizDiv = document.createElement("DIV");
+        quizDiv.id = `lessonForm${lessonId}`;
     }
     for (let qId in quiz) {
-        if(!quiz[qId].id)
-            quiz[qId].id = gen_pseudorandom();
+        if(!quiz[qId].id) quiz[qId].id = genPseudorandom();
+
         let quesElem = document.createElement("DIV");
         quesElem.className = "quizQuestion";
+        let quesId =  quiz[qId].id;
         quesElem.id = `question${quiz[qId].id}`;
         quesElem.style.backgroundColor = "#64abc2";
         if(role === ADMIN){
             let delButton = document.createElement("BUTTON");
-            delButton.style.backgroundColor = "red";
-            delButton.type = "button";
-            delButton.innerText = "DEL";
-            quesElem.appendChild(delButton);
-            delButton.onclick = delQuestion;
-        }
+            delButton.id = `delete${quiz[qId].id}`;
+            delButton.innerText = "-->";
+            delButton.onclick = () => {
+                let removed = removeQuizQuestion(lessonId, quesId);
+                addCandidateQuestion(lessonId, removed);
+            };
 
+            quizDiv.appendChild(delButton);
+        }
+        quesElem.innerHTML += `<p>Core Topic: ${quiz[qId].core_topic}</p>`;
         quesElem.innerHTML += `<p>${quiz[qId].q}</p>`;
         if(quiz[qId].type === "mc")
             for(let cId in quiz[qId].choices){
@@ -143,13 +176,22 @@ function formatQuestions(lessonId, quiz, enabled=true, quizForm=null){
             }
         if(quiz[qId].type === "sa")
             quesElem.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
-        quizForm.appendChild(quesElem);
+        quizDiv.appendChild(quesElem);
 
     }
 
-    if(addSubmit && enabled)
-        quizForm.innerHTML += `<br><input type="submit" value="Submit"><br><hr>`;
-    return quizForm;
+    if(addSubmit && enabled){
+        let submit = document.createElement("BUTTON");
+        submit.innerText = "Submit";
+        submit.onclick = () => {console.log("Submitting quiz for lesson", lessonId);sendQuiz(lessonId);};
+        quizDiv.appendChild(submit);
+    }
+    return quizDiv;
+}
+
+function saveLessons(){
+    console.log("Saving lessons as", LESSONS);
+    // TODO: Ping save lesson endpoint
 }
 
 /** Adds text to the chat from a specified entity
@@ -178,7 +220,7 @@ function loadChat(chatId){
             addOutput(chatId, message.speaker, message.text, false);
 }
 
-function gen_pseudorandom(){
+function genPseudorandom(){
     return `${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
 }

@@ -1,36 +1,42 @@
 {
-  "quiz_composition": ["mc", "mc", "sa"],
+  "quiz_composition": ["mc", "mc", "mc", "sa", "sa"],
   "content": {
     "1.1": {
       "name":  "Introduction (1.1)",
-      "core_topics": ["swallow velocity", "woodchucks", "5 gum"],
+      "core_topics": ["The purpose of mitochondria", "The composition of the cell wall", "The types of genetic information", "The process of cell division"],
       "quiz": [
-        {
-          "q": "What is the airspeed velocity of an unladen swallow?", "type": "mc",
-          "a":  0, "choices":  ["24 mph", "African or European swallow?", "I dont know"]
+        {"q": "Q: What is the purpose of mitochondria?", "type": "mc", "core_topic": "The purpose of mitochondria", "a": 0,
+          "choices": ["To produce cellular energy for the cell", "To store energy", "To transport substances across the membrane", "To secrete waste products"]
         },
-        {
-          "q": "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", "type": "mc",
-          "a":  1, "choices": ["700 lbs", "I'll chuck you if you ask my something silly again", "threeb"]
+        {"q": "Q: What is the main component of the cell wall?", "type": "mc", "core_topic": "The composition of the cell wall", "a": 0,
+          "choices": ["Carbohydrates", "Lipids", "Proteins", "Nucleic Acids"]
         },
-        {
-          "q": "Describe how exactly it feels to chew 5 gum.", "type": "sa",
-          "a":  ""
+        {"q": "Q: What type of genetic information can be learned through the analysis of proteins?", "type": "mc", "core_topic": "The types of genetic information", "a": 0,
+          "choices": ["Amino acid composition", "Chromosomal makeup", "Chemical composition", "Nuclear makeup"]
+        },
+        {"q": "Question: How does cell division occur?", "type": "sa", "core_topic": "The process of cell division",
+          "a": "Answer: Cell division is a biological process that occurs when a parent cell splits into two or more daughter cells. This is typically done through a process of mitosis or meiosis, which includes tightly"
         }
       ]
     },
     "1.2": {
-      "name":  "ATLANTIS (1.2)",
-      "core_topics": ["soft drinks", "wumbo"],
+      "name":  "Fish (1.2)",
+      "core_topics": ["The largest fish", "The skeleton of sharks", "Freshwater fish", "Deep sea fish", "The classification of fish"],
       "quiz": [
-        {
-          "q": "Coke or pepsi?", "type": "mc",
-          "a":  1, "choices":  ["Pepsis", "Cola Cola", "Sprite"]
-        },
-        {
-          "q": "If M is for mini then W is for?", "type": "mc",
-          "a":  2, "choices": ["2nd grade spongebob!", "Wumbo", "It's not my wallet"]
-        }
+          {"q": "Q: What is the largest fish in the world?", "type": "mc", "core_topic": "The largest fish", "a": 3, 
+            "choices": ["Hammerhead Shark", "Great White Shark", "Tiger Shark", "Whale Shark", "Whale Shark"]
+          }, 
+          {"q": "Q: Which of the following is true about the skeleton of sharks?", "type": "mc", "core_topic": "The skeleton of sharks", "a": 2, 
+            "choices": ["Sharks have no skeleton.", "Sharks have a bony skeleton.", "Sharks have a cartilaginous skeleton.", "Sharks have an exoskeleton."]
+          }, 
+          {"q": "Q: Which of the following types of fish is typically found living in freshwater systems?", "type": "mc", "core_topic": "Freshwater fish", "a": 3, 
+            "choices": ["Salmon", "Shark", "Flounder", "Trout", "Answer: A. Trout"]
+          }, 
+          {"q": "Question: What type of fish are deep sea fish?", "type": "sa", "core_topic": "Deep see fish", 
+            "a": "Answer: Deep sea fish are a type of fish that live in the depths of the ocean, usually at depths greater than 1000 meters."}, 
+          {"q": "Question: How are fish classified?", "type": "sa", "core_topic": "The classification of fish", 
+            "a": "Answer: Fish are classified by a variety of physical characteristics, including body shape, number of fins, type of scales, habitat, and diet."
+          }
       ]
     }
   }

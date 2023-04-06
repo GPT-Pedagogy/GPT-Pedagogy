@@ -29,7 +29,10 @@ if __name__ == "__main__":
     # print(response)
 
     teacher = Teacher("000")
-    result = teacher.gen_multiple_choice("France in World War One")
+    result = teacher.gen_quiz_questions(
+        ["The largest fish", "The skeleton of sharks", "Freshwater fish", "Deep see fish", "The classification of fish"],
+        ["mc", "mc", "mc", "sa", "sa"]
+    )
     print(result)
 
     # m_resp = teacher.gen_multiple_choice("dogs")

@@ -40,7 +40,7 @@ class Teacher:
         question = list(filter(None, question))
 
         answer = random.randint(0, len(question)-2)
-        # Swap first, correct answer with the randomly generate answer slot
+        # Swap first, correct answer with the randomly generated answer slot
         tmp = question[answer+1]
         question[answer + 1] = question[1]
         question[1] = tmp
@@ -53,7 +53,7 @@ class Teacher:
         question = [elem for elem in question if elem]
 
         print("Generated!")
-        return {"q": question[0], "type": "mc", "a":  answer, "choices": question[1:]}
+        return {"q": question[0], "type": "mc", "core_topic": topic, "a":  answer, "choices": question[1:]}
 
     def gen_short_answer(self, topic: str, max_tokens=MIN_SA_TOKENS, **kwargs):
         """Generates a short question based on the given topic and encodes it, and its answer, into json"""
@@ -66,7 +66,7 @@ class Teacher:
         question = self.model.complete(prompt, max_tokens=max_tokens, **kwargs).strip("\n").splitlines()
 
         print("Generated!")
-        return {"q": question[0], "type": "sa", "a":  question[1]}
+        return {"q": question[0], "type": "sa", "core_topic": topic, "a":  question[1]}
 
     def set_model(self, teacher_model: str = None, chat_model: str = None, eval_model: str = None):
         """Sets the model name for the specified object(s)"""
