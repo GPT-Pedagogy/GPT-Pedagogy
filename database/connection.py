@@ -1,5 +1,13 @@
 import pymongo
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+sys.path.append(parent_dir)
+import components
 
+# TODO: Create a new DB to store quiz answers
+# TODO: Integrate with the components.py file. 
+# TODO: A function to generate the all students performance. 
 # Function to establish connection to MongoDB
 def connection():
     client = pymongo.MongoClient("mongodb+srv://GPTadmin:xinformatics@cluster0.d1gdjlb.mongodb.net/test")
@@ -93,14 +101,43 @@ def update_performance(collection, rcsid, topic, outcome):
 
         
     
+'''Load chatlog and update the database'''
+def load_chatlog_from_file(rcsid,title, filename):
+    chatlog_data = components.load_from_file(filename)
+    collection = connection()
+    update_chatlog(collection, rcsid, title, chatlog_data)
+
+
 
 
 
 if __name__ == '__main__':
     collection = connection()
     data = query_documents(collection)
-    # insert_user(collection, "liy123", "Sam")
-    example_chatlog_data = ['User: xxxxxxxxx1-231-1', 'Bot: xxxxxxxxx1-231-2', 'User: xxxxxxxxx1-231-3', 'Bot: xxxxxxxxx1-231-4']
+    # insert_user(collection,\"liy123", "Sam")
+    
+    '''
+    example_chatlog_data = [ 
+                                {
+                                    "role": "user",
+                                    "content": "Hello, can you give me some hint about chapter 2 lecture? x    xxx xxxxxxxxxxxxx"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "Sure, here are some important note you can take form Chapter 2: xxxxx."
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Thank you so much"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "You're welcome"
+                                }
+                            ]
+    '''
+    
+    '''
     example_performance_outcome = {
         "Question 1": "Correct",
         "Question 2": "Incorrect",
@@ -109,7 +146,9 @@ if __name__ == '__main__':
         "Question 5": "Correct",
         "Question 6": "Incorrect"
     }
-    update_performance(collection, 'liyu123', 'Unit test', example_performance_outcome)
+    '''
+    
+    # update_performance(collection, 'liyu123', 'Unit test', example_performance_outcome)
     # update_chatlog(collection, 'liyu123', "Pop Quiz", example_chatlog_data)
-    # for document in data:
-    #     print(document, "\n")
+    for document in data:
+        print(document, "\n")
