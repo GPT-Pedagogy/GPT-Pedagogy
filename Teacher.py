@@ -30,10 +30,12 @@ class Teacher:
 
     def gen_multiple_choice(self, topic: str, max_tokens=MIN_MC_TOKENS, **kwargs):
         """Generates a multiple choice question based on the given topic and encodes it into json"""
+
         if kwargs.get("max_tokens", self.MIN_MC_TOKENS) < self.MIN_MC_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_MC_TOKENS}!")
 
         print(f"Generating multiple choice question about {topic}...")
+
         prompt = f"Generate a multiple choice question about {topic} where the first choice is correct."
         question = self.model.complete(prompt, max_tokens=max_tokens, **kwargs).strip("\n").splitlines()
         # Remove empty elements
@@ -57,6 +59,7 @@ class Teacher:
 
     def gen_short_answer(self, topic: str, max_tokens=MIN_SA_TOKENS, **kwargs):
         """Generates a short question based on the given topic and encodes it, and its answer, into json"""
+
         if kwargs.get("max_tokens", self.MIN_SA_TOKENS) < self.MIN_SA_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_SA_TOKENS}!")
 
@@ -64,6 +67,13 @@ class Teacher:
 
         prompt = f"Generate a short answer question about {topic} and an answer."
         question = self.model.complete(prompt, max_tokens=max_tokens, **kwargs).strip("\n").splitlines()
+        question[1] = question[1].strip()
+
+        for label in ["a", "answer"]:
+            for sep in [".", ")", ":"]:
+                if question[1].lower().startswith(label+sep):
+                    question[1] = question[1][len(label+sep):].strip()
+                    break
 
         print("Generated!")
         return {"q": question[0], "type": "sa", "core_topic": topic, "a":  question[1]}

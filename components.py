@@ -66,16 +66,26 @@ class Evaluate:
         self.editor_model: Model = Model(self.EDITOR_MODEL_NAME)
 
     def eval_short_answer(self, question: str, answer: str):
-        """Evaluates the answer to a question and provides feedback and a correct example"""
-        prompt = f"A student was asked {question} and they responded with {answer}.  Is this answer correct or incorrect?"
-        return self.model.complete(prompt)
+        """Evaluates the answer to a question in the form of a grade"""
 
-    def correct_short_answer(self, question: str, answer: str):
+        prompt = f"A student was asked {question} and they responded with {answer}.  " \
+                 f"Grade this answer on a scale from 0 to 100."
+        score = self.model.complete(prompt).strip().split()
+
+        for word in score:
+            if word.split(".")[0].isnumeric():
+                return int(word.split(".")[0])
+
+        raise ValueError("No string within the response was a score!")
+
+    def correct_answer(self, question: str, answer: str):
         """Takes in an incorrect answer and corrects it to a better response"""
+
         prompt = f"Make this answer better match the question {question}."
         return self.editor_model.edit(prompt, answer)
 
     def set_model(self, model_name: str):
         """Sets the model to be used for evaluation"""
+
         self.MODEL_NAME = model_name
         self.model: Model = Model(self.MODEL_NAME)

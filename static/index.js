@@ -15,7 +15,7 @@ function enterLesson(lessonId){
     lessonElem.style.display = "block";
     document.getElementById("mainChat").style.display = "none";
     document.getElementById("lessonTitle").innerText = "Lesson "+lessonId;
-    document.getElementById("outputTitle").innerText = "Feedback";
+    document.getElementById("outputTitle").innerText = "Evaluation";
 
     lessonElem.innerHTML = "";
     lessonElem.appendChild(formatQuestions(lessonId, LESSONS[lessonId].quiz));

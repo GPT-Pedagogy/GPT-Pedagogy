@@ -29,10 +29,14 @@ if __name__ == "__main__":
     # print(response)
 
     teacher = Teacher("000")
-    result = teacher.gen_quiz_questions(
+    """result = teacher.gen_quiz_questions(
         ["The largest fish", "The skeleton of sharks", "Freshwater fish", "Deep see fish", "The classification of fish"],
         ["mc", "mc", "mc", "sa", "sa"]
-    )
+    )"""
+
+    result = teacher.evaluate.eval_short_answer("Q: What was a notable achievement of Charles Darwin?",
+            "Charles Darwin is most well known for his theory of evolution that he published in his book"
+            "On the Origin of Species.")
     print(result)
 
     # m_resp = teacher.gen_multiple_choice("dogs")

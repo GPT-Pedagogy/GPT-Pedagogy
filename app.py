@@ -2,12 +2,15 @@ from flask import Flask, render_template, request
 import json
 import copy
 from Teacher import Teacher
+
+
 app = Flask(__name__)
 teacher = Teacher("000")
 teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
 LESSONS = {}
 ADMIN_ROLE = 1
 STUDENT_ROLE = 0
+
 
 def get_lessons_base(role: int):
     """Returns lesson information to the front end, taking out the answers if requested by a student
@@ -85,25 +88,37 @@ def evaluate_lesson():
     """Evaluates the submitted user information for a lesson"""
 
     answered_quiz = request.json
-    feedback = {}
+    print("Evaluating quiz:", answered_quiz)
+
+    evaluation = {}
     for qId, question in enumerate(answered_quiz["quiz"]):
-        # Multiple choice evaluation
+        ques, resp = None, None
+        evaluation[qId] = {"feedback": "", "score": 0}
+        # Multiple choice preparation
         if LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
             choices = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["choices"]
             answer_idx = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["a"]
+            ques, resp = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], choices[int(question["response"])]
+
+            evaluation[qId]["feedback"] = f"The correct answer was '{choices[answer_idx]}'"
             if question["response"] == str(answer_idx):
-                feedback[qId] = "Correct!"
+                evaluation[qId]["score"] = 1
             else:
-                feedback[qId] = f"Incorrect, the correct answer was '{choices[answer_idx]}'"
+                evaluation[qId]["score"] = 0
 
-        # Short answer evaluation
-        if LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
+        # Short answer preparation
+        elif LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
             ques, resp = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], question["response"]
-            feedback[qId] = teacher.evaluate.eval_short_answer(ques, resp)
-            feedback[qId] += "\n"+teacher.evaluate.correct_short_answer(ques, resp)
+            evaluation[qId]["feedback"] = f"The correct answer was '{LESSONS['content'][answered_quiz['lessonId']]['quiz'][qId]['a']}'"
+            evaluation[qId]["score"] = teacher.evaluate.eval_short_answer(ques, resp)/100
 
-    print("Quiz", answered_quiz)
-    return {"content": feedback}
+        if evaluation[qId]["score"] < 1:
+            evaluation[qId]["feedback"] += "\nCorrection: "+teacher.evaluate.correct_answer(ques, resp)
+
+    rcs_id = answered_quiz["rcs_id"]
+    # TODO: Add evaluation to database for student
+
+    return {"content": evaluation}
 
 
 @app.route('/generate_questions', methods=['GET'])

@@ -6,6 +6,7 @@ const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
 let LESSONS = {};
 let QUESTION_CANDIDATES = [];
 const CHAT_HISTORY = {};
+let RCS_ID = "000";
 
 const ADMIN = 1;
 const STUDENT = 0;
@@ -36,7 +37,7 @@ function sendChat(){
     });
 }
 
-/** Sends the user response to a lesson quiz to the backend and appends the feedback to the chat
+/** Sends the user response to a lesson quiz to the backend and appends the evaluation to the chat
  * @param lessonId {String} The id of the lesson the quiz belongs to
  * @return {Boolean} If the quiz has been submitted successfully*/
 function sendQuiz(lessonId){
@@ -58,7 +59,7 @@ function sendQuiz(lessonId){
     fetch('/evaluate', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-        body: JSON.stringify({"lessonId": lessonId, "quiz": quiz})
+        body: JSON.stringify({"rcs_id": RCS_ID, "lessonId": lessonId, "quiz": quiz})
     }).then(response => response.json()).then(response => {
         console.log(JSON.stringify(response));
         // Remove typing
@@ -66,8 +67,10 @@ function sendQuiz(lessonId){
         document.getElementById("output").innerHTML = tmp.replace(TYPING, "");
 
         for(let fId of Object.keys(response.content)) {
-            let feedback = `Feedback for question ${fId}: ${response.content[fId]}`.replace(/\n/g, "<br>");
-            addOutput(lessonId, MATHESIS_SPEAKER, feedback);
+            let evaluation = `Evaluation for question ${fId}:`+
+                `\nScore: ${response.content[fId].score*100}%`+
+                `\nFeedback: ${response.content[fId].feedback}`.replace(/\n/g, "<br>");
+            addOutput(lessonId, MATHESIS_SPEAKER, evaluation);
         }
     });
     return true;
