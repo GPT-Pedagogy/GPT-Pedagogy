@@ -4,20 +4,40 @@
         "Name": "Michael Jordan",
         "Chatlog": {
             "Homework help on Chapter 1": [
-                "User: xxxxxxx 1-1",
-                "Bot: xxxxxxxx response 1-1",
-                "User: xxxxxxx 2",
-                "Bot: xxxxxxxx response 2",
-                "User: xxxxxxx 3",
-                "Bot: xxxxxxxx response 3"
+                {
+                    "role": "user",
+                    "content": "Hello, can you give me some hint about chapter 2 lecture?"
+                },
+                {
+                    "role": "system",
+                    "content": "Sure, here are some important note you can take form Chapter 2: xxxxx."
+                },
+                {
+                    "role": "user",
+                    "content": "Thank you so much"
+                },
+                {
+                    "role": "system",
+                    "content": "You're welcome"
+                }
             ],
             "Pop Quiz": [
-                "User: xxxxxxx 1-1",
-                "Bot: xxxxxxxx response 1-1",
-                "User: xxxxxxx 2",
-                "Bot: xxxxxxxx response 2",
-                "User: xxxxxxx 3",
-                "Bot: xxxxxxxx response 3"
+                {
+                    "role": "user",
+                    "content": "Hello, can you give me some hint about chapter 3 lecture?"
+                },
+                {
+                    "role": "system",
+                    "content": "Sure, here are some important note you can take form Chapter 3: xxxxx."
+                },
+                {
+                    "role": "user",
+                    "content": "Thank you so much"
+                },
+                {
+                    "role": "system",
+                    "content": "You're welcome"
+                }
             ]
         },
         "Performance": {
@@ -25,7 +45,7 @@
                 "Topic": "Pop quiz on Chapter 1",
                 "Outcome": {
                     "Question 1": "Correct",
-                    "Question 2": "Incorrect",
+                    "Question 2": "Incorrect, here is the explanation",
                     "Question 3": "Correct",
                     "Question 4": "Incorrect",
                     "Question 5": "Correct",
@@ -50,20 +70,40 @@
         "Name": "Will Smiths",
         "Chatlog": {
             "Homework help on Chapter 1": [
-                "User: xxxxxxx 1-1",
-                "Bot: xxxxxxxx response 1-1",
-                "User: xxxxxxx 2",
-                "Bot: xxxxxxxx response 2",
-                "User: xxxxxxx 3",
-                "Bot: xxxxxxxx response 3"
+                {
+                    "role": "user",
+                    "content": "Hello, do you know what're the important concepts in Chapter 5"
+                },
+                {
+                    "role": "system",
+                    "content": "Sure, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                },
+                {
+                    "role": "user",
+                    "content": "Thank you so much"
+                },
+                {
+                    "role": "system",
+                    "content": "You're welcome"
+                }
             ],
             "Pop Quiz": [
-                "User: xxxxxxx 1-1",
-                "Bot: xxxxxxxx response 1-1",
-                "User: xxxxxxx 2",
-                "Bot: xxxxxxxx response 2",
-                "User: xxxxxxx 3",
-                "Bot: xxxxxxxx response 3"
+                {
+                    "role": "user",
+                    "content": "Hello, can you give me a beief summary on this topics?"
+                },
+                {
+                    "role": "system",
+                    "content": "Sure, here are some important note you can take form Chapter 2: xxxxx."
+                },
+                {
+                    "role": "user",
+                    "content": "Thank you so much"
+                },
+                {
+                    "role": "system",
+                    "content": "You're welcome"
+                }
             ]
         },
         "Performance": {
