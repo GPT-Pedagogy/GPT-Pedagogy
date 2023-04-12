@@ -8,7 +8,8 @@
     background-color: #1e4e45;
     overflow-x: hidden;
     padding-top: 20px;
-    margin-top: 80px;
+    margin-top: 100px;
+    border-top-right-radius: 5px;
 }
 
 #sidebarRight {
@@ -21,7 +22,13 @@
     background-color: #1e4e45;
     overflow-x: hidden;
     padding-top: 20px;
-    margin-top: 80px;
+    margin-top: 100px;
+    border-top-left-radius: 5px;
+}
+
+#logo {
+    position: fixed;
+    width: 64px
 }
 
 .navElement {
@@ -76,4 +83,17 @@
 .quizQuestion {
     background-color: #64abc2;
     margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.questionEditButton {
+    margin-bottom: 5px;
+    border: none;
+    color: whitesmoke;
+    border-radius: 3px;
+}
+
+.questionEditButton:hover {
+    background-color: #8f8f8f !important;
 }

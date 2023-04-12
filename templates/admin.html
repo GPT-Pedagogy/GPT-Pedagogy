@@ -3,31 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Mathesis</title>
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="{{ url_for('static', filename='common.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin_lessons.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mathesis.png') }}">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
+    <img id="logo" src="{{ url_for('static', filename='mathesis.png') }}">
     <div id="sidebarLeft"></div>
+    <div id="sidebarRight">
+        <button id="requestGrades" onclick="requestGrades()">Request Grades</button>
+        <button id="genQuestions" style="visibility: hidden" onclick="generateQuestions()">Generate Quizzes</button>
+        <hr>
+        <br>
+    </div>
     <div style="margin: auto; width: 50%">
-        <h2><i>Mathesis</i> admin menu</h2>
+        <h2><i>Mathesis</i> admin lessons menu</h2>
         <h3 id="lessonTitle"></h3><br>
         <div id="lessons"></div>
-        <span id="outputTitle"></span><br>
-        <div>
-            <div id="mathesisContact" class="speechBubble">Mathesis</div>
-            <div id="output"></div>
-        </div>
-        <br><hr><br>
+        <button id="saveLessonsButton" style="visibility: hidden" onclick="saveLessons()">Save lesson plan</button>
+
         <div id="mainChat">
+            <span id="outputTitle"></span><br>
+            <div>
+                <div id="mathesisContact" class="speechBubble">Mathesis</div>
+                <div id="output"></div>
+            </div>
+            <br><hr><br>
             <form onsubmit="sendChat()" action="javascript:void(0);">
                 <label for="inputText">Input Text</label><br>
                 <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
                 <input id="submitText" type="submit" value="Send">
             </form>
         </div>
-
     </div>
 </body>
 </html>

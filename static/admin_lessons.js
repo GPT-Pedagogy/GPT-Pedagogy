@@ -29,6 +29,18 @@ function generateQuestions(){
 function enterLesson(lessonId){
     console.log("Entering lesson", lessonId);
     selected_lesson = lessonId;
+
+    if(lessonId === "chat"){
+        document.getElementById("lessons").style.display = "none";
+        document.getElementById("mainChat").style.display = "block";
+        document.getElementById("lessonTitle").innerText = "Main Chat";
+        document.getElementById("outputTitle").innerText = "Chat";
+        document.getElementById("saveLessonsButton").style.visibility = "hidden";
+        document.getElementById("genQuestions").style.visibility = "hidden";
+        return;
+    }
+
+    document.getElementById("mainChat").style.display = "none";
     document.getElementById("saveLessonsButton").style.visibility = "visible";
     document.getElementById("genQuestions").style.visibility = "visible";
     document.getElementById("genQuestions").innerText = "Generate Questions for "+lessonId;
@@ -62,7 +74,25 @@ function saveLessons(){
 }
 
 
+function requestGrades(){
+    console.log(`Requesting grades...`);
+    fetch('/admin/grades', {method: 'GET'}).then(response => response.json()).then(response => {
+        // Create element with <a> tag
+        const link = document.createElement("a");
+        const file = new Blob([response.grades], { type: 'text/plain' });
+        link.href = URL.createObjectURL(file);
+        link.download = "grades.csv";
+
+        link.click();
+        URL.revokeObjectURL(link.href);
+    });
+}
+
+
 window.onload = () => {
+    enterLesson('chat');
+    let sidebarLeft = document.getElementById("sidebarLeft");
+    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');">Main Chat</div>`;
     setAdmin();
     loadLessons(enterLesson);
 };

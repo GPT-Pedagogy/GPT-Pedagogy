@@ -105,6 +105,7 @@ function addCandidateQuestion(lessonId, question){
 
     let addButton = document.createElement("BUTTON");
     addButton.id = `add${question.id}`;
+    addButton.className = "questionEditButton";
     addButton.innerText = "<--";
     addButton.style.backgroundColor = "green";
     addButton.onclick = () => {
@@ -160,6 +161,7 @@ function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null) {
         if (role === ADMIN) {
             let delButton = document.createElement("BUTTON");
             delButton.id = `delete${quiz[qId].id}`;
+            delButton.className = "questionEditButton";
             delButton.innerText = "-->";
             delButton.style.backgroundColor = "red";
             delButton.onclick = () => {
@@ -178,6 +180,9 @@ function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null) {
             }
         if (quiz[qId].type === "sa")
             quesElem.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
+
+        if (role === ADMIN)
+            quesElem.innerHTML += `<p>A: ${quiz[qId].a}</p>`;
         quizDiv.appendChild(quesElem);
 
     }

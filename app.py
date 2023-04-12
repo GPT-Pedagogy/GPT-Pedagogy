@@ -32,11 +32,6 @@ def admin():
     return render_template('admin.html')
 
 
-@app.route('/admin/edit_lessons')
-def admin_lessons():
-    return render_template('admin_lessons.html')
-
-
 @app.route('/lessons', methods=['GET'])
 def get_lessons_student():
     """Returns lesson information to the front end for students"""
@@ -49,6 +44,14 @@ def get_lessons_admin():
     """Returns lesson information to the front end for administrators"""
 
     return get_lessons_base(ADMIN_ROLE)
+
+
+@app.route('/admin/grades', methods=['GET'])
+def request_grades():
+    """Returns the grade information from students"""
+
+    # TODO: Get grade information from students
+    return {"grades": "not implemented!"}
 
 
 @app.route('/input', methods=['POST'])
