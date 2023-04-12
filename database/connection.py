@@ -1,4 +1,9 @@
 import pymongo
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+sys.path.append(parent_dir)
+import components
 
 # Function to establish connection to MongoDB
 def connection():
@@ -73,11 +78,12 @@ def update_chatlog(collection, rcsid, title, data):
 
 # Same idea as update_chatlog
 # outcome => dictionary --> see the example performance outcome example
-def update_performance(collection, rcsid, topic, outcome):
+def update_performance(rcsid, topic, outcome):
+    collection = connection()
+    print("This is the rcsid: {}\nThis is the topic: {}\nThis is the performance: {}".format(rcsid, topic, outcome))
     query = {'RCSid': rcsid}
     document = collection.find_one(query)
-    print(document['Performance'])
-
+    
     if document:
         performance = document['Performance']
         if topic in performance:
@@ -89,18 +95,61 @@ def update_performance(collection, rcsid, topic, outcome):
 
         collection.update_one(query, {"$set": {'Performance': performance}})
     else:
-        raise ValueError("Document not found for RCSid: {}".format(rcsid))
+        # This will add the user to the database and update its performance data. 
+        insert_user(collection, rcsid, name="Peter")
+        query = {'RCSid': rcsid}
+        document = collection.find_one(query)
+        if document:
+            performance = document['Performance']
+            if topic in performance:
+                existing_outcome = performance[topic]['Outcome']
+                if existing_outcome != outcome:
+                    performance[topic] = {"Topic": topic, "Outcome": outcome}
+            else:
+                performance[topic] = {"Topic": topic, "Outcome": outcome}
+
+            collection.update_one(query, {"$set": {'Performance': performance}})
+        # raise ValueError("Document not found for RCSid: {}".format(rcsid))
 
         
     
+'''Load chatlog and update the database'''
+def load_chatlog_from_file(rcsid,title, filename):
+    chatlog_data = components.load_from_file(filename)
+    collection = connection()
+    update_chatlog(collection, rcsid, title, chatlog_data)
+
+
 
 
 
 if __name__ == '__main__':
     collection = connection()
     data = query_documents(collection)
-    # insert_user(collection, "liy123", "Sam")
-    example_chatlog_data = ['User: xxxxxxxxx1-231-1', 'Bot: xxxxxxxxx1-231-2', 'User: xxxxxxxxx1-231-3', 'Bot: xxxxxxxxx1-231-4']
+    # insert_user(collection,\"liy123", "Sam")
+    
+    '''
+    example_chatlog_data = [ 
+                                {
+                                    "role": "user",
+                                    "content": "Hello, can you give me some hint about chapter 2 lecture? x    xxx xxxxxxxxxxxxx"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "Sure, here are some important note you can take form Chapter 2: xxxxx."
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Thank you so much"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "You're welcome"
+                                }
+                            ]
+    '''
+    
+    '''
     example_performance_outcome = {
         "Question 1": "Correct",
         "Question 2": "Incorrect",
@@ -109,7 +158,9 @@ if __name__ == '__main__':
         "Question 5": "Correct",
         "Question 6": "Incorrect"
     }
-    update_performance(collection, 'liyu123', 'Unit test', example_performance_outcome)
+    '''
+    
+    # update_performance(collection, 'liyu123', 'Unit test', example_performance_outcome)
     # update_chatlog(collection, 'liyu123', "Pop Quiz", example_chatlog_data)
-    # for document in data:
-    #     print(document, "\n")
+    for document in data:
+        print(document, "\n")

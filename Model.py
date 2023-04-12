@@ -22,7 +22,7 @@ class Model:
         self.model_name = model_name
         if not openai.api_key:
             with open("OPENAI_API_KEY.json", "r") as file:
-                openai.api_key = json.loads(file.read())["test"]
+                openai.api_key = json.loads(file.read())["main"]
 
     def complete_chat(self, prompt: str, chat_history: list[dict[str, str]] = None) -> str:
         """Generates a response to the prompt based off of a proper chat history.  Used chat-gpt api"""
