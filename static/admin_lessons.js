@@ -1,5 +1,8 @@
 let selected_lesson = null;
 
+
+/** Sends a request to generate a series of questions based off of the core topics and default
+ * composition of a  given lesson*/
 function generateQuestions(){
     if(!selected_lesson){
         console.log("You must select a lesson first!");
@@ -26,6 +29,8 @@ function generateQuestions(){
 function enterLesson(lessonId){
     console.log("Entering lesson", lessonId);
     selected_lesson = lessonId;
+    document.getElementById("saveLessonsButton").style.visibility = "visible";
+    document.getElementById("genQuestions").style.visibility = "visible";
     document.getElementById("genQuestions").innerText = "Generate Questions for "+lessonId;
     let lessonElem = document.getElementById("lessons");
     lessonElem.style.display = "block";
@@ -33,6 +38,27 @@ function enterLesson(lessonId){
 
     lessonElem.innerHTML = "";
     lessonElem.appendChild(formatQuestions(lessonId, LESSONS[lessonId].quiz, false));
+}
+
+
+/** Saves the current lesson configuration to disk to be retrieved later*/
+function saveLessons(){
+
+    if(!selected_lesson){
+        console.log("You must select a lesson first!");
+        return;
+    }
+
+    console.log("Saving lessons as", LESSONS);
+
+    fetch('/save_lessons', {
+        method: 'POST',
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify(LESSONS)
+    }).then(response => response.json()).then(response => {
+        console.log(JSON.stringify(response));
+        console.log("Success:", response.success);
+    });
 }
 
 

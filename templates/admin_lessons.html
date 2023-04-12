@@ -12,13 +12,15 @@
     <img src="{{ url_for('static', filename='mathesis.png') }}" style="width: 64px">
     <div id="sidebarLeft"></div>
     <div id="sidebarRight">
-        <button id="genQuestions" onclick="generateQuestions()">Generate Quizzes</button>
+        <button id="genQuestions" style="visibility: hidden" onclick="generateQuestions()">Generate Quizzes</button>
+        <hr>
+        <br>
     </div>
     <div style="margin: auto; width: 50%">
         <h2><i>Mathesis</i> admin lessons menu</h2>
         <h3 id="lessonTitle"></h3><br>
         <div id="lessons"></div>
-        <button>Save lesson plan</button>
+        <button id="saveLessonsButton" style="visibility: hidden" onclick="saveLessons()">Save lesson plan</button>
 
 
     </div>

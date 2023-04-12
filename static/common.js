@@ -75,8 +75,8 @@ function sendQuiz(lessonId){
 
 /** Loads in lesson information from the backend and builds the lessons*/
 function loadLessons(enterLessonFunc){
-    console.log("Getting lessons...");
-    fetch('/lessons', {method: 'GET'}).then(response => response.json()).then(response => {
+    console.log(`Getting lessons ${role === ADMIN ? "as admin" : "as student"}...`);
+    fetch(`${role === ADMIN ? "/admin" : ""}/lessons`, {method: 'GET'}).then(response => response.json()).then(response => {
         console.log("Lessons:", JSON.stringify(response));
         let lessons = response;
         let sidebarLeft = document.getElementById("sidebarLeft");
@@ -106,6 +106,7 @@ function addCandidateQuestion(lessonId, question){
     let addButton = document.createElement("BUTTON");
     addButton.id = `add${question.id}`;
     addButton.innerText = "<--";
+    addButton.style.backgroundColor = "green";
     addButton.onclick = () => {
         let lessonElem = document.getElementById(`lessonForm${lessonId}`);
         formatQuestions(lessonId, [question], false, lessonElem);
@@ -141,25 +142,26 @@ function removeQuizQuestion(lessonId, quesId) {
 /** Creates the quiz detained by the lesson on the front end for the user to interact with
  * @param lessonId {String} The id of the lesson with the quiz to be displayed
  * @return {HTMLElement} The HTML form of the quiz*/
-function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null){
+function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null) {
     let addSubmit = false;
-    if(!quizDiv){
+    if (!quizDiv) {
         addSubmit = true;
         quizDiv = document.createElement("DIV");
         quizDiv.id = `lessonForm${lessonId}`;
     }
     for (let qId in quiz) {
-        if(!quiz[qId].id) quiz[qId].id = genPseudorandom();
+        if (!quiz[qId].id) quiz[qId].id = genPseudorandom();
 
         let quesElem = document.createElement("DIV");
         quesElem.className = "quizQuestion";
-        let quesId =  quiz[qId].id;
+        let quesId = quiz[qId].id;
         quesElem.id = `question${quiz[qId].id}`;
         quesElem.style.backgroundColor = "#64abc2";
-        if(role === ADMIN){
+        if (role === ADMIN) {
             let delButton = document.createElement("BUTTON");
             delButton.id = `delete${quiz[qId].id}`;
             delButton.innerText = "-->";
+            delButton.style.backgroundColor = "red";
             delButton.onclick = () => {
                 let removed = removeQuizQuestion(lessonId, quesId);
                 addCandidateQuestion(lessonId, removed);
@@ -169,30 +171,29 @@ function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null){
         }
         quesElem.innerHTML += `<p>Core Topic: ${quiz[qId].core_topic}</p>`;
         quesElem.innerHTML += `<p>${quiz[qId].q}</p>`;
-        if(quiz[qId].type === "mc")
-            for(let cId in quiz[qId].choices){
+        if (quiz[qId].type === "mc")
+            for (let cId in quiz[qId].choices) {
                 quesElem.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
                     <label>${quiz[qId].choices[cId]}</label><br>`;
             }
-        if(quiz[qId].type === "sa")
+        if (quiz[qId].type === "sa")
             quesElem.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
         quizDiv.appendChild(quesElem);
 
     }
 
-    if(addSubmit && enabled){
+    if (addSubmit && enabled) {
         let submit = document.createElement("BUTTON");
         submit.innerText = "Submit";
-        submit.onclick = () => {console.log("Submitting quiz for lesson", lessonId);sendQuiz(lessonId);};
+        submit.onclick = () => {
+            console.log("Submitting quiz for lesson", lessonId);
+            sendQuiz(lessonId);
+        };
         quizDiv.appendChild(submit);
     }
     return quizDiv;
 }
 
-function saveLessons(){
-    console.log("Saving lessons as", LESSONS);
-    // TODO: Ping save lesson endpoint
-}
 
 /** Adds text to the chat from a specified entity
  * @param chatId {String} The id of the chat for saving and loading messages

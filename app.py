@@ -6,6 +6,20 @@ app = Flask(__name__)
 teacher = Teacher("000")
 teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
 LESSONS = {}
+ADMIN_ROLE = 1
+STUDENT_ROLE = 0
+
+def get_lessons_base(role: int):
+    """Returns lesson information to the front end, taking out the answers if requested by a student
+
+    :param role: The role of the user, either admin or student"""
+
+    tmp = copy.deepcopy(LESSONS["content"])
+    if role == STUDENT_ROLE:
+        for lesson in tmp.values():
+            for question in lesson["quiz"]:
+                question.pop("a")
+    return tmp
 
 
 @app.route('/')
@@ -18,21 +32,23 @@ def admin():
     return render_template('admin.html')
 
 
-@app.route('/admin/lessons')
+@app.route('/admin/edit_lessons')
 def admin_lessons():
     return render_template('admin_lessons.html')
 
 
 @app.route('/lessons', methods=['GET'])
-def get_lessons():
-    """Returns lesson information to the front end"""
+def get_lessons_student():
+    """Returns lesson information to the front end for students"""
 
-    tmp = copy.deepcopy(LESSONS["content"])
-    for lesson in tmp.values():
-        for question in lesson["quiz"]:
-            question.pop("a")
+    return get_lessons_base(STUDENT_ROLE)
 
-    return tmp
+
+@app.route('/admin/lessons', methods=['GET'])
+def get_lessons_admin():
+    """Returns lesson information to the front end for administrators"""
+
+    return get_lessons_base(ADMIN_ROLE)
 
 
 @app.route('/input', methods=['POST'])
@@ -44,6 +60,21 @@ def get_input():
     teacher.chat.submit(input_text)
     resp = teacher.chat.generate()
     return {"content": resp}
+
+
+@app.route('/save_lessons', methods=['POST'])
+def save_lessons():
+    """Takes in updated lessons as input and saves them to disk"""
+
+    tmp_content = LESSONS["content"]
+    try:
+        LESSONS["content"] = request.json
+        with open("data/lessons.json", "w") as lesson_file:
+            lesson_file.write(json.dumps(LESSONS))
+    except Exception:
+        LESSONS["content"] = tmp_content
+        return {"success": False}
+    return {"success": True}
 
 
 @app.route('/evaluate', methods=['POST'])
