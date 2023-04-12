@@ -1,4 +1,4 @@
-import connection
+from database import connection
 import pandas as pd
 
 
@@ -38,31 +38,31 @@ def generate_performance():
                 topic_dict[topic] = []
             questions = chapter_data["Outcome"]
             for question_number, result in questions.items():
-                topic_dict[topic].append([rcsid, chapter, topic, question_number, result])
+                topic_dict[topic].append([rcsid, topic, question_number, result])
 
     # Add blank rows between different students
         if prev_rcsid and prev_rcsid != rcsid:
-            data.extend([["", "", "", "", ""], ["", "", "", "", ""]])
+            data.extend([["","", "", ""], ["", "", "", ""]])
 
         # Iterate over the topics for the current student
         for topic, questions in topic_dict.items():
 
             # Add blank row between different topics
             if prev_topic and prev_topic != topic:
-                data.append(["", "", "", "", ""])
+                data.append(["", "", "", ""])
 
             # Add RCS ID, Chapter, and Topic fields for the first question for the topic
             if len(questions) == 1:
                 question = questions[0]
-                data.append([question[0], question[1], question[2], question[3], question[4]])
+                data.append([question[0], question[1], question[2], question[3]])
 
             # Add RCS ID, Chapter, and Topic fields for the first question and leave them blank for others
             else:
                 for i, question in enumerate(questions):
                     if i == 0:
-                        data.append([question[0], question[1], question[2], question[3], question[4]])
+                        data.append([question[0], question[1], question[2], question[3]])
                     else:
-                        data.append(["", "", "", question[3], question[4]])
+                        data.append(["", "", question[2], question[3]])
 
             # Set previous topic
             prev_topic = topic
@@ -71,12 +71,13 @@ def generate_performance():
         prev_rcsid = rcsid
 
     # Create a pandas DataFrame from the data list
-    df = pd.DataFrame(data, columns=["RCS ID", "Chapter", "Topic", "Question Number", "Result"])
+    df = pd.DataFrame(data, columns=["RCS ID", "Topic", "Question Number", "Result"])
 
+    return df
     # Export the DataFrame to an Excel sheet
     with pd.ExcelWriter('students_performance.xlsx', engine='openpyxl') as writer:
         df.to_excel(writer, sheet_name='Sheet1', index=False)
         writer._save()
 
         
-generate_performance()
+# generate_performance()

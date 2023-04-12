@@ -5,9 +5,6 @@ parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
 sys.path.append(parent_dir)
 import components
 
-# TODO: Create a new DB to store quiz answers
-# TODO: Integrate with the components.py file. 
-# TODO: A function to generate the all students performance. 
 # Function to establish connection to MongoDB
 def connection():
     client = pymongo.MongoClient("mongodb+srv://GPTadmin:xinformatics@cluster0.d1gdjlb.mongodb.net/test")
@@ -81,11 +78,12 @@ def update_chatlog(collection, rcsid, title, data):
 
 # Same idea as update_chatlog
 # outcome => dictionary --> see the example performance outcome example
-def update_performance(collection, rcsid, topic, outcome):
+def update_performance(rcsid, topic, outcome):
+    collection = connection()
+    print("This is the rcsid: {}\nThis is the topic: {}\nThis is the performance: {}".format(rcsid, topic, outcome))
     query = {'RCSid': rcsid}
     document = collection.find_one(query)
-    print(document['Performance'])
-
+    
     if document:
         performance = document['Performance']
         if topic in performance:
@@ -97,7 +95,21 @@ def update_performance(collection, rcsid, topic, outcome):
 
         collection.update_one(query, {"$set": {'Performance': performance}})
     else:
-        raise ValueError("Document not found for RCSid: {}".format(rcsid))
+        # This will add the user to the database and update its performance data. 
+        insert_user(collection, rcsid, name="Peter")
+        query = {'RCSid': rcsid}
+        document = collection.find_one(query)
+        if document:
+            performance = document['Performance']
+            if topic in performance:
+                existing_outcome = performance[topic]['Outcome']
+                if existing_outcome != outcome:
+                    performance[topic] = {"Topic": topic, "Outcome": outcome}
+            else:
+                performance[topic] = {"Topic": topic, "Outcome": outcome}
+
+            collection.update_one(query, {"$set": {'Performance': performance}})
+        # raise ValueError("Document not found for RCSid: {}".format(rcsid))
 
         
     
