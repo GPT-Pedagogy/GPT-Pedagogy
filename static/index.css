@@ -97,3 +97,12 @@
 .questionEditButton:hover {
     background-color: #8f8f8f !important;
 }
+
+#submitText {
+    background: url('/static/send.png') no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
