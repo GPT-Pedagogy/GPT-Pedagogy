@@ -83,6 +83,7 @@ def update_chatlog(collection: pymongo.collection.Collection, rcs_id: str, title
 
     # Example dictionary outline for the 'Chatlog' 
     # print(document['Chatlog']['Homework help on Chapter 1'])
+
     query = {'RCSid': rcs_id}
     document = collection.find_one(query)
    
@@ -124,7 +125,7 @@ def update_performance(rcs_id: str, topic: str, outcome: dict):
         collection.update_one(query, {"$set": {'Performance': performance}})
     else:
         # This will add the user to the database and update its performance data.
-        insert_user(collection, rcs_id, name="Peter")
+        insert_user(collection, rcs_id, username="Peter")
         query = {'RCSid': rcs_id}
         document = collection.find_one(query)
         if document:
@@ -139,11 +140,17 @@ def update_performance(rcs_id: str, topic: str, outcome: dict):
             collection.update_one(query, {"$set": {'Performance': performance}})
 
 
-'''Load chatlog and update the database'''
-def load_chatlog_from_file(rcsid,title, filename):
-    chatlog_data = components.load_from_file(filename)
+def load_chatlog_from_file(chat: components.Chat, rcs_id: str, title: str, filename: str):
+    """Load chatlog and update the database
+
+    :param chat: The chat object associated with the target chatlog
+    :param rcs_id: The RCS id of the student to update
+    :param title: The title of the chatlog to update
+    :param filename: The name of the file to load the chatlog from"""
+
+    chatlog_data = chat.load_from_file(filename)
     collection = connection()
-    update_chatlog(collection, rcsid, title, chatlog_data)
+    update_chatlog(collection, rcs_id, title, chatlog_data)
 
 
 if __name__ == '__main__':

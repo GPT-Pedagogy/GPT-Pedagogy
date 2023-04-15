@@ -2,9 +2,11 @@ from database import connection
 import pandas as pd
 
 
-
-'''Generate the student's performances to the teacher. '''
 def generate_performance():
+    """Generate the student's performance for the teacher to view
+
+    :return: A pandas dataframe representing the student's performance"""
+
     db = connection.connection()
   
     # Retrieve all documents from the performance_data collection

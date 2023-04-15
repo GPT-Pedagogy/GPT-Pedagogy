@@ -69,10 +69,12 @@ def request_grades():
     """Returns the grade information from students
 
     :return: A dictionary of grades from students"""
+
     df = generate_performance.generate_performance()
     filename = "students_performance.xlsx"
     with pd.ExcelWriter(filename, engine='openpyxl') as writer:
         df.to_excel(writer, sheet_name='Sheet1', index=False)
+
     # Return the file as a download to the user
     return send_file(filename, as_attachment=True)
 
@@ -85,7 +87,6 @@ def get_input():
     * inputText (str) - Chat inputted from a student
 
     :return: The response to the student chat from GPT"""
-
 
     input_text = request.json["inputText"]
     print("Input text", input_text)
@@ -131,7 +132,10 @@ def evaluate_lesson():
     print("Evaluating quiz:", answered_quiz)
 
     evaluation = {}
+    titles = {}
     for qId, question in enumerate(answered_quiz["quiz"]):
+        titles[qId] = "Question " + str(qId) + ': '+question['core_topic']
+
         ques, resp = None, None
         evaluation[qId] = {"feedback": "", "score": 0}
         # Multiple choice preparation
@@ -155,21 +159,13 @@ def evaluate_lesson():
         if evaluation[qId]["score"] < 1:
             evaluation[qId]["feedback"] += "\nCorrection: "+teacher.evaluate.correct_answer(ques, resp)
 
-
-    rcs_id = answered_quiz["rcs_id"]
-    lessonID = answered_quiz['lessonId']
-    topic = "Lesson " + lessonID
-
-    data = {}
-    for qId, question in enumerate(answered_quiz["quiz"]):
-        data[qId] = "Question " + str(qId) + ': '+question['core_topic']
+    rcs_id = answered_quiz["rcsId"]
+    lesson_id = answered_quiz['lessonId']
+    topic = "Lesson " + lesson_id
 
     performance_data = {}
-    for id, answer in enumerate(evaluation):
-        if evaluation[answer]['score'] == 1:
-            performance_data[data[id]] = "Score: 100% " + evaluation[answer]['feedback']
-        else:
-            performance_data[data[id]] = "Score: 0%; Feedback: " + evaluation[answer]['feedback']
+    for qId in evaluation:
+        performance_data[titles[qId]] = f"Score: {evaluation[qId]['score']*100}%, Feedback: " + evaluation[qId]['feedback']
 
     connection.update_performance(rcs_id, topic, performance_data)
 
