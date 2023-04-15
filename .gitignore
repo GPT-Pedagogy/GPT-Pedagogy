@@ -12,3 +12,4 @@ docs/*/*.log
 **/*.pickle
 docs/sphinx/.doctrees/
 *.inv
+*.log

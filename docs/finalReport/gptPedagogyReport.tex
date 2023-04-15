@@ -4,7 +4,6 @@
 \usepackage{fancyhdr}
 
 \pagestyle{fancy}
-\begin{document}
 
 \title{GPT Pedagogy}
 \author[1]{Matthew Pisano}
@@ -15,41 +14,142 @@
 \affil[1]{Rensselaer Polytechnic Institute}
 \date{\today}
 
-\maketitle
+\begin{document}
+    \maketitle
 
-\abstract{
-    GPT-3 is a Large Language Model which, through overuse, is often used to deprive students of the 
-    opportunity to learn effectively. Our intended use case of GPT enables the 
-    transparent use of the technology between instructor and student. We aim to create a 
-    more active and participatory learning environment through the usage of the model in active
-    learning. Our long-term goal for higher education is along the lines of the fourth UN SDG:
-    
-    \begin{quote}
-        Ensure inclusive and equitable quality education and promote lifelong 
-        learning opportunities for all.
-    \end{quote}
+    \abstract{
+        GPT-3 is a Large Language Model which, through overuse, is often used to deprive students of the
+        opportunity to learn effectively. Our intended use case of GPT enables the
+        transparent use of the technology between instructor and student. We aim to create a
+        more active and participatory learning environment through the usage of the model in active
+        learning. Our long-term goal for higher education is along the lines of the fourth UN SDG:
 
-    We view GPT as a way to create an adaptive learning experience which 
-    promotes the educational endeavor rather than detracts from it.
+        \begin{quote}
+            Ensure inclusive and equitable quality education and promote lifelong
+            learning opportunities for all.
+        \end{quote}
 
-    Our plan is to develop a GPT-3 based learning assistant for the \textit{Introduction to Biology}
-    course here at RPI.  Through a partnership with the professor, we will gather sufficient amounts
-    of course material to fine-tune a pre-trained GPT-3 model. This will create a knowledgeable 
-    and focused learning assistant.  By creating this personalized AI tutor we can make it easier 
-    and more transparent for students to learn the material and reduce their stress.
+        We view GPT as a way to create an adaptive learning experience which promotes the educational
+        endeavor rather than detracts from it.
 
-    One of our goals is for the model to maintain its conversational abilities while embedding 
-    additional knowledge about faculty defined key learning objectives. The model will generate a 
-    series of topic-relevant questions, evaluate the answers of those questions, and give 
-    useful feedback or counter-examples to the student. The model benefits from human-in-the-loop 
-    reinforcement learning by storing previous chats from students and faculty alike.
+        Our plan is to develop a GPT-3 based learning assistant for the \textit{Introduction to Biology}
+        course here at RPI.  Through a partnership with the professor, we will gather sufficient amounts
+        of course material to fine-tune a pre-trained GPT-3 model. This will create a knowledgeable
+        and focused learning assistant, \textit{Mathesis} (from the ancient greek work for learning).
+        By creating this personalized AI tutor we can make it easier and more transparent for
+        students to learn the material and reduce their stress.
 
-    We also aim for this model to be generalizable to other classes and disciplines in the future.
-    The model will work especially well for courses where it is difficult to give personalized 
-    feedback to each learner in each class meeting time, such as in classes that have a high
-    student to faculty ratio. It will also work well for courses with students interested in AI 
-    who cannot adequately engage with that interest through the course material.
-}
+        One of our goals is for the model to maintain its conversational abilities while embedding
+        additional knowledge about faculty defined key learning objectives. \textit{Mathesis} will
+        generate a series of topic-relevant questions, evaluate the answers of those questions, and give
+        useful feedback or counter-examples to the student. The model benefits from human-in-the-loop
+        reinforcement learning by storing previous chats from students and faculty alike.
 
+        We also aim for this model to be generalizable to other classes and disciplines in the future.
+        The model will work especially well for courses where it is difficult to give personalized
+        feedback to each learner in each class meeting time, such as in classes that have a high
+        student to faculty ratio. It will also work well for courses with students interested in AI
+        who cannot adequately engage with that interest through the course material.
+    }
 
+    \pagebreak
+    \section{Introduction}
+
+    The idea for this project was conceived before the beginning of this project in the context of
+    our Informatics class.  It stemmed from observations about the current trend that large language
+    models are heading in and how many educational institutions are not fully prepared to handle the
+    fallout of this trend.  Our primary motivation for this project is to remedy this issue.  By
+    providing students with an opportunity to use large language models, like GPT, as a learning tool,
+    we allow students to gain valuable insight into the practical benefits and shortcomings of these models.
+
+    \section{Project Use Case}
+
+    \subsection{Specifications}
+
+    For the development of the use case for this project, it is important to detail several
+    specifications that describe GPT Pedagogy in a more rigorous manner.  One of these specifications
+    is the list of the functional requirements of the project.  To fulfil our objectives, the
+    project needs to:
+
+    \begin{itemize}
+        \item Provide students with a knowledgeable teacher that can answer any course-relevant question
+        \item Be able to automatically generate a series of evaluation questions for students and
+        reference answers based on the core topics of the course
+        \item Receive students' answers to evaluation questions and evaluate their correctness based
+        off of the reference answers
+        \item Provide useful feedback to students if their answers did not sufficiently match the
+        reference answers
+        \item Allow instructors to review and regenerate all questions generated by the model
+        \item Allow instructors to evaluate a summary of student performance based off of the
+        automatically generated questions
+    \end{itemize}
+
+    Another important specification to consider is that of the entropy/uncertainty of the project.
+    Overall, we have worked to minimize the total uncertainty of the project.  It is important to note,
+    however, that the GPT model will always introduce some amount of extra uncertainty.
+
+    One of the areas where we worked to minimize the uncertainty in was the user interface.  This is
+    split into two parts, the student and administrator views.  In both of these cases, our design
+    was oriented towards a simple, straightforward interface.  We worked to accomplish this through
+    the use of a minimalist design.  Users can choose to choose only a few tabs: the main chat and
+    the lesson evaluations.  The administrators have a similar view, with th addition of the ability
+    to edit the questions that are displayed to students.  In our design, buttons, animations, and
+    images are kept to a minimum.  This will hopefully allow users to focus more on working on
+    evaluations or interacting with \textit{Mathesis} to better learn specific topics.
+
+    Another way we worked to minimize uncertainty is through the fine-tuning of the model on our
+    own, customized, training data.  By feeding \textit{Mathesis} significant amounts of course
+    material, we have narrowed its focus down to the relevant topics of the course.  While the model
+    does not forget its previously learned knowledge, its ability to correctly interpret and recall
+    information related to the course has increased.  This lowers the uncertainty of the project
+    by encouraging the trained model to generate responses that are targeted towards the course
+    material.  This will increase its helpfulness to students as unrelated responses may provide
+    misinformation or serve to demotivate students from interacting with the system.
+
+    The use case that we developed addresses what we expect to be the basic low of the system, along
+    with any reasonable alternate or exception flows.  The goal of this system is the same as the
+    project in general: to use an interface and pre-trained model to provide students with a flexible
+    and helpful learning assistant for the \textit{Introduction to Biology} course at RPI.
+
+    We have included the particular flows that we did in order to properly scope our use case.  Our intention
+    is to cover all relevant ways in which students and administrators, while not including flows that
+    may bloat our design of this early use case.  Examples of such flows would be deliberate
+    adversarial attacks to the system.  While these attacks are a near certainty in a deployed system,
+    the time constraints on this project has not allowed us to account for them in our working prototype.
+    Due to this reason, we have set this and similar edge cases to be outside our scope.
+
+    \subsection{Implementation Considerations}
+    ...
+
+    \section{Architectural Models}
+
+    \subsection{Conceptual Model}
+    ...
+    \subsection{Logical Model}
+    ...
+
+    \subsection{Implementation}
+    ...
+
+    \section{Conclusion}
+
+    \subsection{Future Work}
+    In our future work in this project, we expect to both finalize the attributes of the project that
+    we have included in its current scope and to expand the projects scope to cover more edge cases.
+
+    ...
+
+    Ways in which we would expand the scope of the project would to be to better handle reasonable
+    edge cases.  These could come in the form of students needing help with navigating the new system,
+    handling adversarial attacks from students, or further automating the process of training models
+    on new datasets.  These possible additions would serve to help students better adapt to using the
+    \textit{Mathesis} assistant and its surrounding learning platform, deter students from using
+    the model for unintended purposes, and creating encouraging environment for other professors who
+    would like to include their courses into the learning system in future semesters respectively.
+
+    \subsection{Closing Thoughts}
+    ...
+
+    \pagebreak
+    % references and bib
 \end{document}
