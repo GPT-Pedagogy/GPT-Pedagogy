@@ -9,3 +9,5 @@ static/*.xcf
 *.fls
 *.synctex.gz
 docs/*/*.log
+**/*.pickle
+docs/sphinx/.doctrees/

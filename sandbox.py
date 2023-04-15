@@ -1,7 +1,5 @@
 import openai
-import json
-from Model import Model
-from Teacher import Teacher
+from model.Teacher import Teacher
 
 
 # main: file-Ol4t15mr9T3Wb7cUl4bEtRDj, ft-zJk1gHZzIgGjnNJjMEs7Zbk8

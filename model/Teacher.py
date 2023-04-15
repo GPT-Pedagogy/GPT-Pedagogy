@@ -1,6 +1,6 @@
 import random
-from components import Chat, Evaluate
-from Model import Model
+from model.components import Chat, Evaluate
+from model.Model import Model
 
 
 class Teacher:

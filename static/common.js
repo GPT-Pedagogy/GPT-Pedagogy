@@ -16,7 +16,7 @@ function setAdmin(){
     role = ADMIN;
 }
 
-/** Sends the content of the input prompt to the backend and appends the generated response to the chat*/
+/** Sends the content of the input prompt to the model and appends the generated response to the chat*/
 function sendChat(){
     let inputText = document.getElementById("inputText").value;
     document.getElementById("inputText").value = '';
@@ -37,7 +37,7 @@ function sendChat(){
     });
 }
 
-/** Sends the user response to a lesson quiz to the backend and appends the evaluation to the chat
+/** Sends the user response to a lesson quiz to the model and appends the evaluation to the chat
  * @param lessonId {String} The id of the lesson the quiz belongs to
  * @return {Boolean} If the quiz has been submitted successfully*/
 function sendQuiz(lessonId){
@@ -76,7 +76,7 @@ function sendQuiz(lessonId){
     return true;
 }
 
-/** Loads in lesson information from the backend and builds the lessons*/
+/** Loads in lesson information from the model and builds the lessons*/
 function loadLessons(enterLessonFunc){
     console.log(`Getting lessons ${role === ADMIN ? "as admin" : "as student"}...`);
     fetch(`${role === ADMIN ? "/admin" : ""}/lessons`, {method: 'GET'}).then(response => response.json()).then(response => {

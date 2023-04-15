@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Welcome to GPT Pedagogy’s documentation! &#8212; GPT Pedagogy  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">GPT Pedagogy  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to GPT Pedagogy’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-gpt-pedagogy-s-documentation">
+<h1>Welcome to GPT Pedagogy’s documentation!<a class="headerlink" href="#welcome-to-gpt-pedagogy-s-documentation" title="Permalink to this heading">¶</a></h1>
+<p>Here you will find detailed documentation concerning the functions and classes within this project, along with
+their appropriate usages.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<section id="module-app">
+<span id="app"></span><h2>App<a class="headerlink" href="#module-app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.admin">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serves the admin page for the website</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The website admin page</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.evaluate_lesson">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">evaluate_lesson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.evaluate_lesson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the submitted user quiz for a lesson</p>
+<p><strong>JSON Data</strong></p>
+<ul class="simple">
+<li><p>rcsId (str) - The RCS id of the student that submitted this quiz</p></li>
+<li><p>lessonId (str) - The id of the lesson that this quiz belongs to</p></li>
+<li><p>quiz (dict) - A dictionary representing the quiz that the student has sent in</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The automatic evaluation and feedback from GPT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.generate_questions">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">generate_questions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.generate_questions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns several candidate quizzes to be manually reviewed</p>
+<p><strong>Optional Query Params</strong></p>
+<ul class="simple">
+<li><p>l (list) - A list of lesson ids to generate the questions for</p></li>
+<li><p>c (dict) - A dictionary, with the lesson id as the key, containing the composition of the questions for that lesson</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the generated transactions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_input">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.get_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in user input and passes it off to the chat</p>
+<p><strong>JSON Data</strong></p>
+<ul class="simple">
+<li><p>inputText (str) - Chat inputted from a student</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The response to the student chat from GPT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_lessons_admin">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_lessons_admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.get_lessons_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns lesson information to the front end for administrators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of lessons with quizzes, without censorship</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_lessons_base">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_lessons_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.get_lessons_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns lesson information to the front end, withholding the answers if requested by a student</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role</strong> – The role of the user, either admin or student</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The dictionary of lessons</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_lessons_student">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_lessons_student</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.get_lessons_student" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns lesson information to the front end for students</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of lessons with quizzes, censored for students</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.home">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serves the home page for the website</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The website homepage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.request_grades">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">request_grades</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.request_grades" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the grade information from students</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of grades from students</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.save_lessons">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">save_lessons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.save_lessons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in updated lessons as input and saves them to disk</p>
+<p><strong>JSON Data</strong></p>
+<ul class="simple">
+<li><p>updatedLessons (dict) - A dictionary of lessons with quizzes to overwrite the previous lessons</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing a boolean success value</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<hr class="docutils" />
+<section id="model">
+<h1>Model<a class="headerlink" href="#model" title="Permalink to this heading">¶</a></h1>
+<hr class="docutils" />
+<section id="module-model.components">
+<span id="components"></span><h2>Components<a class="headerlink" href="#module-model.components" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="model.components.Chat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.components.</span></span><span class="sig-name descname"><span class="pre">Chat</span></span><a class="headerlink" href="#model.components.Chat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing a chat instance of a user, keeping track of chat history and managing interactions</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears chat history</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an appropriate response from the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The model’s response to the latest chat from the user</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load chat state from a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the file to load the chat from</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.save_to_file">
+<span class="sig-name descname"><span class="pre">save_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.save_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save current chat state into a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the file to save the chat to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.set_model">
+<span class="sig-name descname"><span class="pre">set_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.set_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the model to be used in the chat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_name</strong> – The name of the model to use for the chat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Chat.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Chat.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit user text into the chat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The text to save to the chat</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="model.components.Evaluate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.components.</span></span><span class="sig-name descname"><span class="pre">Evaluate</span></span><a class="headerlink" href="#model.components.Evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class containing evaluation and correction logic for user submitted answers</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Evaluate.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Evaluate.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Evaluate.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">answer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Evaluate.correct_answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in an incorrect answer and corrects it to a better response</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> – The short answer or multiple choice question that the student was asked</p></li>
+<li><p><strong>answer</strong> – The answer that the student provided</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The model’s correction of the student’s answer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Evaluate.eval_short_answer">
+<span class="sig-name descname"><span class="pre">eval_short_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">answer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Evaluate.eval_short_answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the answer to a question in the form of a grade</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question</strong> – The short answer question that the student was asked</p></li>
+<li><p><strong>answer</strong> – The answer that the student provided</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The grade of the answer as an integer score</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.components.Evaluate.set_model">
+<span class="sig-name descname"><span class="pre">set_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.components.Evaluate.set_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Sets the model to be used for evaluation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_name</strong> – The name of the model to use for evaluation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>Model<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<span class="target" id="module-model.Model"></span><dl class="py class">
+<dt class="sig sig-object py" id="model.Model.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.Model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing an openai model.  Contains low level methods associated with basic model functionality</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Model.Model.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Model.Model.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing an openai model.  Contains low level methods associated with basic model functionality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_name</strong> – The name of the OpenAI model to use</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Model.Model.complete">
+<span class="sig-name descname"><span class="pre">complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#model.Model.Model.complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Completes the prompt with additional context considered.  Uses a fine-tuned model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prompt</strong> – The prompt for the model to respond to</p></li>
+<li><p><strong>context</strong> – A list of chats previously generated by the user or model.  This gives context to the model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The fine-tuned model’s response to the prompt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Model.Model.complete_chat">
+<span class="sig-name descname"><span class="pre">complete_chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#model.Model.Model.complete_chat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a response to the prompt based off of a proper chat history.  Uses the ChatGPT API only</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prompt</strong> – The prompt for the model to respond to</p></li>
+<li><p><strong>context</strong> – A list of chats previously generated by the user or model.  This gives context to the model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ChatGPT’s response to the prompt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Model.Model.edit">
+<span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">editable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Model.Model.edit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a corrected version of the <code class="docutils literal notranslate"><span class="pre">editable</span></code> parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instruction</strong> – An instruction on what the model is to do with the <code class="docutils literal notranslate"><span class="pre">editable</span></code></p></li>
+<li><p><strong>editable</strong> – A string of text that the model is to edit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The model’s edit of the text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Model.Model.embed">
+<span class="sig-name descname"><span class="pre">embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Model.Model.embed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a vector embedding of the given text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The text to embed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The embedding of the text</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="module-model.Teacher">
+<span id="teacher"></span><h2>Teacher<a class="headerlink" href="#module-model.Teacher" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="model.Teacher.Teacher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.Teacher.</span></span><span class="sig-name descname"><span class="pre">Teacher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher" title="Permalink to this definition">¶</a></dt>
+<dd><p>A high-level class that contains both chat and evaluation functionality, along with administrative capabilities</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Teacher.Teacher.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>A high-level class that contains both chat and evaluation functionality, along with administrative capabilities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rcs_id</strong> – The RCS id of the student that this teacher will interact with</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Teacher.Teacher.gen_multiple_choice">
+<span class="sig-name descname"><span class="pre">gen_multiple_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.gen_multiple_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a multiple choice question based on the given topic and encodes it into json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> – The topic to generate a question on</p></li>
+<li><p><strong>max_tokens</strong> – The maximum length of the generated question in tokens</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A generated multiple choice question</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Teacher.Teacher.gen_quiz_questions">
+<span class="sig-name descname"><span class="pre">gen_quiz_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.gen_quiz_questions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a quiz based on a set of topics and a set of question types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topics</strong> – A list of topics to generate questions based off of</p></li>
+<li><p><strong>composition</strong> – The types of questions that will be generated</p></li>
+<li><p><strong>randomize</strong> – Whether to randomize the order of the questions that will be generated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of generated questions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Teacher.Teacher.gen_short_answer">
+<span class="sig-name descname"><span class="pre">gen_short_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.gen_short_answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a short question based on the given topic and encodes it, and its answer, into json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> – The topic to generate a question on</p></li>
+<li><p><strong>max_tokens</strong> – The maximum length of the generated question in tokens</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A generated short answer question</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.Teacher.Teacher.set_model">
+<span class="sig-name descname"><span class="pre">set_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">teacher_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chat_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.set_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the model name for the specified object(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>teacher_model</strong> – The model to use for the teacher</p></li>
+<li><p><strong>chat_model</strong> – The model to use for the chat</p></li>
+<li><p><strong>eval_model</strong> – The model to use for the evaluator</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<hr class="docutils" />
+<section id="database">
+<h1>Database<a class="headerlink" href="#database" title="Permalink to this heading">¶</a></h1>
+<hr class="docutils" />
+<section id="module-database.connection">
+<span id="connection"></span><h2>Connection<a class="headerlink" href="#module-database.connection" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.connection">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establishes a connection to mongodb</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A collection of user metadata</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.insert_user">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">insert_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.insert_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a new user into the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> – The MongoDB collection containing the user data</p></li>
+<li><p><strong>rcs_id</strong> – The RCS id of the user to insert</p></li>
+<li><p><strong>username</strong> – The name of the user to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.load_chatlog_from_file">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">load_chatlog_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#model.components.Chat" title="model.components.Chat"><span class="pre">Chat</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.load_chatlog_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load chatlog and update the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chat</strong> – The chat object associated with the target chatlog</p></li>
+<li><p><strong>rcs_id</strong> – The RCS id of the student to update</p></li>
+<li><p><strong>title</strong> – The title of the chatlog to update</p></li>
+<li><p><strong>filename</strong> – The name of the file to load the chatlog from</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.query_documents">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">query_documents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.query_documents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all documents within the database =&gt; pass in database schema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>collection</strong> – The MongoDB collection containing the user data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>All relevant documents in the database</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.update_chatlog">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">update_chatlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.update_chatlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the conversation history of the user with the given RCS id</p>
+<p><strong>Examples</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s1">&#39;User: xxxxxxxxx1-231-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Bot: xxxxxxxxx1-231-2&#39;</span><span class="p">,</span> <span class="s1">&#39;User: xxxxxxxxx1-231-3&#39;</span><span class="p">,</span> <span class="s1">&#39;Bot: xxxxxxxxx1-231-4&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> – The MongoDB collection containing the user data</p></li>
+<li><p><strong>rcs_id</strong> – The RCS id of the user to update</p></li>
+<li><p><strong>title</strong> – The title of the conversation</p></li>
+<li><p><strong>data</strong> – A list of new chats to add to the chatlog</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If there is no existing document for the user with the given RCS id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.update_performance">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">update_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcome</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.update_performance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the quiz performance history of the user with the given RCS id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rcs_id</strong> – The RCS id of the user to update</p></li>
+<li><p><strong>topic</strong> – The topic that the user was quizzed on</p></li>
+<li><p><strong>outcome</strong> – The user’s performance on the given topic</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If there is no existing document for the user with the given RCS id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.connection.validate_user">
+<span class="sig-prename descclassname"><span class="pre">database.connection.</span></span><span class="sig-name descname"><span class="pre">validate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcs_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.connection.validate_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a user with the given RCS id exists in the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> – The MongoDB collection containing the user data</p></li>
+<li><p><strong>rcs_id</strong> – The RCS id of the user to look for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the user exists, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="module-database.generate_performance">
+<span id="generate-performance"></span><h2>Generate Performance<a class="headerlink" href="#module-database.generate_performance" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="database.generate_performance.generate_performance">
+<span class="sig-prename descclassname"><span class="pre">database.generate_performance.</span></span><span class="sig-name descname"><span class="pre">generate_performance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database.generate_performance.generate_performance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the student’s performance for the teacher to view</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pandas dataframe representing the student’s performance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<hr class="docutils" />
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to GPT Pedagogy’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a><ul>
+<li><a class="reference internal" href="#module-app">App</a><ul>
+<li><a class="reference internal" href="#app.admin"><code class="docutils literal notranslate"><span class="pre">admin()</span></code></a></li>
+<li><a class="reference internal" href="#app.evaluate_lesson"><code class="docutils literal notranslate"><span class="pre">evaluate_lesson()</span></code></a></li>
+<li><a class="reference internal" href="#app.generate_questions"><code class="docutils literal notranslate"><span class="pre">generate_questions()</span></code></a></li>
+<li><a class="reference internal" href="#app.get_input"><code class="docutils literal notranslate"><span class="pre">get_input()</span></code></a></li>
+<li><a class="reference internal" href="#app.get_lessons_admin"><code class="docutils literal notranslate"><span class="pre">get_lessons_admin()</span></code></a></li>
+<li><a class="reference internal" href="#app.get_lessons_base"><code class="docutils literal notranslate"><span class="pre">get_lessons_base()</span></code></a></li>
+<li><a class="reference internal" href="#app.get_lessons_student"><code class="docutils literal notranslate"><span class="pre">get_lessons_student()</span></code></a></li>
+<li><a class="reference internal" href="#app.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li><a class="reference internal" href="#app.request_grades"><code class="docutils literal notranslate"><span class="pre">request_grades()</span></code></a></li>
+<li><a class="reference internal" href="#app.save_lessons"><code class="docutils literal notranslate"><span class="pre">save_lessons()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model">Model</a><ul>
+<li><a class="reference internal" href="#module-model.components">Components</a><ul>
+<li><a class="reference internal" href="#model.components.Chat"><code class="docutils literal notranslate"><span class="pre">Chat</span></code></a><ul>
+<li><a class="reference internal" href="#model.components.Chat.__init__"><code class="docutils literal notranslate"><span class="pre">Chat.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.clear"><code class="docutils literal notranslate"><span class="pre">Chat.clear()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.generate"><code class="docutils literal notranslate"><span class="pre">Chat.generate()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.load_from_file"><code class="docutils literal notranslate"><span class="pre">Chat.load_from_file()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.save_to_file"><code class="docutils literal notranslate"><span class="pre">Chat.save_to_file()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.set_model"><code class="docutils literal notranslate"><span class="pre">Chat.set_model()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Chat.submit"><code class="docutils literal notranslate"><span class="pre">Chat.submit()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model.components.Evaluate"><code class="docutils literal notranslate"><span class="pre">Evaluate</span></code></a><ul>
+<li><a class="reference internal" href="#model.components.Evaluate.__init__"><code class="docutils literal notranslate"><span class="pre">Evaluate.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Evaluate.correct_answer"><code class="docutils literal notranslate"><span class="pre">Evaluate.correct_answer()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Evaluate.eval_short_answer"><code class="docutils literal notranslate"><span class="pre">Evaluate.eval_short_answer()</span></code></a></li>
+<li><a class="reference internal" href="#model.components.Evaluate.set_model"><code class="docutils literal notranslate"><span class="pre">Evaluate.set_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Model</a><ul>
+<li><a class="reference internal" href="#model.Model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a><ul>
+<li><a class="reference internal" href="#model.Model.Model.__init__"><code class="docutils literal notranslate"><span class="pre">Model.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#model.Model.Model.complete"><code class="docutils literal notranslate"><span class="pre">Model.complete()</span></code></a></li>
+<li><a class="reference internal" href="#model.Model.Model.complete_chat"><code class="docutils literal notranslate"><span class="pre">Model.complete_chat()</span></code></a></li>
+<li><a class="reference internal" href="#model.Model.Model.edit"><code class="docutils literal notranslate"><span class="pre">Model.edit()</span></code></a></li>
+<li><a class="reference internal" href="#model.Model.Model.embed"><code class="docutils literal notranslate"><span class="pre">Model.embed()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-model.Teacher">Teacher</a><ul>
+<li><a class="reference internal" href="#model.Teacher.Teacher"><code class="docutils literal notranslate"><span class="pre">Teacher</span></code></a><ul>
+<li><a class="reference internal" href="#model.Teacher.Teacher.__init__"><code class="docutils literal notranslate"><span class="pre">Teacher.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#model.Teacher.Teacher.gen_multiple_choice"><code class="docutils literal notranslate"><span class="pre">Teacher.gen_multiple_choice()</span></code></a></li>
+<li><a class="reference internal" href="#model.Teacher.Teacher.gen_quiz_questions"><code class="docutils literal notranslate"><span class="pre">Teacher.gen_quiz_questions()</span></code></a></li>
+<li><a class="reference internal" href="#model.Teacher.Teacher.gen_short_answer"><code class="docutils literal notranslate"><span class="pre">Teacher.gen_short_answer()</span></code></a></li>
+<li><a class="reference internal" href="#model.Teacher.Teacher.set_model"><code class="docutils literal notranslate"><span class="pre">Teacher.set_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database">Database</a><ul>
+<li><a class="reference internal" href="#module-database.connection">Connection</a><ul>
+<li><a class="reference internal" href="#database.connection.connection"><code class="docutils literal notranslate"><span class="pre">connection()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.insert_user"><code class="docutils literal notranslate"><span class="pre">insert_user()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.load_chatlog_from_file"><code class="docutils literal notranslate"><span class="pre">load_chatlog_from_file()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.query_documents"><code class="docutils literal notranslate"><span class="pre">query_documents()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.update_chatlog"><code class="docutils literal notranslate"><span class="pre">update_chatlog()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.update_performance"><code class="docutils literal notranslate"><span class="pre">update_performance()</span></code></a></li>
+<li><a class="reference internal" href="#database.connection.validate_user"><code class="docutils literal notranslate"><span class="pre">validate_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-database.generate_performance">Generate Performance</a><ul>
+<li><a class="reference internal" href="#database.generate_performance.generate_performance"><code class="docutils literal notranslate"><span class="pre">generate_performance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">GPT Pedagogy  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to GPT Pedagogy’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Matthew Pisano.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    </div>
+  </body>
+</html>

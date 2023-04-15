@@ -2,13 +2,11 @@ from flask import Flask, render_template, request, send_file
 import json
 import copy
 import pandas as pd
-from Teacher import Teacher
+from model.Teacher import Teacher
 from database import connection, generate_performance
 
 
 app = Flask(__name__)
-teacher = Teacher("000")
-teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
 LESSONS = {}
 ADMIN_ROLE = 1
 STUDENT_ROLE = 0
@@ -212,6 +210,10 @@ def generate_questions():
 
 
 if __name__ == '__main__':
+
+    teacher = Teacher("000")
+    teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
+
     with open("data/lessons.json", "r") as file:
         LESSONS = json.loads(file.read())
 
