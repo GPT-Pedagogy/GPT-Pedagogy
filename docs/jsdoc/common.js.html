@@ -1,8 +1,36 @@
-"use strict";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: common.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: common.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
 
 const USER_SPEAKER = 0;
 const MATHESIS_SPEAKER = 1;
-const TYPING = `<p class="speechBubble mathesisSpeech">...</p>`;
+const TYPING = `&lt;p class="speechBubble mathesisSpeech">...&lt;/p>`;
 const ADMIN = 1;
 const STUDENT = 0;
 
@@ -80,7 +108,7 @@ function sendQuiz(lessonId){
         for(let fId of Object.keys(response.content)) {
             let evaluation = `Evaluation for question ${fId}:`+
                 `\nScore: ${response.content[fId].score*100}%`+
-                `\nFeedback: ${response.content[fId].feedback}`.replace(/\n/g, "<br>");
+                `\nFeedback: ${response.content[fId].feedback}`.replace(/\n/g, "&lt;br>");
             addOutput(lessonId, MATHESIS_SPEAKER, evaluation);
         }
     });
@@ -101,9 +129,9 @@ function loadLessons(enterLessonFunc){
             let elem = document.createElement("DIV");
             elem.classList.add("navElement");
             elem.onclick = () => enterLessonFunc(lesson.id);
-            elem.innerHTML = `${lesson.name}<br>Core Topics:<br>`;
+            elem.innerHTML = `${lesson.name}&lt;br>Core Topics:&lt;br>`;
             for(let topic of lesson.core_topics)
-                elem.innerHTML += topic+",<br>";
+                elem.innerHTML += topic+",&lt;br>";
             sidebarLeft.appendChild(elem);
         }
     });
@@ -135,23 +163,23 @@ function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null, onQuestionA
         if (onQuestionAdd !== null)
             onQuestionAdd(lessonId, quesId, quizDiv);
 
-        quesElem.innerHTML += `<p>Core Topic: ${quiz[qId].core_topic}</p>`;
-        quesElem.innerHTML += `<p>${quiz[qId].q}</p>`;
+        quesElem.innerHTML += `&lt;p>Core Topic: ${quiz[qId].core_topic}&lt;/p>`;
+        quesElem.innerHTML += `&lt;p>${quiz[qId].q}&lt;/p>`;
         if (quiz[qId].type === "mc")
             for (let cId in quiz[qId].choices) {
-                quesElem.innerHTML += `<input type="radio" name="${lessonId}.${qId}" value="${cId}">
-                    <label>${quiz[qId].choices[cId]}</label><br>`;
+                quesElem.innerHTML += `&lt;input type="radio" name="${lessonId}.${qId}" value="${cId}">
+                    &lt;label>${quiz[qId].choices[cId]}&lt;/label>&lt;br>`;
             }
         if (quiz[qId].type === "sa")
-            quesElem.innerHTML += `<input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
+            quesElem.innerHTML += `&lt;input type="text" name="${lessonId}.${qId}" placeholder="Type your answer here" style="width: 400px">`;
 
         if (role === ADMIN)
-            quesElem.innerHTML += `<p>A: ${quiz[qId].a}</p>`;
+            quesElem.innerHTML += `&lt;p>A: ${quiz[qId].a}&lt;/p>`;
         quizDiv.appendChild(quesElem);
 
     }
 
-    if (addSubmit && enabled) {
+    if (addSubmit &amp;&amp; enabled) {
         let submit = document.createElement("BUTTON");
         submit.innerText = "Submit";
         submit.onclick = () => {
@@ -171,9 +199,9 @@ function formatQuestions(lessonId, quiz, enabled=true, quizDiv=null, onQuestionA
  * @param updateHistory {Boolean} Weather to update the history of the chat with this {@link text}*/
 function addOutput(chatId, speaker, text, updateHistory = true){
     let bubbleClass = speaker === USER_SPEAKER ? "userSpeech" : "mathesisSpeech";
-    document.getElementById("output").innerHTML += `<p class="speechBubble ${bubbleClass}">
+    document.getElementById("output").innerHTML += `&lt;p class="speechBubble ${bubbleClass}">
         ${text}
-    </p>`;
+    &lt;/p>`;
     if(updateHistory){
         if(!chat_history[chatId]) chat_history[chatId] = [];
         chat_history[chatId].push({"speaker": speaker, "text": text});
@@ -198,4 +226,26 @@ function loadChat(chatId){
 function genPseudorandom(){
     return `${Date.now()}_${Math.floor(Math.random() * 10000)}`;
 
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#QUESTION_CANDIDATES">QUESTION_CANDIDATES</a></li><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestion">addCandidateQuestion</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 15 2023 13:27:28 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -18,7 +18,7 @@ function enterLesson(lessonId){
     document.getElementById("outputTitle").innerText = "Evaluation";
 
     lessonElem.innerHTML = "";
-    lessonElem.appendChild(formatQuestions(lessonId, LESSONS[lessonId].quiz));
+    lessonElem.appendChild(formatQuestions(lessonId, lessons[lessonId].quiz));
 }
 
 window.onload = () => {

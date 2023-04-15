@@ -6,10 +6,11 @@ from model.Teacher import Teacher
 from database import connection, generate_performance
 
 
-app = Flask(__name__)
-LESSONS = {}
 ADMIN_ROLE = 1
 STUDENT_ROLE = 0
+
+app = Flask(__name__)
+lessons = {}
 
 
 def get_lessons_base(role: int):
@@ -18,7 +19,7 @@ def get_lessons_base(role: int):
     :param role: The role of the user, either admin or student
     :return: The dictionary of lessons"""
 
-    tmp = copy.deepcopy(LESSONS["content"])
+    tmp = copy.deepcopy(lessons["content"])
     if role == STUDENT_ROLE:
         for lesson in tmp.values():
             for question in lesson["quiz"]:
@@ -103,13 +104,13 @@ def save_lessons():
 
     :return: A dictionary containing a boolean success value"""
 
-    tmp_content = LESSONS["content"]
+    tmp_content = lessons["content"]
     try:
-        LESSONS["content"] = request.json["updatedLessons"]
+        lessons["content"] = request.json["updatedLessons"]
         with open("data/lessons.json", "w") as lesson_file:
-            lesson_file.write(json.dumps(LESSONS))
+            lesson_file.write(json.dumps(lessons))
     except Exception:
-        LESSONS["content"] = tmp_content
+        lessons["content"] = tmp_content
         return {"success": False}
     return {"success": True}
 
@@ -137,10 +138,10 @@ def evaluate_lesson():
         ques, resp = None, None
         evaluation[qId] = {"feedback": "", "score": 0}
         # Multiple choice preparation
-        if LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
-            choices = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["choices"]
-            answer_idx = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["a"]
-            ques, resp = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], choices[int(question["response"])]
+        if lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "mc":
+            choices = lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["choices"]
+            answer_idx = lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["a"]
+            ques, resp = lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], choices[int(question["response"])]
 
             evaluation[qId]["feedback"] = f"The correct answer was '{choices[answer_idx]}'"
             if question["response"] == str(answer_idx):
@@ -149,9 +150,9 @@ def evaluate_lesson():
                 evaluation[qId]["score"] = 0
 
         # Short answer preparation
-        elif LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
-            ques, resp = LESSONS["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], question["response"]
-            evaluation[qId]["feedback"] = f"The correct answer was '{LESSONS['content'][answered_quiz['lessonId']]['quiz'][qId]['a']}'"
+        elif lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["type"] == "sa":
+            ques, resp = lessons["content"][answered_quiz["lessonId"]]["quiz"][qId]["q"], question["response"]
+            evaluation[qId]["feedback"] = f"The correct answer was '{lessons['content'][answered_quiz['lessonId']]['quiz'][qId]['a']}'"
             evaluation[qId]["score"] = teacher.evaluate.eval_short_answer(ques, resp)/100
 
         if evaluation[qId]["score"] < 1:
@@ -193,13 +194,13 @@ def generate_questions():
         print(f"Limiting to lessons: {lesson_ids}")
 
     candidates = {}
-    for lesson_id in LESSONS["content"]:
-        lesson = LESSONS["content"][lesson_id]
+    for lesson_id in lessons["content"]:
+        lesson = lessons["content"][lesson_id]
         if lesson_ids and lesson["id"] not in lesson_ids:
             continue
         # Retrieve question types for quiz
         if not custom_comps.get(lesson_id):
-            composition = lesson["quiz_composition"] if lesson.get("quiz_composition") else LESSONS["quiz_composition"]
+            composition = lesson["quiz_composition"] if lesson.get("quiz_composition") else lessons["quiz_composition"]
         else:
             composition = custom_comps.get(lesson_id)
 
@@ -215,10 +216,10 @@ if __name__ == '__main__':
     teacher.set_model("text-davinci-003", "text-davinci-003", "text-davinci-003")
 
     with open("data/lessons.json", "r") as file:
-        LESSONS = json.loads(file.read())
+        lessons = json.loads(file.read())
 
-    for lesson in LESSONS["content"]:
-        if not LESSONS["content"][lesson].get("id"):
-            LESSONS["content"][lesson]["id"] = lesson
+    for lesson in lessons["content"]:
+        if not lessons["content"][lesson].get("id"):
+            lessons["content"][lesson]["id"] = lesson
 
     app.run()
