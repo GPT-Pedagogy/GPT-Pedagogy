@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import json
 import copy
+import pandas as pd
 from Teacher import Teacher
+from database import connection, generate_performance
 
 
 app = Flask(__name__)
@@ -67,10 +69,12 @@ def request_grades():
     """Returns the grade information from students
 
     :return: A dictionary of grades from students"""
-
-    # TODO: Get grade information from students
-    return {"grades": "not implemented!"}
-
+    df = generate_performance.generate_performance()
+    filename = "students_performance.xlsx"
+    with pd.ExcelWriter(filename, engine='openpyxl') as writer:
+        df.to_excel(writer, sheet_name='Sheet1', index=False)
+    # Return the file as a download to the user
+    return send_file(filename, as_attachment=True)
 
 @app.route('/input', methods=['POST'])
 def get_input():
@@ -151,8 +155,23 @@ def evaluate_lesson():
         if evaluation[qId]["score"] < 1:
             evaluation[qId]["feedback"] += "\nCorrection: "+teacher.evaluate.correct_answer(ques, resp)
 
+
     rcs_id = answered_quiz["rcs_id"]
-    # TODO: Add evaluation to database for student
+    lessonID = answered_quiz['lessonId']
+    topic = "Lesson " + lessonID
+
+    data = {}
+    for qId, question in enumerate(answered_quiz["quiz"]):
+        data[qId] = "Question " + str(qId) + ': '+question['core_topic']
+
+    performance_data = {}
+    for id, answer in enumerate(evaluation):
+        if evaluation[answer]['score'] == 1:
+            performance_data[data[id]] = "Score: 100% " + evaluation[answer]['feedback']
+        else:
+            performance_data[data[id]] = "Score: 0%; Feedback: " + evaluation[answer]['feedback']
+
+    connection.update_performance(rcs_id, topic, performance_data)
 
     return {"content": evaluation}
 

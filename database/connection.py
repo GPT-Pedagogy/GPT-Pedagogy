@@ -1,4 +1,9 @@
 import pymongo
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+sys.path.append(parent_dir)
+import components
 
 
 def connection():
@@ -94,18 +99,18 @@ def update_chatlog(collection: pymongo.collection.Collection, rcs_id: str, title
         raise ValueError(f"Document not found for RCSid: {rcs_id}")
 
 
-def update_performance(collection: pymongo.collection.Collection, rcs_id: str, topic: str, outcome: dict):
+def update_performance(rcs_id: str, topic: str, outcome: dict):
     """Updates the quiz performance history of the user with the given RCS id
 
-    :param collection: The MongoDB collection containing the user data
     :param rcs_id: The RCS id of the user to update
     :param topic: The topic that the user was quizzed on
     :param outcome: The user's performance on the given topic
     :raise ValueError: If there is no existing document for the user with the given RCS id"""
 
+    collection = connection()
+    print("This is the rcsid: {}\nThis is the topic: {}\nThis is the performance: {}".format(rcs_id, topic, outcome))
     query = {'RCSid': rcs_id}
     document = collection.find_one(query)
-    print(document['Performance'])
 
     if document:
         performance = document['Performance']
@@ -118,14 +123,56 @@ def update_performance(collection: pymongo.collection.Collection, rcs_id: str, t
 
         collection.update_one(query, {"$set": {'Performance': performance}})
     else:
-        raise ValueError("Document not found for RCSid: {}".format(rcs_id))
+        # This will add the user to the database and update its performance data.
+        insert_user(collection, rcs_id, name="Peter")
+        query = {'RCSid': rcs_id}
+        document = collection.find_one(query)
+        if document:
+            performance = document['Performance']
+            if topic in performance:
+                existing_outcome = performance[topic]['Outcome']
+                if existing_outcome != outcome:
+                    performance[topic] = {"Topic": topic, "Outcome": outcome}
+            else:
+                performance[topic] = {"Topic": topic, "Outcome": outcome}
+
+            collection.update_one(query, {"$set": {'Performance': performance}})
+
+
+'''Load chatlog and update the database'''
+def load_chatlog_from_file(rcsid,title, filename):
+    chatlog_data = components.load_from_file(filename)
+    collection = connection()
+    update_chatlog(collection, rcsid, title, chatlog_data)
 
 
 if __name__ == '__main__':
-    mongo_collection = connection()
-    data = query_documents(mongo_collection)
-    # insert_user(collection, "liy123", "Sam")
-    example_chatlog_data = ['User: xxxxxxxxx1-231-1', 'Bot: xxxxxxxxx1-231-2', 'User: xxxxxxxxx1-231-3', 'Bot: xxxxxxxxx1-231-4']
+    collection = connection()
+    data = query_documents(collection)
+    # insert_user(collection,\"liy123", "Sam")
+
+    '''
+    example_chatlog_data = [ 
+                                {
+                                    "role": "user",
+                                    "content": "Hello, can you give me some hint about chapter 2 lecture? x    xxx xxxxxxxxxxxxx"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "Sure, here are some important note you can take form Chapter 2: xxxxx."
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Thank you so much"
+                                },
+                                {
+                                    "role": "system",
+                                    "content": "You're welcome"
+                                }
+                            ]
+    '''
+
+    '''
     example_performance_outcome = {
         "Question 1": "Correct",
         "Question 2": "Incorrect",
@@ -134,7 +181,9 @@ if __name__ == '__main__':
         "Question 5": "Correct",
         "Question 6": "Incorrect"
     }
-    update_performance(mongo_collection, 'liyu123', 'Unit test', example_performance_outcome)
+    '''
+
+    # update_performance(collection, 'liyu123', 'Unit test', example_performance_outcome)
     # update_chatlog(collection, 'liyu123', "Pop Quiz", example_chatlog_data)
-    # for document in data:
-    #     print(document, "\n")
+    for document in data:
+        print(document, "\n")
