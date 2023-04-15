@@ -66,7 +66,7 @@ function saveLessons(){
     fetch('/save_lessons', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-        body: JSON.stringify(LESSONS)
+        body: {'updatedLessons': LESSONS}
     }).then(response => response.json()).then(response => {
         console.log(JSON.stringify(response));
         console.log("Success:", response.success);

@@ -59,7 +59,7 @@ function sendQuiz(lessonId){
     fetch('/evaluate', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-        body: JSON.stringify({"rcs_id": RCS_ID, "lessonId": lessonId, "quiz": quiz})
+        body: {"rcsId": RCS_ID, "lessonId": lessonId, "quiz": quiz}
     }).then(response => response.json()).then(response => {
         console.log(JSON.stringify(response));
         // Remove typing

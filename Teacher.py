@@ -4,18 +4,30 @@ from Model import Model
 
 
 class Teacher:
+    """A high-level class that contains both chat and evaluation functionality, along with administrative capabilities"""
+
     MODEL_NAME = "text-davinci-003"
     MIN_MC_TOKENS = 60
     MIN_SA_TOKENS = 50
 
     def __init__(self, rcs_id: str):
+        """A high-level class that contains both chat and evaluation functionality, along with administrative capabilities
+
+        :param rcs_id: The RCS id of the student that this teacher will interact with"""
+
         self.rcs_id = rcs_id
         self.model: Model = Model(self.MODEL_NAME)
         self.chat = Chat()
         self.evaluate = Evaluate()
 
     def gen_quiz_questions(self, topics: list[str], composition: list[str], randomize=False):
-        """Generates a quiz based on a set of topics and a set of question types"""
+        """Generates a quiz based on a set of topics and a set of question types
+
+        :param topics: A list of topics to generate questions based off of
+        :param composition: The types of questions that will be generated
+        :param randomize: Whether to randomize the order of the questions that will be generated
+        :return: A list of generated questions"""
+
         if randomize:
             random.shuffle(topics)
 
@@ -29,7 +41,11 @@ class Teacher:
         return quiz
 
     def gen_multiple_choice(self, topic: str, max_tokens=MIN_MC_TOKENS, **kwargs):
-        """Generates a multiple choice question based on the given topic and encodes it into json"""
+        """Generates a multiple choice question based on the given topic and encodes it into json
+
+        :param topic: The topic to generate a question on
+        :param max_tokens: The maximum length of the generated question in tokens
+        :return: A generated multiple choice question"""
 
         if kwargs.get("max_tokens", self.MIN_MC_TOKENS) < self.MIN_MC_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_MC_TOKENS}!")
@@ -58,7 +74,11 @@ class Teacher:
         return {"q": question[0], "type": "mc", "core_topic": topic, "a":  answer, "choices": question[1:]}
 
     def gen_short_answer(self, topic: str, max_tokens=MIN_SA_TOKENS, **kwargs):
-        """Generates a short question based on the given topic and encodes it, and its answer, into json"""
+        """Generates a short question based on the given topic and encodes it, and its answer, into json
+
+        :param topic: The topic to generate a question on
+        :param max_tokens: The maximum length of the generated question in tokens
+        :return: A generated short answer question"""
 
         if kwargs.get("max_tokens", self.MIN_SA_TOKENS) < self.MIN_SA_TOKENS:
             ValueError(f"Arg 'max_tokens' must be at least {self.MIN_SA_TOKENS}!")
@@ -79,7 +99,12 @@ class Teacher:
         return {"q": question[0], "type": "sa", "core_topic": topic, "a":  question[1]}
 
     def set_model(self, teacher_model: str = None, chat_model: str = None, eval_model: str = None):
-        """Sets the model name for the specified object(s)"""
+        """Sets the model name for the specified object(s)
+
+        :param teacher_model: The model to use for the teacher
+        :param chat_model: The model to use for the chat
+        :param eval_model: The model to use for the evaluator"""
+
         if teacher_model:
             self.MODEL_NAME = teacher_model
             self.model: Model = Model(self.MODEL_NAME)

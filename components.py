@@ -10,6 +10,7 @@ import time
 
 class Chat:
     """Class representing a chat instance of a user, keeping track of chat history and managing interactions"""
+
     CHAT_MODE = 0
     MODEL_NAME = "text-davinci-003"
     chat_history = []
@@ -19,7 +20,10 @@ class Chat:
         self.model: Model = Model(self.MODEL_NAME)
 
     def submit(self, text: str):
-        """Submit user text into the chat"""
+        """Submit user text into the chat
+
+        :param text: The text to save to the chat"""
+
         text = text.strip()
         # Add punctuation to avoid bad completions
         if text[-1] not in ["?", ".", "!"]:
@@ -27,15 +31,20 @@ class Chat:
         self.chat_history.append({"role": "user", "content": text, "timestamp": time.time()})
 
     def generate(self):
-        """Generate an appropriate response from the model"""
-        # mode logic
+        """Generate an appropriate response from the model
+
+        :return: The model's response to the latest chat from the user"""
+
         response = self.model.complete(self.chat_history[-1]["content"],
                        context=self.chat_history[:-1], max_tokens=self.MIN_CHAT_TOKENS)
         self.chat_history.append({"role": "assistant", "content": response, "timestamp": time.time()})
         return response
 
     def load_from_file(self, file_name: str):
-        """Load chat state from a file"""
+        """Load chat state from a file
+
+        :param file_name: The name of the file to load the chat from"""
+
         with open(file_name, "r") as file:
             raw = file.read()
         chat = json.loads(raw)
@@ -43,21 +52,30 @@ class Chat:
             self.chat_history.insert(0, message)
 
     def save_to_file(self, file_name: str):
-        """Save current chat state into a file"""
+        """Save current chat state into a file
+
+        :param file_name: The name of the file to save the chat to"""
+
         with open(file_name, "w") as file:
             file.write(json.dumps(self.chat_history))
 
     def clear(self):
         """Clears chat history"""
+
         self.chat_history = []
 
     def set_model(self, model_name: str):
-        """Sets the model to be used in the chat"""
+        """Sets the model to be used in the chat
+
+        :param model_name: The name of the model to use for the chat"""
+
         self.MODEL_NAME = model_name
         self.model: Model = Model(self.MODEL_NAME)
 
 
 class Evaluate:
+    """Class containing evaluation and correction logic for user submitted answers"""
+
     MODEL_NAME = "text-davinci-003"
     EDITOR_MODEL_NAME = "text-davinci-edit-001"
 
@@ -66,7 +84,11 @@ class Evaluate:
         self.editor_model: Model = Model(self.EDITOR_MODEL_NAME)
 
     def eval_short_answer(self, question: str, answer: str):
-        """Evaluates the answer to a question in the form of a grade"""
+        """Evaluates the answer to a question in the form of a grade
+
+        :param question: The short answer question that the student was asked
+        :param answer: The answer that the student provided
+        :return: The grade of the answer as an integer score"""
 
         prompt = f"A student was asked {question} and they responded with {answer}.  " \
                  f"Grade this answer on a scale from 0 to 100."
@@ -79,13 +101,19 @@ class Evaluate:
         raise ValueError("No string within the response was a score!")
 
     def correct_answer(self, question: str, answer: str):
-        """Takes in an incorrect answer and corrects it to a better response"""
+        """Takes in an incorrect answer and corrects it to a better response
+
+        :param question: The short answer or multiple choice question that the student was asked
+        :param answer: The answer that the student provided
+        :return: The model's correction of the student's answer"""
 
         prompt = f"Make this answer better match the question {question}."
         return self.editor_model.edit(prompt, answer)
 
     def set_model(self, model_name: str):
-        """Sets the model to be used for evaluation"""
+        """"Sets the model to be used for evaluation
+
+        :param model_name: The name of the model to use for evaluation"""
 
         self.MODEL_NAME = model_name
         self.model: Model = Model(self.MODEL_NAME)

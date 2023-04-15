@@ -13,9 +13,10 @@ STUDENT_ROLE = 0
 
 
 def get_lessons_base(role: int):
-    """Returns lesson information to the front end, taking out the answers if requested by a student
+    """Returns lesson information to the front end, withholding the answers if requested by a student
 
-    :param role: The role of the user, either admin or student"""
+    :param role: The role of the user, either admin or student
+    :return: The dictionary of lessons"""
 
     tmp = copy.deepcopy(LESSONS["content"])
     if role == STUDENT_ROLE:
@@ -27,31 +28,45 @@ def get_lessons_base(role: int):
 
 @app.route('/')
 def home():
+    """Serves the home page for the website
+
+    :return: The website homepage"""
+
     return render_template('index.html')
 
 
 @app.route('/admin')
 def admin():
+    """Serves the admin page for the website
+
+    :return: The website admin page"""
+
     return render_template('admin.html')
 
 
 @app.route('/lessons', methods=['GET'])
 def get_lessons_student():
-    """Returns lesson information to the front end for students"""
+    """Returns lesson information to the front end for students
+
+    :return: A dictionary of lessons with quizzes, censored for students"""
 
     return get_lessons_base(STUDENT_ROLE)
 
 
 @app.route('/admin/lessons', methods=['GET'])
 def get_lessons_admin():
-    """Returns lesson information to the front end for administrators"""
+    """Returns lesson information to the front end for administrators
+
+    :return: A dictionary of lessons with quizzes, without censorship"""
 
     return get_lessons_base(ADMIN_ROLE)
 
 
 @app.route('/admin/grades', methods=['GET'])
 def request_grades():
-    """Returns the grade information from students"""
+    """Returns the grade information from students
+
+    :return: A dictionary of grades from students"""
 
     # TODO: Get grade information from students
     return {"grades": "not implemented!"}
@@ -59,7 +74,14 @@ def request_grades():
 
 @app.route('/input', methods=['POST'])
 def get_input():
-    """Takes in user input and passes it off to the chat"""
+    """Takes in user input and passes it off to the chat
+
+    **JSON Data**
+
+    * inputText (str) - Chat inputted from a student
+
+    :return: The response to the student chat from GPT"""
+
 
     input_text = request.json["inputText"]
     print("Input text", input_text)
@@ -70,11 +92,17 @@ def get_input():
 
 @app.route('/save_lessons', methods=['POST'])
 def save_lessons():
-    """Takes in updated lessons as input and saves them to disk"""
+    """Takes in updated lessons as input and saves them to disk
+
+    **JSON Data**
+
+    * updatedLessons (dict) - A dictionary of lessons with quizzes to overwrite the previous lessons
+
+    :return: A dictionary containing a boolean success value"""
 
     tmp_content = LESSONS["content"]
     try:
-        LESSONS["content"] = request.json
+        LESSONS["content"] = request.json["updatedLessons"]
         with open("data/lessons.json", "w") as lesson_file:
             lesson_file.write(json.dumps(LESSONS))
     except Exception:
@@ -85,7 +113,15 @@ def save_lessons():
 
 @app.route('/evaluate', methods=['POST'])
 def evaluate_lesson():
-    """Evaluates the submitted user information for a lesson"""
+    """Evaluates the submitted user quiz for a lesson
+
+    **JSON Data**
+
+    * rcsId (str) - The RCS id of the student that submitted this quiz
+    * lessonId (str) - The id of the lesson that this quiz belongs to
+    * quiz (dict) - A dictionary representing the quiz that the student has sent in
+
+    :return: The automatic evaluation and feedback from GPT"""
 
     answered_quiz = request.json
     print("Evaluating quiz:", answered_quiz)
@@ -123,7 +159,14 @@ def evaluate_lesson():
 
 @app.route('/generate_questions', methods=['GET'])
 def generate_questions():
-    """Returns several candidate quizzes to be manually reviewed"""
+    """Returns several candidate quizzes to be manually reviewed
+
+    **Optional Query Params**
+
+    * l (list) - A list of lesson ids to generate the questions for
+    * c (dict) - A dictionary, with the lesson id as the key, containing the composition of the questions for that lesson
+
+    :return: A dictionary containing the generated transactions"""
 
     #return """
     #{"1.1":{"lesson_id":"1.1","quiz":[{"a":4,"choices":["Fruit Chill","Fire Wave","Bubble Blast","Frost Byte","Fruit Chill"],"q":"Q: What is the flavor of 5 Gum's latest taste sensation?","type":"mc"},{"a":2,"choices":["35 m/s","0 m/s","11 m/s","72 m/s"],"q":"Q: The average airspeed velocity of an unladen European swallow is:","type":"mc"},{"a":"Answer: A woodchuck can chuck around 35 cubic feet of wood in a day.","q":"Question: How much wood can a woodchuck chuck?","type":"sa"}]}}"""
@@ -151,25 +194,6 @@ def generate_questions():
         candidates[lesson_id] = quiz
 
     return candidates
-
-
-@app.route('/modify_quiz_plan', methods=['POST'])
-def select_generated_question():
-    """Edits the quizzes in the lesson plan after human filtering"""
-
-    # Get added or removed questions
-    mods = request.json["mods"]
-    # Remove questions first to avoid order corruption
-    for question in mods:
-        if question["op"] == "rem":
-            LESSONS["content"][question["lesson_id"]]["quiz"].pop(question["id"])
-
-    for question in mods:
-        if question["op"] == "add":
-            LESSONS["content"][question["lesson_id"]]["quiz"].append(question)
-
-    with open("data/lessons.json", "w") as file:
-        file.write(json.dumps(LESSONS))
 
 
 if __name__ == '__main__':

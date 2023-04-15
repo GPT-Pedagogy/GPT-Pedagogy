@@ -13,8 +13,6 @@ def fine_tune_request(model: str, tuning_file: str):
 
 
 if __name__ == "__main__":
-    """.with open("OPENAI_API_KEY.json", "r") as file:
-        openai.api_key = json.loads(file.read())["main"]"""
 
     # {'q': 'Q: In which conflict did France suffer major military losses during World War One? ', 'type': 'mc', 'a': 0, 'choices': ['The Battle of Verdun', 'The Battle of Waterloo', 'The Battle of the Somme', 'The Battle of Marne']}
 
