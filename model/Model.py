@@ -15,7 +15,7 @@ class Model:
 
         self.model_name = model_name
         if not openai.api_key:
-            with open("../OPENAI_API_KEY.json", "r") as file:
+            with open("OPENAI_API_KEY.json", "r") as file:
                 openai.api_key = json.loads(file.read())["main"]
 
     def complete_chat(self, prompt: str, context: list[dict[str, str]] = None) -> str:

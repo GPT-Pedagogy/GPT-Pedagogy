@@ -1,7 +1,7 @@
 
 
-/** A list of candidate quiz questions waiting to be added by an admin*/
-let QUESTION_CANDIDATES = [];
+/** A dictionary of lists of candidate quiz questions waiting to be added by an admin*/
+let question_candidates = {};
 
 
 /** Sends a request to generate a series of questions based off of the core topics and default
@@ -20,7 +20,8 @@ function generateQuestions(){
             for (let question of Object.values(questions[lessonId].quiz)) {
                 question.id = genPseudorandom();
                 console.log("Question:", question);
-                addCandidateQuestion(lessonId, question);
+                question_candidates[lessonId].push(question);
+                addCandidateQuestionElem(lessonId, question);
             }
         }
     });
@@ -32,6 +33,9 @@ function generateQuestions(){
 function enterLesson(lessonId){
     console.log("Entering lesson", lessonId);
     selected_lesson = lessonId;
+    let sidebarRight = document.getElementById("sidebarRight");
+    let candidateHolder = document.getElementById("candidateHolder");
+    candidateHolder.innerHTML = "";
 
     if(lessonId === "chat"){
         document.getElementById("lessons").style.display = "none";
@@ -40,9 +44,11 @@ function enterLesson(lessonId){
         document.getElementById("outputTitle").innerText = "Chat";
         document.getElementById("saveLessonsButton").style.visibility = "hidden";
         document.getElementById("genQuestions").style.visibility = "hidden";
+        sidebarRight.style.visibility = "hidden";
         return;
     }
 
+    sidebarRight.style.visibility = "visible";
     document.getElementById("mainChat").style.display = "none";
     document.getElementById("saveLessonsButton").style.visibility = "visible";
     document.getElementById("genQuestions").style.visibility = "visible";
@@ -52,7 +58,9 @@ function enterLesson(lessonId){
     document.getElementById("lessonTitle").innerText = "Lesson "+lessonId;
 
     lessonElem.innerHTML = "";
-    lessonElem.appendChild(formatQuestions(lessonId, lessons[lessonId].quiz, false, onQuestionAdd));
+    lessonElem.appendChild(formatQuestions(lessonId, lessons[lessonId].quiz, false, null, onQuestionAdd));
+    if(question_candidates[lessonId] === undefined) question_candidates[lessonId] = [];
+    for(let ques of question_candidates[lessonId]) addCandidateQuestionElem(lessonId, ques);
 }
 
 
@@ -96,8 +104,8 @@ function requestGrades(){
 /** Adds a question to the list of candidate questions and to the sidebar.  These may be added to a quiz through admin oversight
  * @param lessonId {String} The id of the lesson to add approved questions to
  * @param question {Object} Dictionary containing the question information*/
-function addCandidateQuestion(lessonId, question){
-    let sidebarRight = document.getElementById("sidebarRight");
+function addCandidateQuestionElem(lessonId, question){
+    let candidateHolder = document.getElementById("candidateHolder");
     let elem = document.createElement("DIV");
     elem.id = `candidate${question.id}`;
     elem.classList.add("navElement");
@@ -111,29 +119,34 @@ function addCandidateQuestion(lessonId, question){
     addButton.style.backgroundColor = "green";
     addButton.onclick = () => {
         let lessonElem = document.getElementById(`lessonForm${lessonId}`);
-        formatQuestions(lessonId, [question], false, lessonElem);
+        formatQuestions(lessonId, [question], false, lessonElem, onQuestionAdd);
         lessons[lessonId].quiz.push(question);
+        for(let i=0; i<question_candidates[lessonId].length; i++)
+            if(question_candidates[lessonId][i].id === question.id) {
+                question_candidates[lessonId].splice(i, 1);
+                break;
+            }
         elem.remove();
         addButton.remove();
     };
 
-    QUESTION_CANDIDATES.push(question);
-    sidebarRight.appendChild(addButton);
-    sidebarRight.appendChild(elem);
+    candidateHolder.appendChild(addButton);
+    candidateHolder.appendChild(elem);
 }
 
 
 /** Removes the quiz with an id of {@link quesId} from the lesson with the id {@link lessonId} and returns the removed element
  * @param lessonId {String} The id of the lesson to remove the question from
  * @param quesId {String} The id of the quiz question to remove
- * @return {HTMLElement | null} The removed question element*/
+ * @return {Object | null} The removed question element*/
 function removeQuizQuestion(lessonId, quesId) {
     let found = null;
+
     console.log("Removing quiz", quesId, "from lesson", lessonId);
     for(let i=0; i<lessons[lessonId].quiz.length; i++){
         if(lessons[lessonId].quiz[i].id === quesId) {
             found = lessons[lessonId].quiz[i];
-            QUESTION_CANDIDATES.push(lessons[lessonId].quiz[i]);
+            question_candidates[lessonId].push(lessons[lessonId].quiz[i]);
             lessons[lessonId].quiz.splice(i, 1);
         }
     }
@@ -158,7 +171,7 @@ function onQuestionAdd(lessonId, quesId, quizDiv){
     delButton.style.backgroundColor = "red";
     delButton.onclick = () => {
         let removed = removeQuizQuestion(lessonId, quesId);
-        addCandidateQuestion(lessonId, removed);
+        addCandidateQuestionElem(lessonId, removed);
     };
 
     quizDiv.appendChild(delButton);

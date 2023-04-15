@@ -70,12 +70,13 @@ def request_grades():
     :return: A dictionary of grades from students"""
 
     df = generate_performance.generate_performance()
-    filename = "students_performance.xlsx"
+
+    """filename = "students_performance.xlsx"
     with pd.ExcelWriter(filename, engine='openpyxl') as writer:
-        df.to_excel(writer, sheet_name='Sheet1', index=False)
+        df.to_excel(writer, sheet_name='Sheet1', index=False)"""
 
     # Return the file as a download to the user
-    return send_file(filename, as_attachment=True)
+    return {"grades": df.to_csv()}
 
 @app.route('/input', methods=['POST'])
 def get_input():
