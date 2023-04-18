@@ -20,7 +20,7 @@
     \maketitle
 
     \abstract{
-        GPT-3 is a Large Language Model which, through overuse, is often used to deprive students of the
+        GPT-3 is a Large Language Model that, through overuse, is often used to deprive students of the
         opportunity to learn effectively. Our intended use case of GPT enables the
         transparent use of the technology between instructor and student. We aim to create a
         more active and participatory learning environment through the usage of the model in active
@@ -49,31 +49,31 @@
 
         We also aim for this model to be generalizable to other classes and disciplines in the future.
         The model will work especially well for courses where it is difficult to give personalized
-        feedback to each learner in each class meeting time, such as in classes that have a high
-        student to faculty ratio. It will also work well for courses with students interested in AI
-        who cannot adequately engage with that interest through the course material.
+        feedback to each learner in each class meeting time. This often happens in classes that have
+        a high student to faculty ratio. It will also work well for courses with students, interested
+        in AI, who cannot adequately engage with that interest through the course material.
     }
 
     \pagebreak
     \section{Introduction}
 
-    The idea for this project was conceived before the beginning of this project in the context of
-    our Informatics class.  It stemmed from observations about the current trend that large language
-    models are heading in and how many educational institutions are not fully prepared to handle the
+    The idea for this project was conceived before the beginning of our Informatics class.
+    It stemmed from observations about the direction that large language models are currently
+    heading in, and how many educational institutions are not fully prepared to handle the
     fallout of this trend.  Our primary motivation for this project is to remedy this issue.  By
     providing students with an opportunity to use large language models, like GPT, as a learning tool,
     we allow students to gain valuable insight into the practical benefits and shortcomings of these models.
 
     \subsection{Our Targeted Approach}
 
-    When looking at our project through a more focused lens, we believe that it will benefit the students
-    that take the into courses that we hope \textit{Mathesis} will be integrated into.  For many
-    introductory classes, their main focus is to imbue students with a large amount of foundational
-    knowledge before they explore specific categories further in subsequent classes.  We believe that
+    When looking at our project through a more focused lens, we believe that it will benefit the
+    students in the courses that \textit{Mathesis} may be integrated into.  For many introductory
+    classes, their main focus is to imbue students with a large amount of foundational
+    knowledge before they explore the specifics in subsequent classes.  We believe that
     a GPT model will have a significant impact in helping with this task.  By fine-tuning a model
-    on a large amount of course material, it will be able to provide relevant questions from students
+    on a large amount of course material, it will be able to provide relevant questions to students
     with greater detail and with a stronger relation to the other topics in the course.  This comes
-    in addition to the large amount of general knowledge that the model initially has.  While it may
+    along with the large amount of general knowledge that the model initially has.  While it may
     not be able to go into detail about very niche topics, fine-tuning allows it to provide adequate
     detail on the material that students need to learn.
 
@@ -81,7 +81,7 @@
 
     From a broader perspective, customized learning assistants, similar to ours, have the potential
     to make a significant impact on the educational landscape as a whole.  One of the biggest issues
-    that our project address is the asymmetric distribution of time between students and teachers.
+    that our project addresses is the asymmetric distribution of faculty time between students.
     Many courses at RPI, especially one or two thousand level courses, have a very high student to
     faculty ratio.  Due to this, each student is only afforded a very limited amount of one-on-one
     time with the professor or their TAs.  Automated learning assistants like \textit{Mathesis} can
@@ -94,7 +94,7 @@
 
     \subsection{Aristotle For All}
 
-    This has served as a large motivator for us while working on this project.  The opportunity to
+    This asymetry has served as a large motivator for us while working on this project.  The opportunity to
     both free up faculty to have more personalized time with each student and to allow each student
     to have a personal tutor by their side will help to solve many of the struggles that students
     have with learning in general.  These ideas are reflected in both past and contemporary sources.
@@ -163,17 +163,18 @@
     material.  This will increase its helpfulness to students as unrelated responses may provide
     misinformation or serve to demotivate students from interacting with the system.
 
-    The use case that we developed addresses what we expect to be the basic low of the system, along
+    The use case that we developed addresses what we expect to be the basic flow of the system, along
     with any reasonable alternate or exception flows.  The goal of this system is the same as the
     project in general: to use an interface and pre-trained model to provide students with a flexible
     and helpful learning assistant for the \textit{Introduction to Biology} course at RPI.
 
     We have included the particular flows that we did in order to properly scope our use case.  Our intention
-    is to cover all relevant ways in which students and administrators, while not including flows that
-    may bloat our design of this early use case.  Examples of such flows would be deliberate
-    adversarial attacks to the system.  While these attacks are a near certainty in a deployed system,
-    the time constraints on this project has not allowed us to account for them in our working prototype.
-    Due to this reason, we have set this and similar edge cases to be outside our scope.
+    is to implement all relevant ways in which students and administrators interact with the system,
+    while not including flows that may bloat our design of this early use case.  Examples
+    of such flows would be deliberate adversarial attacks to the system.  While these attacks are a
+    near certainty in a deployed system, the time constraints on this project has not allowed us to
+    account for them in our working prototype. Due to this reason, we have set this, and similar
+    edge cases, to be outside our implementation scope.
 
     \subsection{Implementation Considerations}
 
@@ -186,7 +187,7 @@
     is currently in a prototype form, it would be unwise to begin using signs in places where they do
     not need to be.  In place of these signs we instead have text descriptions.  While this may be
     less visually appealing, it offers a lower uncertainty as many elements have their descriptions
-    written on them.  An example of a sign that we do use can be found in the 'send' icon for the
+    written on them.  An example of a sign that we \textit{do} use can be found in the 'send' icon for the
     chat functionality.  This sign is an icon, specifically as it does not physically resemble anything
     being sent.  We chose this icon to be that of a paper airplane, as is standard across most
     massaging applications.  Through the use of this, and other icons, we hope to make all functionality
@@ -196,8 +197,8 @@
     the project.  Our design of the chat and feedback interfaces mirrors that of more mundane chat-focused
     applications.  By modeling our interface in a similar manner to SMS communications, we create a
     familiar environment to both students and teachers.  This was likely the rationale of ChatGPT's
-    interface design, which mirrors these communications as well.  The lesson quiz submitting also
-    mirrors familiar environments such as LMS.  By creating a familiar environment, we hope that users
+    interface design, which mirrors these communications as well.  The lesson quiz submission also
+    mirrors other systems, such as LMS.  By creating a familiar environment, we hope that users
     will be able to immediately recognize the form and function of the interface, allowing for
     quicker acclimation.
 
@@ -219,14 +220,14 @@
     \subsection{Model Choice}
 
     One of the biggest references that we used in this decision-making process was
-    the OpenAi Python API documentation\cite{openAiDocs}.  This documentation details
-    each of the models that we can use, their capabilities, and their drawbacks.  On example of this
+    the OpenAI Python API documentation\cite{openAiDocs}.  This documentation details
+    each of the models that we can use, their capabilities, and their drawbacks.  One example of this
     comes in the type of model that we use.  As our primary model, we use their \textit{text-davinci-003}
     model.  We have found that this model is a good balance between cost, quality, and flexibility.
-    DaVinci is the most advances of the \textit{text-*} models.  It offers similar quality to ChatGPT
+    DaVinci is the most advanced of the \textit{text-*} models.  It offers similar quality to ChatGPT
     and has the added bonus of being available for file-tuning.  Using this feature helps to lower
     the uncertainty of our information system, as mentioned above.  An option that we did not decide to
-    use as our primary model is the \textit{gpt-3.5-turbo}.  This model is the model behind ChatGPT itself;
+    use as our primary model is \textit{gpt-3.5-turbo}.  This model is the model behind ChatGPT itself;
     it is more expensive and has the drawback of not being pre-trainable.  Due to these factors, we
     decided to keep using \textit{text-davinci-003} after the announcement of \textit{gpt-3.5-turbo}
     that came mid-way through the project.  This decision helps us to fulfil the first four of our
@@ -236,7 +237,7 @@
 
     Another important decision that we made was our decision to exclude particular alternative or
     error flows from our design.  From the beginning of this project, we have been aware that
-    large language models like the GPT series can both be incredibly helpful and somewhat volatile.
+    large language models, like the GPT series, can both be incredibly helpful and somewhat volatile.
     Notably, we considered the possibility that users could perform adversarial attacks on the model.
     While these attacks would only affect that particular student, it is important to make sure
     our model provides all students with an appropriate learning environment, regardless of their actions.
@@ -245,12 +246,13 @@
     ignore its alignment and safety training.  Attacks like these would likely also be able to
     bypass the fine-tuning of \textit{Mathesis}.  We have partially confirmed this assumption by
     testing similar exploits on GPT models.  We performed this evaluation by taking note of several
-    topics that GPT disliked talking about and convincing the model to mention them, in our case,
-    past political figures, by speaking about adjacent topics then re-asking questions directing
-    at these disallowed topics.  Our evaluation suggests that students could attempt something
+    topics that GPT disliked talking about and were able to convince the model to mention them.  For
+    our experiment, we chose to focus on past political figures.  By speaking about adjacent topics
+    then re-asking questions directed at these disallowed topics we were able to bypass the model's
+    alignment somewhat.  Our evaluation suggests that students could attempt something
     similar if they wished to do so.  At present, we have decided to not work on measures
     specifically preventing this type of attack.  The reason for this is the relatively quick
-    patches OpenAI sends out when exploits are discovered combined with the difficulty of the
+    patches OpenAI sends out when exploits are discovered, combined with the difficulty of the
     problem.  Our hope is that this will not impact the functional requirements of the project,
     especially as OpenAI continues to work against the issue.
 
