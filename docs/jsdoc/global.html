@@ -98,68 +98,6 @@
 
         
             
-<h4 class="name" id="QUESTION_CANDIDATES"><span class="type-signature"></span>QUESTION_CANDIDATES<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    A list of candidate quiz questions waiting to be added by an admin
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line4">line 4</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
 <h4 class="name" id="RCS_ID"><span class="type-signature"></span>RCS_ID<span class="type-signature"></span></h4>
 
 
@@ -346,6 +284,68 @@
 
         
             
+<h4 class="name" id="question_candidates"><span class="type-signature"></span>question_candidates<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    A dictionary of lists of candidate quiz questions waiting to be added by an admin
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="selected_lesson"><span class="type-signature"></span>selected_lesson<span class="type-signature"></span></h4>
 
 
@@ -418,7 +418,7 @@
     
 
     
-    <h4 class="name" id="addCandidateQuestion"><span class="type-signature"></span>addCandidateQuestion<span class="signature">(lessonId, question)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addCandidateQuestionElem"><span class="type-signature"></span>addCandidateQuestionElem<span class="signature">(lessonId, question)</span><span class="type-signature"></span></h4>
     
 
     
@@ -542,7 +542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line99">line 99</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -905,7 +905,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line32">line 32</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -1979,7 +1979,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line153">line 153</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line166">line 166</a>
     </li></ul></dd>
     
 
@@ -2015,7 +2015,7 @@ question and turns it back into a candidate
     
 
     
-    <h4 class="name" id="removeQuizQuestion"><span class="type-signature"></span>removeQuizQuestion<span class="signature">(lessonId, quesId)</span><span class="type-signature"> &rarr; {HTMLElement|null}</span></h4>
+    <h4 class="name" id="removeQuizQuestion"><span class="type-signature"></span>removeQuizQuestion<span class="signature">(lessonId, quesId)</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
     
 
     
@@ -2139,7 +2139,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line130">line 130</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line142">line 142</a>
     </li></ul></dd>
     
 
@@ -2179,7 +2179,7 @@ question and turns it back into a candidate
     </dt>
     <dd>
         
-<span class="param-type">HTMLElement</span>
+<span class="param-type">Object</span>
 |
 
 <span class="param-type">null</span>
@@ -2252,7 +2252,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line81">line 81</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -2340,7 +2340,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line60">line 60</a>
+        <a href="admin_lessons.js.html">admin_lessons.js</a>, <a href="admin_lessons.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -2721,13 +2721,13 @@ question and turns it back into a candidate
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#QUESTION_CANDIDATES">QUESTION_CANDIDATES</a></li><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestion">addCandidateQuestion</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestionElem">addCandidateQuestionElem</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#question_candidates">question_candidates</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 15 2023 13:27:28 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Apr 18 2023 09:26:51 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

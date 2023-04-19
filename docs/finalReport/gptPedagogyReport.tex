@@ -8,11 +8,11 @@
 \pagestyle{fancy}
 
 \title{GPT Pedagogy}
-\author[1]{Matthew Pisano}
-\author[1]{Tiburon Benavides}
-\author[1]{Lu Zhou}
-\author[1]{Yanshen Lin}
-\author[1]{Yiyang Cai}
+\author[1]{Matthew Pisano\quad\href{mailto:pisanm2@rpi.edu}{pisanm2@rpi.edu}}
+\author[1]{\\Tiburon Benavides\quad\href{mailto:benavt@rpi.edu}{benavt@rpi.edu}}
+\author[1]{\\Lu Zhou\quad\href{mailto:zhoul12@rpi.edu}{zhoul12@rpi.edu}}
+\author[1]{\\Yanshen Lin\quad\href{mailto:liny16@rpi.edu}{liny16@rpi.edu}}
+\author[1]{\\Yiyang Cai\quad\href{mailto:caiy3@rpi.edu}{caiy3@rpi.edu}}
 \affil[1]{Rensselaer Polytechnic Institute}
 \date{\today}
 
@@ -98,11 +98,11 @@
     both free up faculty to have more personalized time with each student and to allow each student
     to have a personal tutor by their side will help to solve many of the struggles that students
     have with learning in general.  These ideas are reflected in both past and contemporary sources.
-    In a very similar vein to our project, Khan Academy's \textit{Khanmigo}\cite{khanmigo} model
+    In a very similar vein to our project, Khan Academy's \textit{Khanmigo}~\cite{khanmigo} model
     aims to provide a very similar service to students through the internet.  Our hope is that
     \textit{Mathesis} will soon serve a similar role, but customized for RPI's students and
     curriculum.  These ideas are reflected in the well researched, and somewhat prophetic, video
-    \textit{Digital Aristotle: Thoughts on the Future of Education} by CGP Grey.  It outlines
+    \textit{Digital Aristotle: Thoughts on the Future of Education}~\cite{aristotle} by CGP Grey.  It outlines
     many of the same points that we have mentioned here in addition to detailing how technologies
     such as \textit{Mathesis} or \textit{Khanmigo} can have on the future of education.
 
@@ -220,7 +220,7 @@
     \subsection{Model Choice}
 
     One of the biggest references that we used in this decision-making process was
-    the OpenAI Python API documentation\cite{openAiDocs}.  This documentation details
+    the OpenAI Python API documentation~\cite{openAiDocs}.  This documentation details
     each of the models that we can use, their capabilities, and their drawbacks.  One example of this
     comes in the type of model that we use.  As our primary model, we use their \textit{text-davinci-003}
     model.  We have found that this model is a good balance between cost, quality, and flexibility.
@@ -241,7 +241,7 @@
     Notably, we considered the possibility that users could perform adversarial attacks on the model.
     While these attacks would only affect that particular student, it is important to make sure
     our model provides all students with an appropriate learning environment, regardless of their actions.
-    This decision was influenced primarily by the \textit{DAN}\cite{danThread} (Do Anything Now)
+    This decision was influenced primarily by the \textit{DAN}~\cite{danThread} (Do Anything Now)
     exploit and its many iterations.  This exploit allows users to convince the ChatGPT model to
     ignore its alignment and safety training.  Attacks like these would likely also be able to
     bypass the fine-tuning of \textit{Mathesis}.  We have partially confirmed this assumption by
