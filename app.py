@@ -76,7 +76,22 @@ def request_grades():
         df.to_excel(writer, sheet_name='Sheet1', index=False)"""
 
     # Return the file as a download to the user
-    return {"grades": df.to_csv()}
+    # return {"grades": df.to_csv()}
+
+    '''xlsx format'''
+    # filename = "students_performance.xlsx"
+    # with pd.ExcelWriter(filename, engine='openpyxl') as writer:
+    #     df.to_excel(writer, sheet_name='Sheet1', index=False)
+    # # Return the file as a download to the user
+    # return send_file(filename, as_attachment=True)
+
+    filename = "students_performance.csv"
+    # Create a temporary file to store the CSV data
+    temp_file = filename
+    df.to_csv(temp_file, index=False)
+
+    # Use Flask's send_file function to return the CSV file as a download
+    return send_file(temp_file, mimetype='text/csv', as_attachment=True)
 
 @app.route('/input', methods=['POST'])
 def get_input():
