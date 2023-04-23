@@ -202,7 +202,11 @@ def generate_questions():
     #{"1.1":{"lesson_id":"1.1","quiz":[{"a":4,"choices":["Fruit Chill","Fire Wave","Bubble Blast","Frost Byte","Fruit Chill"],"q":"Q: What is the flavor of 5 Gum's latest taste sensation?","type":"mc"},{"a":2,"choices":["35 m/s","0 m/s","11 m/s","72 m/s"],"q":"Q: The average airspeed velocity of an unladen European swallow is:","type":"mc"},{"a":"Answer: A woodchuck can chuck around 35 cubic feet of wood in a day.","q":"Question: How much wood can a woodchuck chuck?","type":"sa"}]}}"""
     try:
         lesson_ids = json.loads(request.args.get("l", "[]"))
-        custom_comps = json.loads(request.args.get("pmc", "{}"))
+        if request.args.get("topics") is None:
+            selected_topic_ids = None
+        else:
+            selected_topic_ids = json.loads(request.args.get("topics"))
+        custom_pmc = json.loads(request.args.get("pmc", "{}"))
     except Exception:
         return "Malformed arguments"
 
@@ -215,12 +219,13 @@ def generate_questions():
         if lesson_ids and lesson["id"] not in lesson_ids:
             continue
         # Retrieve question types for quiz
-        if not custom_comps.get(lesson_id):
+        if not custom_pmc.get(lesson_id):
             percent_mc = lesson["percent_mc"] if lesson.get("percent_mc") else lessons["percent_mc"]
         else:
-            percent_mc = custom_comps.get(lesson_id)
+            percent_mc = custom_pmc.get(lesson_id)
 
-        quiz = {"lesson_id": lesson_id, "quiz": teacher.gen_quiz_questions(lesson["core_topics"], percent_mc, randomize=True)}
+        selected_topics = [topic for idx, topic in enumerate(lesson["core_topics"]) if selected_topic_ids is None or idx in selected_topic_ids]
+        quiz = {"lesson_id": lesson_id, "quiz": teacher.gen_quiz_questions(selected_topics, percent_mc, randomize=True)}
         candidates[lesson_id] = quiz
 
     return candidates

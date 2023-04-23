@@ -7,17 +7,41 @@ let question_candidates = {};
 
 function proposeGenerateQuestions(){
     document.getElementById("confirmationPopup").style.display = "block";
-    document.getElementById("popupConfirm").onclick = generateQuestions;
+
+    let content = document.getElementById("popupContent");
+    content.innerHTML = "";
+    let coreTopics = lessons[selected_lesson].core_topics;
+    let popupForm = document.createElement("form");
+    popupForm.id = "popupForm";
+    popupForm.innerHTML += `<p>Select the topics that you want to generate questions for:</p>`;
+    for(let idx in coreTopics){
+        popupForm.innerHTML += `<input type="checkbox" id="popupCheck${idx}" name="${idx}" value="${idx}">`;
+        popupForm.innerHTML += `<label for="popupCheck${idx}">${coreTopics[idx]}</label><br>`;
+    }
+    content.appendChild(popupForm);
+    document.getElementById("popupConfirm").onclick = () => {
+        let selectedTopics = [];
+        for(let idx in coreTopics){
+            if(popupForm.elements[idx].checked)
+                selectedTopics.push(parseInt(idx));
+        }
+        console.log("Got selected topics", selectedTopics);
+        generateQuestions(selectedTopics);
+        document.getElementById("popupDeny").click();
+    };
 }
 /** Sends a request to generate a series of questions based off of the core topics and default
  * composition of a given lesson*/
-function generateQuestions(){
+function generateQuestions(selectedTopics=null){
     if(!selected_lesson){
         console.log("You must select a lesson first!");
         return;
     }
-    console.log(`Generating questions for lesson ${selected_lesson}...`);
-    fetch('/generate_questions?l='+JSON.stringify([selected_lesson]),
+    if(selectedTopics === null)
+        selectedTopics = lessons[selected_lesson].core_topics;
+
+    console.log(`Generating questions for lesson ${selected_lesson} with selected topics ${selectedTopics}...`);
+    fetch(`/generate_questions?l=${JSON.stringify([selected_lesson])}&topics=${JSON.stringify(selectedTopics)}`,
         {method: 'GET'}).then(response => response.json()).then(response => {
         console.log("Questions:", JSON.stringify(response));
         let questions = response;
@@ -187,7 +211,7 @@ function onQuestionAdd(lessonId, quesId, quizDiv){
 window.onload = () => {
     enterLesson('chat');
     let sidebarLeft = document.getElementById("sidebarLeft");
-    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');">Main Chat</div>`;
+    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');"><h3>Main Chat</h3></div>`;
     setAdmin();
     loadLessons(enterLesson);
 };

@@ -25,6 +25,6 @@ function enterLesson(lessonId){
 window.onload = () => {
     enterLesson('chat');
     let sidebarLeft = document.getElementById("sidebarLeft");
-    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');">Main Chat</div>`;
+    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');"><h3>Main Chat</h3></div>`;
     loadLessons(enterLesson);
 };

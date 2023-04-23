@@ -101,7 +101,7 @@ function loadLessons(enterLessonFunc){
             let elem = document.createElement("DIV");
             elem.classList.add("navElement");
             elem.onclick = () => enterLessonFunc(lesson.id);
-            elem.innerHTML = `${lesson.name}<br>Core Topics:<br>`;
+            elem.innerHTML = `<h3>${lesson.name}</h3><br>Core Topics:<br>`;
             for(let topic of lesson.core_topics)
                 elem.innerHTML += topic+",<br>";
             sidebarLeft.appendChild(elem);
