@@ -1,0 +1,38 @@
+{
+  "percent_mc": 75,
+  "content": {
+    "1.1": {
+      "id": "1.1",
+      "name": "Evolution (1.1)",
+      "core_topics": [
+        "the origin of elements involved in bio/organic chemistry", "the iron catastrophe",
+        "earth's development in stages", "earth's magnetic field", "the building block of life",
+        "the elements in living systems", "what happens when a star dies", "stanley miller's experiment",
+        "how rna and dna differ"
+      ],
+      "quiz": []
+    },
+    "1.2": {
+      "id": "1.2",
+      "name": "Evolution (1.2)",
+      "core_topics": [
+        "the discovery of exoplanets", "life on mars", "the biological hierarchy", "ecological communities",
+        "the biosphere", "the major properties of living systems", "the metabolism of living organisms",
+        "the growth and development of living organisms", "adaptation", "homeostasis", "reproduction",
+        "types of viruses"
+      ],
+      "quiz": []
+    },
+    "1.3": {
+      "id": "1.3",
+      "name": "Evolution (1.3)",
+      "core_topics": [
+        "early life on earth", "the early atmosphere of earth", "carbon dating", "anaerobic bacterial photosynthesis",
+        "archaea", "prokaryotes", "atp", "photosynthesis and oxygen", "fossilization", "the domains of life on earth",
+        "endosymbiosis", "the first oxygen revolution", "the second oxygen revolution", "the ediacaran period",
+        "the cambrian explosion", "tiktaalik"
+      ],
+      "quiz": []
+    }
+  }
+}

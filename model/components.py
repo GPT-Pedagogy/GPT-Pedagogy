@@ -35,8 +35,11 @@ class Chat:
 
         :return: The model's response to the latest chat from the user"""
 
-        response = self.model.complete(self.chat_history[-1]["content"],
-                       context=self.chat_history[:-1], max_tokens=self.MIN_CHAT_TOKENS)
+        if len(self.chat_history[-1]["content"]) < 5:
+            response = "I work best when prompts are longer.  Try prefacing your input with 'What is ...' or 'Teach me about ...'"
+        else:
+            response = self.model.complete(self.chat_history[-1]["content"],
+                           context=self.chat_history[:-1], max_tokens=self.MIN_CHAT_TOKENS)
         self.chat_history.append({"role": "assistant", "content": response, "timestamp": time.time()})
         return response
 

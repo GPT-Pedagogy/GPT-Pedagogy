@@ -1,6 +1,6 @@
 #sidebarLeft {
     height: 100%;
-    width: 160px;
+    width: 360px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -14,7 +14,7 @@
 
 #sidebarRight {
     height: 100%;
-    width: 360px;
+    width: 460px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -35,7 +35,11 @@
     display: block;
     background-color: #1e5e55;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin: 5px 5px 10px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 3px;
+    border-color: whitesmoke;
+    border-left-style: solid;
 }
 
 .navElement:hover{
@@ -45,7 +49,7 @@
 .speechBubble {
     width: fit-content;
     padding: 5px;
-    margin: 10px;
+    margin: 10px 10px 20px;
 }
 
 #mathesisContact {
@@ -72,12 +76,20 @@
     max-height: 500px;
     overflow-y: auto;
     margin: 5px;
+    border-radius: 3px;
+    background-color: #2a2a2a;
+    padding: 10px 5px;
 }
 
 #inputText {
     background-color: #1e1e1e;
     color: azure;
     margin: 5px;
+    width: 80%;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    border-width: medium;
+    padding: 10px;
 }
 
 .quizQuestion {
@@ -85,6 +97,19 @@
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 5px;
+}
+
+button {
+    border: none;
+    color: whitesmoke;
+    padding: 5px;
+    background-color: #348f82;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+button:hover {
+    background-color: #60bbae;
 }
 
 .questionEditButton {
@@ -105,4 +130,50 @@
     cursor: pointer;
     width: 30px;
     height: 30px;
+}
+
+#lessonTitle, #outputTitle {
+    border-left: whitesmoke;
+    background-color: #348f82;
+    border-radius: 3px;
+    border-left-style: solid;
+    padding: 3px;
+}
+
+#confirmationPopup {
+    z-index: 2;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    background-color: #1e5e55;
+    border-radius: 10px;
+    padding: 10px;
+    width: 60%;
+    height: 80%;
+    border-style: solid;
+}
+
+#popupContent {
+    height: 80%;
+}
+
+#popupDeny {
+    height: 80%;
+    width: auto;
+    font-size: large;
+    padding: 5px;
+}
+
+#popupConfirm {
+    height: 80%;
+    width: auto;
+    font-size: large;
+    float: right;
+    padding: 5px;
+}
+
+#popupButtonHolder {
+    height: 10%;
+    width: 40%;
+    margin-left: 30%;
 }

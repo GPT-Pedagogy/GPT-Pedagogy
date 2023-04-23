@@ -8,13 +8,14 @@ function enterLesson(lessonId){
         document.getElementById("lessons").style.display = "none";
         document.getElementById("mainChat").style.display = "block";
         document.getElementById("lessonTitle").innerText = "Main Chat";
-        document.getElementById("outputTitle").innerText = "Chat";
+        document.getElementById("outputTitle").style.display = "none";
         return;
     }
     let lessonElem = document.getElementById("lessons");
     lessonElem.style.display = "block";
     document.getElementById("mainChat").style.display = "none";
     document.getElementById("lessonTitle").innerText = "Lesson "+lessonId;
+    document.getElementById("outputTitle").style.display = "block";
     document.getElementById("outputTitle").innerText = "Evaluation";
 
     lessonElem.innerHTML = "";

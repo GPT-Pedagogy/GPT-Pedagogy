@@ -131,7 +131,7 @@ the quality of the answers, and provide feedback on incorrect answers.  This wor
 multiple choice and short answer type questions.  Finally, the [Teacher](model/Teacher.py) object
 is the main governor of the models.  It contains both of the previous models and has the added
 ability to generate new questions based off of core topics.  By utilizing the conjunction of
-these three components, we are able to give *Mathesis* the ability to fulfil all of the functional
+these three components, we are able to give *Mathesis* the ability to fulfil all the functional
 requirements of this project.
 
 ## Diagrams

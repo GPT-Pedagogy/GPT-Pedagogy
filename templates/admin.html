@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Mathesis</title>
     <script src="{{ url_for('static', filename='common.js') }}"></script>
-    <script src="{{ url_for('static', filename='admin_lessons.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mathesis.png') }}">
 </head>
@@ -13,7 +13,7 @@
     <div id="sidebarLeft"></div>
     <div id="sidebarRight">
         <button id="requestGrades" onclick="requestGrades()">Request Grades</button>
-        <button id="genQuestions" style="visibility: hidden" onclick="generateQuestions()">Generate Quizzes</button>
+        <button id="genQuestions" style="visibility: hidden" onclick="proposeGenerateQuestions()">Generate Quizzes</button>
         <hr>
         <br>
         <div id="candidateHolder"></div>
@@ -25,17 +25,28 @@
         <button id="saveLessonsButton" style="visibility: hidden" onclick="saveLessons()">Save lesson plan</button>
 
         <div id="mainChat">
-            <span id="outputTitle"></span><br>
+            <br>
+            <h3 id="outputTitle"></h3><br>
             <div>
                 <div id="mathesisContact" class="speechBubble">Mathesis</div>
                 <div id="output"></div>
             </div>
             <br><hr><br>
             <form onsubmit="sendChat()" action="javascript:void(0);">
-                <label for="inputText">Input Text</label><br>
+                <br>
                 <input id="inputText" name="inputText" type="text" placeholder="Say anything!">
                 <button id="submitText" type="submit"></button>
             </form>
+        </div>
+    </div>
+    <div id="confirmationPopup" style="display: none">
+        <p style="font-size: x-large">Are You Sure?</p>
+        <div id="popupContent">
+
+        </div>
+        <div id="popupButtonHolder">
+            <button id="popupDeny" onclick="document.getElementById('confirmationPopup').style.display = 'none'">Cancel</button>
+            <button id="popupConfirm">Confirm</button>
         </div>
     </div>
 </body>

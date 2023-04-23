@@ -20,11 +20,11 @@ class Teacher:
         self.chat = Chat()
         self.evaluate = Evaluate()
 
-    def gen_quiz_questions(self, topics: list[str], composition: list[str], randomize=False):
+    def gen_quiz_questions(self, topics: list[str], percent_mc: float, randomize=False):
         """Generates a quiz based on a set of topics and a set of question types
 
         :param topics: A list of topics to generate questions based off of
-        :param composition: The types of questions that will be generated
+        :param percent_mc: The percentage of questions that will be multiple choice
         :param randomize: Whether to randomize the order of the questions that will be generated
         :return: A list of generated questions"""
 
@@ -32,11 +32,13 @@ class Teacher:
             random.shuffle(topics)
 
         quiz = []
-        for i, q_type in enumerate(composition):
-            if i >= len(topics):
-                break
-            quiz.append(self.gen_multiple_choice(topics[i]) if q_type == "mc" else
-                        self.gen_short_answer(topics[i]))
+        for i, topic in enumerate(topics):
+            rand = random.randint(0, 100)
+            q_type = "sa"
+            if rand < percent_mc:
+                q_type = "mc"
+            quiz.append(self.gen_multiple_choice(topic) if q_type == "mc" else
+                        self.gen_short_answer(topic))
 
         return quiz
 

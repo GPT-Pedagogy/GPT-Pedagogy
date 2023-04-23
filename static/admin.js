@@ -4,6 +4,11 @@
 let question_candidates = {};
 
 
+
+function proposeGenerateQuestions(){
+    document.getElementById("confirmationPopup").style.display = "block";
+    document.getElementById("popupConfirm").onclick = generateQuestions;
+}
 /** Sends a request to generate a series of questions based off of the core topics and default
  * composition of a given lesson*/
 function generateQuestions(){
@@ -41,7 +46,7 @@ function enterLesson(lessonId){
         document.getElementById("lessons").style.display = "none";
         document.getElementById("mainChat").style.display = "block";
         document.getElementById("lessonTitle").innerText = "Main Chat";
-        document.getElementById("outputTitle").innerText = "Chat";
+        document.getElementById("outputTitle").style.display = "none";
         document.getElementById("saveLessonsButton").style.visibility = "hidden";
         document.getElementById("genQuestions").style.visibility = "hidden";
         sidebarRight.style.visibility = "hidden";
@@ -50,6 +55,7 @@ function enterLesson(lessonId){
 
     sidebarRight.style.visibility = "visible";
     document.getElementById("mainChat").style.display = "none";
+    document.getElementById("outputTitle").style.display = "block";
     document.getElementById("saveLessonsButton").style.visibility = "visible";
     document.getElementById("genQuestions").style.visibility = "visible";
     document.getElementById("genQuestions").innerText = "Generate Questions for "+lessonId;
