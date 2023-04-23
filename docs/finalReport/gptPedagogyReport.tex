@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{graphicx}
 \usepackage{babel}
 \usepackage{csquotes}
 \pagestyle{fancy}
@@ -205,10 +206,24 @@
     \section{Architectural Models}
 
     \subsection{Conceptual Model}
-    ...
+    
+    GPT3.5 is placed at the center of the diagram, symbolizing the project's foundation. Surrounding GPT3.5 is the Mathesis Learning Assistant, which represents the extension and customization of GPT3.5 to achieve the project's specific goals. As the base model, GPT3.5 provides the core language understanding and generation capabilities that the Mathesis Learning Assistant will build upon. Key Learning Objectives are connected to the Mathesis Learning Assistant with an arrow, highlighting their guiding role in shaping the model's behavior. These objectives ensure that the model focuses on the most important topics and concepts as defined by the faculty. The assistant generates questions and provides feedback on student's performance based on these key learning objectives. The UserInfo MongoDB Database stores user information and their corresponding performance data for specific chapters.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Conceptual_diagram.jpg}
+        \caption{Conceptual Model}
+        \label{fig:GPT Pedagpgy}
+    \end{figure}
     \subsection{Logical Model}
-    ...
-
+    
+    The Key Learning Objectives are stored in Excel sheets containing units, topics, questions, and answers that guide the Mathesis Learning Assistant. This assistant comprises two main functionalities: Conversation and Quiz Evaluation. The conversation is a chatbot built upon the GPT3.5 model, enabling students to ask questions related to the learning topics. Quiz Evaluation is a functionality that grades chapter quizzes for students and records their performance. The Generated Questions \& Feedback item in the Output object represent the quiz question generation process and the responses provided by the Conversation functionality of the Mathesis Learning Assistant. The UserInfo Database, with RCSID as the primary key, stores student information, including Name, Chatlog, and Performance. 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Logical_diagram.jpg}
+        \caption{Logical Model}
+        \label{fig:GPT Pedagpgy}
+    \end{figure}
+    
     \subsection{Implementation}
     ...
 
