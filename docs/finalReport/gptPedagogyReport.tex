@@ -210,6 +210,14 @@
     In our conceptual model, we outline the general structure of our project, its core components,
     and how those components relate to each other.
 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Conceptual_diagram}
+        \caption{Conceptual Model}
+        \label{fig:conceptualModel}
+    \end{figure}
+    
+
     \paragraph{Mathesis}
     The core of our project is our \textit{Mathesis}
     learning assistant, powered by GPT 3.5.  This is placed at the center of the diagram, symbolizing
@@ -243,16 +251,18 @@
     the model produces and the areas that the students may be struggling the most in.  Both scenarios
     help to guide faculty into improving the course in some way.
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{Conceptual_diagram}
-        \caption{Conceptual Model}
-        \label{fig:conceptualModel}
-    \end{figure}
+    
     \subsection{Logical Model}
     
     Our logical model both maintains the objects and relations of the conceptual model and builds upon
     them through extra details about attributes any typing.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Logical_diagram}
+        \caption{Logical Model}
+        \label{fig:logicalModel}
+    \end{figure}
 
     \paragraph{Mathesis and Output}
     Our learning assistant comprises two main functionalities: Conversation and Quiz Evaluation.
@@ -260,7 +270,9 @@
     topics, expanding their knowledge before formal evaluation. Quiz Evaluation is a functionality
     that grades chapter quizzes for students and records their performance. The 'Generated Questions
     \& Feedback' item in the Output object represents the quiz question generation process and the
-    responses provided by the conversation functionality of the Mathesis Learning Assistant.
+    responses provided by the conversation functionality of the Mathesis Learning Assistant. 
+    The 'Interface' object comprehensively represents the entire application, encompassing all its components and functionalities. 
+    This includes the administrative view within the Mathesis Learning Assistant, which offers a specialized perspective tailored for administrators to have an overview of students' performance.
 
     \paragraph{Key Learning Objectives}
     For the faculty, the key learning
@@ -276,12 +288,7 @@
     In the web interface, faculty have the ability to download a summary of student performance
     in either a csv or Excel format.
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{Logical_diagram}
-        \caption{Logical Model}
-        \label{fig:logicalModel}
-    \end{figure}
+
 
     \section{Prototype Implementation}
 
