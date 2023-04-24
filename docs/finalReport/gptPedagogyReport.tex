@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage{authblk}
+\usepackage{float}
 \usepackage[margin=1in]{geometry}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -21,91 +22,80 @@
     \maketitle
 
     \abstract{
-        GPT-3 is a Large Language Model that, through overuse, is often used to deprive students of the
-        opportunity to learn effectively. Our intended use case of GPT enables the
-        transparent use of the technology between instructor and student. We aim to create a
-        more active and participatory learning environment through the usage of the model in active
-        learning. Our long-term goal for higher education is along the lines of the fourth UN SDG:
+        GPT-3 and related technologies, while transformative, can be misused by students, hindering
+        their learning potential. This paper presents a technical use case description for a GPT-3-based
+        tool designed to foster transparency, active learning, and engagement between instructors and
+        students in higher education. Our objective in designing this tool aligns with the fourth UN SDG,
 
         \begin{quote}
             Ensure inclusive and equitable quality education and promote lifelong
-            learning opportunities for all.
+            learning opportunities for all~\cite{sdg}.
         \end{quote}
 
-        We view GPT as a way to create an adaptive learning experience which promotes the educational
-        endeavor rather than detracts from it.
+        We propose an asynchronous and adaptive learning tool that supports, rather than undermines,
+        the educational process.
 
-        Our plan is to develop a GPT-3 based learning assistant for the \textit{Introduction to Biology}
-        course here at RPI.  Through a partnership with the professor, we will gather sufficient amounts
-        of course material to fine-tune a pre-trained GPT-3 model. This will create a knowledgeable
-        and focused learning assistant, \textit{Mathesis} (from the ancient greek work for learning).
-        By creating this personalized AI tutor we can make it easier and more transparent for
-        students to learn the material and reduce their stress.
+        Our learning assistant, named \textit{Mathesis} from the ancient greek work for learning,
+        will be integrated in an Introduction to Biology course at RPI during the Fall 2023 semester.
+        In collaboration with institute faculty members, we have gathered ample course material to
+        fine-tune a GPT-3 model. When integrated with our online user interface, this model can be
+        used by students as a domain-knowledgeable and adaptive learning assistant. This personalized
+        AI tutor aims to facilitate learning, increase transparency, and reduce student stress.
 
-        One of our goals is for the model to maintain its conversational abilities while embedding
-        additional knowledge about faculty defined key learning objectives. \textit{Mathesis} will
-        generate a series of topic-relevant questions, evaluate the answers of those questions, and give
-        useful feedback or counter-examples to the student. The model benefits from human-in-the-loop
-        reinforcement learning by storing previous chats from students and faculty alike.
+        Our goal for \textit{Mathesis} is to retain the conversational abilities of ChatGPT while
+        fine-tuning the underlying large language model (LLM) with domain expertise. The current
+        fine-tuned model can perform several tasks that achieve this goal.  These include: the generation
+        of course-relevant multiple choice and free response questions, the assessment of student
+        responses, and the generation of tailored critical and constructive student feedback.
+        Future model iterations will leverage human-in-the-loop reinforcement learning, drawing from
+        previous interactions with students and faculty to expand its proficiency as a learning tool.
 
         We also aim for this model to be generalizable to other classes and disciplines in the future.
         The model will work especially well for courses where it is difficult to give personalized
         feedback to each learner in each class meeting time. This often happens in classes that have
-        a high student to faculty ratio. It will also work well for courses with students, interested
-        in AI, who cannot adequately engage with that interest through the course material.
+        a high student to faculty ratio.
     }
 
     \pagebreak
+
     \section{Introduction}
 
-    The idea for this project was conceived before the beginning of our Informatics class.
-    It stemmed from observations about the direction that large language models are currently
-    heading in, and how many educational institutions are not fully prepared to handle the
-    fallout of this trend.  Our primary motivation for this project is to remedy this issue.  By
-    providing students with an opportunity to use large language models, like GPT, as a learning tool,
-    we allow students to gain valuable insight into the practical benefits and shortcomings of these models.
+    Large language models (LLMs), such as OpenAI's Generative Pre-trained Transformer (GPT) series,
+    have revolutionized the field of natural language processing (NLP) with their advanced language
+    understanding and generation capabilities. These models are based on deep learning architectures
+    called transformers, which enable the efficient processing of vast amounts of textual data. LLMs
+    are trained on extensive datasets containing diverse information from websites, books, articles,
+    and other sources, allowing them to grasp context and generate human-like responses. GPT-3, the
+    latest iteration in the series, has shown remarkable performance in various tasks, including
+    translation, summarization, and question-answering. While these models hold immense potential
+    for applications across different domains, their use in educational settings has gained significant
+    attention. By leveraging the proficiency of LLMs like GPT-3, we aim to develop an innovative
+    learning tool that enhances student engagement and promotes a more personalized learning experience.
 
     \subsection{Our Targeted Approach}
 
-    When looking at our project through a more focused lens, we believe that it will benefit the
-    students in the courses that \textit{Mathesis} may be integrated into.  For many introductory
-    classes, their main focus is to imbue students with a large amount of foundational
-    knowledge before they explore the specifics in subsequent classes.  We believe that
-    a GPT model will have a significant impact in helping with this task.  By fine-tuning a model
-    on a large amount of course material, it will be able to provide relevant questions to students
-    with greater detail and with a stronger relation to the other topics in the course.  This comes
-    along with the large amount of general knowledge that the model initially has.  While it may
-    not be able to go into detail about very niche topics, fine-tuning allows it to provide adequate
-    detail on the material that students need to learn.
+    In partnership with the Teaching and Learning Collaboratory (TLC) at Rensselaer Polytechnic
+    Institute (RPI) in Troy, NY, we have identified an Introduction to Biology class section in the
+    Fall 2023 semester for the debut of our GPT-based learning management system. We believe \textit{Mathesis}
+    will significantly benefit students by providing them with relevant questions and detailed
+    knowledge of course topics. This targeted approach reduces uncertainty and increases the model's
+    usefulness to students by generating responses specific to the course material, avoiding
+    misinformation or demotivation.
 
-    \subsection{Broad Impact}
+    \subsection{Significance}
 
-    From a broader perspective, customized learning assistants, similar to ours, have the potential
-    to make a significant impact on the educational landscape as a whole.  One of the biggest issues
-    that our project addresses is the asymmetric distribution of faculty time between students.
-    Many courses at RPI, especially one or two thousand level courses, have a very high student to
-    faculty ratio.  Due to this, each student is only afforded a very limited amount of one-on-one
-    time with the professor or their TAs.  Automated learning assistants like \textit{Mathesis} can
-    help to afford students more time with a knowledgeable entity in their field.  This effect would
-    not only benefit students at RPI, but also nearly every other student in every other institution.
-    While models such as ours cannot serve as a complete replacement for faculty, they can instead
-    serve as an aide, answering students' questions and providing helpful feedback.  The more
-    competent this model, the less one-on-one time students will need to spend with faculty.  This
-    will hopefully result in a more complete understanding of the course material among the students.
-
-    \subsection{Aristotle For All}
-
-    This asymetry has served as a large motivator for us while working on this project.  The opportunity to
-    both free up faculty to have more personalized time with each student and to allow each student
-    to have a personal tutor by their side will help to solve many of the struggles that students
-    have with learning in general.  These ideas are reflected in both past and contemporary sources.
-    In a very similar vein to our project, Khan Academy's \textit{Khanmigo}~\cite{khanmigo} model
-    aims to provide a very similar service to students through the internet.  Our hope is that
-    \textit{Mathesis} will soon serve a similar role, but customized for RPI's students and
-    curriculum.  These ideas are reflected in the well researched, and somewhat prophetic, video
-    \textit{Digital Aristotle: Thoughts on the Future of Education}~\cite{aristotle} by CGP Grey.  It outlines
-    many of the same points that we have mentioned here in addition to detailing how technologies
-    such as \textit{Mathesis} or \textit{Khanmigo} can have on the future of education.
+    Customized learning assistants, like \textit{Mathesis}, have the potential to reshape the educational
+    landscape. We do not contend that AI models can replace faculty, rather that they can serve as
+    learning aids to students. In this role, the model continuously assesses and reinforces the
+    student competency in course-relevant material by answering questions and providing feedback on
+    self-administered assessments.  The potential impact of these assistants is especially significant
+    in courses with a very high student-to-faculty ratio.  In these classes, each student is only
+    afforded a very limited amount of one-on-one time with the professor or their TAs.  Automated
+    learning assistants like \textit{Mathesis} can help to afford students more time with a
+    knowledgeable entity in their field.  Similar initiatives, such as Khan Academy's Khanmigo~\cite{khanmigo}
+    model, offer comparable services to K-12 education through their online educational platform.
+    We hypothesize that integration of LLM tutors in higher education will result in an elevated
+    level of conceptualization of course material among affected students.
 
     \section{Project Use Case}
 
@@ -119,16 +109,12 @@
     \begin{itemize}
         \label{functionalReqs}
 
-        \item Provide students with a knowledgeable teacher that can answer any course-relevant question
-        \item Be able to automatically generate a series of evaluation questions for students and
-        reference answers based on the core topics of the course
-        \item Receive students' answers to evaluation questions and evaluate their correctness based
-        off of the reference answers
-        \item Provide useful feedback to students if their answers did not sufficiently match the
-        reference answers
-        \item Allow instructors to review and regenerate all questions generated by the model
-        \item Allow instructors to evaluate a summary of student performance based off of the
-        automatically generated questions
+        \item Be able to confidently and correctly answer any course-relevant question
+        \item Be able to generate questions for students on key learning objectives
+        \item Receive and evaluate student answers
+        \item Provide useful feedback to students on their answers
+        \item Allow instructors to customize question generation
+        \item Allow instructors to evaluate class performance on key learning objectives
     \end{itemize}
 
     Along with these functional requirements, the project requires several \textit{non-functional
@@ -138,7 +124,7 @@
         \label{nonFunctionalReqs}
         \item A GPT model that can respond in a conversational and contextually sensitive manner
         \item That model be fine-tuned on relevant course material to narrow its focus of expertise
-        \item A front end environment that allows students and administrators to interact with the model
+        \item A user interface students and administrators use to interact with the model
         \item A login and authentication system to prevent unwanted access and to keep track of evaluations
     \end{itemize}
 
@@ -146,7 +132,15 @@
     Overall, we have worked to minimize the total uncertainty of the project.  It is important to note,
     however, that the GPT model will always introduce some amount of extra uncertainty.
 
-    One of the areas where we worked to minimize the uncertainty in was the user interface.  This is
+    One of the areas where we worked to minimize uncertainty is through the fine-tuning of the model on our
+    own, customized, training data.  The use of a GPT model introduces some uncertainty in user
+    experience. However, we have minimized uncertainty associated with use of the model by employing
+    fine-tuning and prompt engineering techniques. Fine-tuning enables confidence in our model to
+    provide accurate information on course-related concepts. Whereas prompt engineering tailors
+    model outputs to fit within designed specifications which are amenable to integration within
+    our user interface.
+
+    Another way in which we worked to minimize the uncertainty in was the user interface.  This is
     split into two parts, the student and administrator views.  In both of these cases, our design
     was oriented towards a simple, straightforward interface.  We worked to accomplish this through
     the use of a minimalist design.  Users can choose to choose only a few tabs: the main chat and
@@ -154,15 +148,6 @@
     to edit the questions that are displayed to students.  In our design, buttons, animations, and
     images are kept to a minimum.  This will hopefully allow users to focus more on working on
     evaluations or interacting with \textit{Mathesis} to better learn specific topics.
-
-    Another way we worked to minimize uncertainty is through the fine-tuning of the model on our
-    own, customized, training data.  By feeding \textit{Mathesis} significant amounts of course
-    material, we have narrowed its focus down to the relevant topics of the course.  While the model
-    does not forget its previously learned knowledge, its ability to correctly interpret and recall
-    information related to the course has increased.  This lowers the uncertainty of the project
-    by encouraging the trained model to generate responses that are targeted towards the course
-    material.  This will increase its helpfulness to students as unrelated responses may provide
-    misinformation or serve to demotivate students from interacting with the system.
 
     The use case that we developed addresses what we expect to be the basic flow of the system, along
     with any reasonable alternate or exception flows.  The goal of this system is the same as the
@@ -177,7 +162,7 @@
     account for them in our working prototype. Due to this reason, we have set this, and similar
     edge cases, to be outside our implementation scope.
 
-    \subsection{Implementation Considerations}
+    \subsection{Semiotic Implementation Considerations}
 
     As mentioned above, one of our primary design goals of this project was to minimize uncertainty.
     In addition to the previously mentioned methods, we also minimized uncertainty through our
@@ -199,9 +184,43 @@
     applications.  By modeling our interface in a similar manner to SMS communications, we create a
     familiar environment to both students and teachers.  This was likely the rationale of ChatGPT's
     interface design, which mirrors these communications as well.  The lesson quiz submission also
-    mirrors other systems, such as LMS.  By creating a familiar environment, we hope that users
-    will be able to immediately recognize the form and function of the interface, allowing for
-    quicker acclimation.
+    mirrors other systems, such as RPI's learning management systems (LMS).  By creating a familiar
+    environment, we hope that users will be able to immediately recognize the form and function of
+    the interface, allowing for quicker acclimation.
+
+    \subsection{Alignment and Feedback Considerations}
+
+    Several considerations are specific to early adoption in the Introduction to Biology course at RPI.
+    This course deals with several topics which could be scrutinized by students with disparate
+    experiences, beliefs, and upbringings including: human evolution, origins of Earth, Covid-19,
+    and climate change. While it is most likely impossible to robustly account for each of the various
+    views on each topic, we have already made significant strides to fine-tune the underlying model
+    to respect student’s views while also making them aware of the current prevailing consensus in
+    the biological literature. \textit{Mathesis'} role is to educate, not to indoctrinate. For this reason,
+    our model's behavior towards student's stated beliefs is trained to be both respectful and
+    agnostic of doctrine. In the future, a topic blacklist may be curated to prevent students from
+    asking the learning assistant questions misaligned with course concepts. Topics on this blacklist
+    may involve disparate conspiracy theories prevalent in modern online discourse. When a question
+    regarding one of these topics is asked, the response will be hard-coded to redirect the student's
+    question to the human faculty member.
+
+    Our system is designed to be customizable and scalable to fit future needs of higher education.
+    While we have partnered with a professor in the Biology department, there are other courses at
+    RPI which may benefit from a personalized AI tutor like \textit{Mathesis}. Our platform is
+    designed to be amenable to a broad spectrum of course curricula. Each course at RPI can be
+    subdivided into units, and each unit can be further divided into key learning objectives. The
+    fine-tuned models are trained to be proficient question-answering systems per each stated key
+    learning objective. Furthermore, significant supplemental documentation of the fine-tuning
+    process will be made available for domain-knowledgeable models to be created for other courses.
+    For some courses like calculus and physics, it may be necessary to incorporate more updated
+    models like GPT-4 which have image + text modality. This modality would enable students to upload
+    images of their work to be assessed by the system.
+
+    Finally, our system will employ a student and faculty feedback component to allow continuous
+    improvement of the resource. This ability will allow users to report issues or flag model outputs,
+    suggest improvements, and contribute to the model's ongoing refinement. By providing users a
+    voice in the future development of this project, we hope to make the \textit{Mathesis} learning assistant
+    more inclusive, accommodating, and adaptable to a wide range of student and faculty interactions.
 
     \section{Architectural Models}
 
@@ -210,7 +229,7 @@
     In our conceptual model, we outline the general structure of our project, its core components,
     and how those components relate to each other.
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{Conceptual_diagram}
         \caption{Conceptual Model}
@@ -257,7 +276,7 @@
     Our logical model both maintains the objects and relations of the conceptual model and builds upon
     them through extra details about attributes any typing.
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{Logical_diagram}
         \caption{Logical Model}
@@ -270,9 +289,11 @@
     topics, expanding their knowledge before formal evaluation. Quiz Evaluation is a functionality
     that grades chapter quizzes for students and records their performance. The 'Generated Questions
     \& Feedback' item in the Output object represents the quiz question generation process and the
-    responses provided by the conversation functionality of the Mathesis Learning Assistant. 
-    The 'Interface' object comprehensively represents the entire application, encompassing all its components and functionalities. 
-    This includes the administrative view within the Mathesis Learning Assistant, which offers a specialized perspective tailored for administrators to have an overview of students' performance.
+    responses provided by the conversation functionality of the \textit{Mathesis} Learning Assistant. The
+    'Interface' object comprehensively represents the entire application, encompassing all its
+    components and functionalities.  This includes the administrative view within the \textit{Mathesis}
+    Learning Assistant, which offers a specialized perspective tailored for administrators to have
+    an overview of students' performance.
 
     \paragraph{Key Learning Objectives}
     For the faculty, the key learning
@@ -287,7 +308,6 @@
     Chatlog, and Performance.  This information is stored, ready to be put to use by the faculty.
     In the web interface, faculty have the ability to download a summary of student performance
     in either a csv or Excel format.
-
 
 
     \section{Prototype Implementation}
@@ -322,12 +342,8 @@
     This decision was influenced primarily by the \textit{DAN}~\cite{danThread} (Do Anything Now)
     exploit and its many iterations.  This exploit allows users to convince the ChatGPT model to
     ignore its alignment and safety training.  Attacks like these would likely also be able to
-    bypass the fine-tuning of \textit{Mathesis}.  We have partially confirmed this assumption by
-    testing similar exploits on GPT models.  We performed this evaluation by taking note of several
-    topics that GPT disliked talking about and were able to convince the model to mention them.  For
-    our experiment, we chose to focus on past political figures.  By speaking about adjacent topics
-    then re-asking questions directed at these disallowed topics we were able to bypass the model's
-    alignment somewhat.  Our evaluation suggests that students could attempt something
+    bypass the fine-tuning of \textit{Mathesis}.  We partially confirmed this assumption by testing
+    similar exploits on GPT models.  Our evaluation suggests that students could attempt something
     similar if they wished to do so.  At present, we have decided to not work on measures
     specifically preventing this type of attack.  The reason for this is the relatively quick
     patches OpenAI sends out when exploits are discovered, combined with the difficulty of the
@@ -340,18 +356,38 @@
     In our future work in this project, we expect to both finalize the attributes of the project that
     we have included in its current scope and to expand the projects scope to cover more edge cases.
 
-    ...
+    We aim to better handle reasonable edge cases by assisting students with navigating the new system,
+    managing adversarial attacks, and further automating the model training process on new datasets.
+    These enhancements will help students adapt to the \textit{Mathesis} assistant and its learning platform,
+    deter them from using the model for unintended purposes, and create a conducive environment for
+    professors who wish to integrate their courses into the learning system in future semesters.
 
-    Ways in which we would expand the scope of the project would to be to better handle reasonable
-    edge cases.  These could come in the form of students needing help with navigating the new system,
-    handling adversarial attacks from students, or further automating the process of training models
-    on new datasets.  These possible additions would serve to help students better adapt to using the
-    \textit{Mathesis} assistant and its surrounding learning platform, deter students from using
-    the model for unintended purposes, and creating encouraging environment for other professors who
-    would like to include their courses into the learning system in future semesters respectively.
+    A member of our team will continue to monitor and maintain the \textit{Mathesis} learning assistant as it
+    is integrated into our pilot program in Introduction to Biology. This member will assist in user
+    support and training during the semester and coordinate with the course’s faculty member to
+    facilitate a seamless integration. During and after the conclusion of our pilot semester, we will
+    generate metrics which assess the competency of students to achieve the course’s key learning
+    objectives and compare with a control section of the course taught by the same faculty member.
+    We hope these metrics, and the student and faculty feedback resulting from our pilot program will
+    indicate to the RPI community that personalized AI tutors can be successful in promoting student
+    engagement and comprehension.
 
     \subsection{Closing Thoughts}
-    ...
+    Our project has the potential to make a significant impact on higher education, specifically in
+    facilitating personalized learning experiences for students. By providing a knowledgeable and
+    adaptive AI learning assistant, we aim to promote active engagement, reduce stress, and ensure a
+    transparent learning environment for both students and instructors.
+
+    The success of \textit{Mathesis} in the Introduction to Biology course at RPI will serve as a
+    stepping stone for its future integration into various other university courses. We believe that
+    personalized AI tutors can be particularly beneficial in courses where providing individualized
+    feedback to each student can be challenging due to high enrollment numbers or limited instructor
+    resources.
+
+    By aligning our project with the fourth UN SDG, we aim to contribute to the global goal of
+    ensuring inclusive and equitable quality education and promoting lifelong learning opportunities for
+    all. We envision \textit{Mathesis} becoming a scalable and adaptable platform that can be integrated
+    into different educational frameworks, fostering a culture of continuous lifelong learning and improvement.
 
     \pagebreak
     
