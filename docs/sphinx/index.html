@@ -87,8 +87,9 @@ their appropriate usages.</p>
 <dd><p>Returns several candidate quizzes to be manually reviewed</p>
 <p><strong>Optional Query Params</strong></p>
 <ul class="simple">
-<li><p>l (list) - A list of lesson ids to generate the questions for</p></li>
-<li><p>c (dict) - A dictionary, with the lesson id as the key, containing the composition of the questions for that lesson</p></li>
+<li><p>l (list[str]) - A list of lesson ids to generate the questions for</p></li>
+<li><p>pmc (dict) - A dictionary, with the lesson id as the key, containing the probability that any given question will be multiple choice</p></li>
+<li><p>topics (list[int]) - A list of the ids of all the core topics of the lesson that need their questions generated</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -445,13 +446,13 @@ their appropriate usages.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="model.Teacher.Teacher.gen_quiz_questions">
-<span class="sig-name descname"><span class="pre">gen_quiz_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.gen_quiz_questions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gen_quiz_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_mc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.Teacher.Teacher.gen_quiz_questions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a quiz based on a set of topics and a set of question types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>topics</strong> – A list of topics to generate questions based off of</p></li>
-<li><p><strong>composition</strong> – The types of questions that will be generated</p></li>
+<li><p><strong>percent_mc</strong> – The percentage of questions that will be multiple choice</p></li>
 <li><p><strong>randomize</strong> – Whether to randomize the order of the questions that will be generated</p></li>
 </ul>
 </dd>

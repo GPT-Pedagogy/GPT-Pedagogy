@@ -193,8 +193,9 @@ def generate_questions():
 
     **Optional Query Params**
 
-    * l (list) - A list of lesson ids to generate the questions for
-    * c (dict) - A dictionary, with the lesson id as the key, containing the composition of the questions for that lesson
+    * l (list[str]) - A list of lesson ids to generate the questions for
+    * pmc (dict) - A dictionary, with the lesson id as the key, containing the probability that any given question will be multiple choice
+    * topics (list[int]) - A list of the ids of all the core topics of the lesson that need their questions generated
 
     :return: A dictionary containing the generated transactions"""
 

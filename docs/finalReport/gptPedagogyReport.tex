@@ -207,25 +207,81 @@
 
     \subsection{Conceptual Model}
     
-    GPT3.5 is placed at the center of the diagram, symbolizing the project's foundation. Surrounding GPT3.5 is the Mathesis Learning Assistant, which represents the extension and customization of GPT3.5 to achieve the project's specific goals. As the base model, GPT3.5 provides the core language understanding and generation capabilities that the Mathesis Learning Assistant will build upon. Key Learning Objectives are connected to the Mathesis Learning Assistant with an arrow, highlighting their guiding role in shaping the model's behavior. These objectives ensure that the model focuses on the most important topics and concepts as defined by the faculty. The assistant generates questions and provides feedback on student's performance based on these key learning objectives. The UserInfo MongoDB Database stores user information and their corresponding performance data for specific chapters.
+    In our conceptual model, we outline the general structure of our project, its core components,
+    and how those components relate to each other.
+
+    \paragraph{Mathesis}
+    The core of our project is our \textit{Mathesis}
+    learning assistant, powered by GPT 3.5.  This is placed at the center of the diagram, symbolizing
+    its foundational role. It is important to include this component in our diagram as it is the main
+    generator of content for the project.  This content can be anything from novel quiz questions to
+    feedback for students. In our diagram, \textit{Mathesis} is shown as a wrapper with a core of
+    GPT 3.5.  This is because our implementation is an extension and customization of GPT 3.5, created
+    to achieve the project's specific goals. As the base model, GPT 3.5 provides the core language
+    understanding and generation capabilities that the \textit{Mathesis} Learning Assistant will build
+    upon.
+
+    \paragraph{Key Learning Objectives}
+    Also in our model, we include key learning objectives as an object.  This object represents the
+    collection of core course material that students are meant to learn.  It is connected to our model,
+    highlighting their guiding role in shaping the model's behavior through fine-tuning. These
+    objectives ensure that the model focuses on the most important topics and concepts as defined by
+    the faculty. The assistant generates questions and provides feedback on student's performance
+    based on these key learning objectives.
+
+    \paragraph{Model Output}
+    In our diagram, we also include the products of the learning assistant.  This is important to include
+    because it shows what the model actually does to deserve its role as central to the function of
+    the project.  This output comes in the form of questions, generated from the learning objectives
+    of the course, and useful feedback and corrections to the answers of students.  This feedback also
+    encapsulates the char functionality of the model, where it provides feedback based on any question
+    that the user asks of it.
+
+    \paragraph{User Information System}
+    Finally, the UserInfo MongoDB Database stores user information and their corresponding performance
+    data for specific chapters.  This will be useful to help gauge the quality of the questions that
+    the model produces and the areas that the students may be struggling the most in.  Both scenarios
+    help to guide faculty into improving the course in some way.
+
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{Conceptual_diagram.jpg}
+        \includegraphics[width=0.8\textwidth]{Conceptual_diagram}
         \caption{Conceptual Model}
-        \label{fig:GPT Pedagpgy}
+        \label{fig:conceptualModel}
     \end{figure}
     \subsection{Logical Model}
     
-    The Key Learning Objectives are stored in Excel sheets containing units, topics, questions, and answers that guide the Mathesis Learning Assistant. This assistant comprises two main functionalities: Conversation and Quiz Evaluation. The conversation is a chatbot built upon the GPT3.5 model, enabling students to ask questions related to the learning topics. Quiz Evaluation is a functionality that grades chapter quizzes for students and records their performance. The Generated Questions \& Feedback item in the Output object represent the quiz question generation process and the responses provided by the Conversation functionality of the Mathesis Learning Assistant. The UserInfo Database, with RCSID as the primary key, stores student information, including Name, Chatlog, and Performance. 
+    Our logical model both maintains the objects and relations of the conceptual model and builds upon
+    them through extra details about attributes any typing.
+
+    \paragraph{Mathesis and Output}
+    Our learning assistant comprises two main functionalities: Conversation and Quiz Evaluation.
+    The model's conversational capabilities enable students to ask questions related to the learning
+    topics, expanding their knowledge before formal evaluation. Quiz Evaluation is a functionality
+    that grades chapter quizzes for students and records their performance. The 'Generated Questions
+    \& Feedback' item in the Output object represents the quiz question generation process and the
+    responses provided by the conversation functionality of the Mathesis Learning Assistant.
+
+    \paragraph{Key Learning Objectives}
+    For the faculty, the key learning
+    objectives are stored in Excel sheets containing units, topics, questions, and answers that
+    go into the internal representation that will guide our learning assistant.  Internally, this
+    information is represented by a JSON file.  Within this file, we store each lesson, the core
+    concepts that the lesson aims to teach, and any questions that \textit{Mathesis} generates based
+    on those topics.
+
+    \paragraph{User Information System}
+    The UserInfo Database, with RCSID as the primary key, stores student information, including Name,
+    Chatlog, and Performance.  This information is stored, ready to be put to use by the faculty.
+    In the web interface, faculty have the ability to download a summary of student performance
+    in either a csv or Excel format.
+
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{Logical_diagram.jpg}
+        \includegraphics[width=0.8\textwidth]{Logical_diagram}
         \caption{Logical Model}
-        \label{fig:GPT Pedagpgy}
+        \label{fig:logicalModel}
     \end{figure}
-    
-    \subsection{Implementation}
-    ...
 
     \section{Prototype Implementation}
 

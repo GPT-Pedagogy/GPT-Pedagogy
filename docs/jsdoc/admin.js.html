@@ -1,4 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: admin.js</title>
 
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: admin.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 
 /** A dictionary of lists of candidate quiz questions waiting to be added by an admin*/
 let question_candidates = {};
@@ -14,10 +42,10 @@ function proposeGenerateQuestions(){
     let coreTopics = lessons[selected_lesson].core_topics;
     let popupForm = document.createElement("form");
     popupForm.id = "popupForm";
-    popupForm.innerHTML += `<p>Select the topics that you want to generate questions for:</p>`;
+    popupForm.innerHTML += `&lt;p>Select the topics that you want to generate questions for:&lt;/p>`;
     for(let idx in coreTopics){
-        popupForm.innerHTML += `<input type="checkbox" id="popupCheck${idx}" name="${idx}" value="${idx}">`;
-        popupForm.innerHTML += `<label for="popupCheck${idx}">${coreTopics[idx]}</label><br>`;
+        popupForm.innerHTML += `&lt;input type="checkbox" id="popupCheck${idx}" name="${idx}" value="${idx}">`;
+        popupForm.innerHTML += `&lt;label for="popupCheck${idx}">${coreTopics[idx]}&lt;/label>&lt;br>`;
     }
     content.appendChild(popupForm);
     document.getElementById("popupConfirm").onclick = () => {
@@ -43,7 +71,7 @@ function generateQuestions(selectedTopics=null){
         selectedTopics = lessons[selected_lesson].core_topics;
 
     console.log(`Generating questions for lesson ${selected_lesson} with selected topics ${selectedTopics}...`);
-    fetch(`/generate_questions?l=${JSON.stringify([selected_lesson])}&topics=${JSON.stringify(selectedTopics)}`,
+    fetch(`/generate_questions?l=${JSON.stringify([selected_lesson])}&amp;topics=${JSON.stringify(selectedTopics)}`,
         {method: 'GET'}).then(response => response.json()).then(response => {
         console.log("Questions:", JSON.stringify(response));
         let questions = response;
@@ -121,7 +149,7 @@ function saveLessons(){
 function requestGrades(){
     console.log(`Requesting grades...`);
     fetch('/admin/grades', {method: 'GET'}).then(response => response.json()).then(response => {
-        // Create element with <a> tag
+        // Create element with &lt;a> tag
         const link = document.createElement("a");
         const file = new Blob([response.grades], { type: 'text/plain' });
         link.href = URL.createObjectURL(file);
@@ -147,13 +175,13 @@ function addCandidateQuestionElem(lessonId, question){
     let addButton = document.createElement("BUTTON");
     addButton.id = `add${question.id}`;
     addButton.className = "questionEditButton";
-    addButton.innerText = "<--";
+    addButton.innerText = "&lt;--";
     addButton.style.backgroundColor = "green";
     addButton.onclick = () => {
         let lessonElem = document.getElementById(`lessonForm${lessonId}`);
         formatQuestions(lessonId, [question], false, lessonElem, onQuestionAdd);
         lessons[lessonId].quiz.push(question);
-        for(let i=0; i<question_candidates[lessonId].length; i++)
+        for(let i=0; i&lt;question_candidates[lessonId].length; i++)
             if(question_candidates[lessonId][i].id === question.id) {
                 question_candidates[lessonId].splice(i, 1);
                 break;
@@ -175,7 +203,7 @@ function removeQuizQuestion(lessonId, quesId) {
     let found = null;
 
     console.log("Removing quiz", quesId, "from lesson", lessonId);
-    for(let i=0; i<lessons[lessonId].quiz.length; i++){
+    for(let i=0; i&lt;lessons[lessonId].quiz.length; i++){
         if(lessons[lessonId].quiz[i].id === quesId) {
             found = lessons[lessonId].quiz[i];
             question_candidates[lessonId].push(lessons[lessonId].quiz[i]);
@@ -213,7 +241,29 @@ function onQuestionAdd(lessonId, quesId, quizDiv){
 window.onload = () => {
     enterLesson('chat');
     let sidebarLeft = document.getElementById("sidebarLeft");
-    sidebarLeft.innerHTML = `<div class="navElement" onclick="enterLesson('chat');"><h3>Main Chat</h3></div>`;
+    sidebarLeft.innerHTML = `&lt;div class="navElement" onclick="enterLesson('chat');">&lt;h3>Main Chat&lt;/h3>&lt;/div>`;
     setAdmin();
     loadLessons(enterLesson);
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestionElem">addCandidateQuestionElem</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#proposeGenerateQuestions">proposeGenerateQuestions</a></li><li><a href="global.html#question_candidates">question_candidates</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 23 2023 21:56:47 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

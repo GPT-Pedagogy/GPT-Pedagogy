@@ -542,7 +542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line107">line 107</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -905,7 +905,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line33">line 33</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -1468,7 +1468,7 @@ NOTE: Do not use for any type of sensitive calculations.  This is only for gener
     
 
     
-    <h4 class="name" id="generateQuestions"><span class="type-signature"></span>generateQuestions<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generateQuestions"><span class="type-signature"></span>generateQuestions<span class="signature">(selectedTopics)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1486,6 +1486,63 @@ composition of a given lesson
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selectedTopics</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;int></span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1521,7 +1578,7 @@ composition of a given lesson
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line9">line 9</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -1979,7 +2036,96 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line166">line 166</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="proposeGenerateQuestions"><span class="type-signature"></span>proposeGenerateQuestions<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Displays the confirmation popup for generating new questions and populates it with checkboxes
+for which core topics need questions generated.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -2139,7 +2285,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line142">line 142</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line174">line 174</a>
     </li></ul></dd>
     
 
@@ -2252,7 +2398,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line89">line 89</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -2340,7 +2486,7 @@ question and turns it back into a candidate
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line68">line 68</a>
+        <a href="admin.js.html">admin.js</a>, <a href="admin.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -2721,13 +2867,13 @@ question and turns it back into a candidate
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestionElem">addCandidateQuestionElem</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#question_candidates">question_candidates</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#RCS_ID">RCS_ID</a></li><li><a href="global.html#addCandidateQuestionElem">addCandidateQuestionElem</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#chat_history">chat_history</a></li><li><a href="global.html#enterLesson">enterLesson</a></li><li><a href="global.html#formatQuestions">formatQuestions</a></li><li><a href="global.html#genPseudorandom">genPseudorandom</a></li><li><a href="global.html#generateQuestions">generateQuestions</a></li><li><a href="global.html#lessons">lessons</a></li><li><a href="global.html#loadChat">loadChat</a></li><li><a href="global.html#loadLessons">loadLessons</a></li><li><a href="global.html#onQuestionAdd">onQuestionAdd</a></li><li><a href="global.html#proposeGenerateQuestions">proposeGenerateQuestions</a></li><li><a href="global.html#question_candidates">question_candidates</a></li><li><a href="global.html#removeQuizQuestion">removeQuizQuestion</a></li><li><a href="global.html#requestGrades">requestGrades</a></li><li><a href="global.html#saveLessons">saveLessons</a></li><li><a href="global.html#selected_lesson">selected_lesson</a></li><li><a href="global.html#sendChat">sendChat</a></li><li><a href="global.html#sendQuiz">sendQuiz</a></li><li><a href="global.html#setAdmin">setAdmin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Apr 18 2023 09:26:51 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 23 2023 21:56:47 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
