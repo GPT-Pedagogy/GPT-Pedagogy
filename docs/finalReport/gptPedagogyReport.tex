@@ -7,7 +7,12 @@
 \usepackage{graphicx}
 \usepackage{babel}
 \usepackage{csquotes}
+\usepackage[toc,page]{appendix}
+\usepackage{makecell}
+\newcommand{\tabitem}{\\~~\llap{\textbullet}~~}
+
 \pagestyle{fancy}
+
 
 \title{GPT Pedagogy}
 \author[1]{Matthew Pisano\quad\href{mailto:pisanm2@rpi.edu}{pisanm2@rpi.edu}}
@@ -100,6 +105,9 @@
     We hypothesize that integration of LLM tutors in higher education will result in an elevated
     level of conceptualization of course material among affected students.
 
+    \let\thefootnote\relax\footnotetext{Our source code can be found at
+    \href{https://github.com/ITWSXInformatics/ChatGPT_Pedagogy_Group2_2023}{github.com/ITWSXInformatics/ChatGPT\_Pedagogy\_Group2\_2023}}
+
     \section{Project Use Case}
 
     \subsection{Specifications}
@@ -163,7 +171,8 @@
     of such flows would be deliberate adversarial attacks to the system.  While these attacks are a
     near certainty in a deployed system, the time constraints on this project has not allowed us to
     account for them in our working prototype. Due to this reason, we have set this, and similar
-    edge cases, to be outside our implementation scope.
+    edge cases, to be outside our implementation scope.  The completed use case can be found in
+    \hyperref[tab:useCaseDoc1]{Appendix A}
 
     \subsection{Semiotic Implementation Considerations}
 
@@ -438,4 +447,143 @@
     
     \bibliographystyle{abbrv}
     \bibliography{references}
+
+    \pagebreak
+
+    \begin{appendices}
+
+        \setcounter{section}{0}
+        \section{Use Case Document}
+
+        \begin{table}[H]
+        \label{tab:useCaseDoc1}
+        \centering
+        \def\arraystretch{1.4}
+        \begin{tabular}{|p{13cm}|}
+            \hline
+            \textbf{Use Case Name:} GPT Pedagogy: Mathesis\\\hline
+
+            \textbf{Goal:}\\
+
+            Develop a model, \textit{Mathesis}, that maintains its conversational abilities,
+            while embedding additional knowledge about faculty defined key learning objectives.
+            This model will generate a series of topic-relevant questions, evaluate the answers of
+            those questions, and give useful feedback or counterexamples to the student.
+
+            This model will be able to be generalizable for other classes and disciplines,
+            working especially well for courses where it is difficult to give personalized
+            feedback to each learner during class. This often happens in classes that
+            have a high student to faculty ratio. It will also work well for courses with students,
+            interested in AI, who cannot adequately engage with that interest through the course
+            material.\\\hline
+
+            \textbf{Summary:}\\
+
+            Students can log in and can start chatting with our agent as it
+            responds in real time with auto-generated responses. They can then proceed with their
+            learning experience and discover gaps in their knowledge through their chat and through
+            quizzes.  This leads to better overall learning outcomes.
+
+            Faculty can log in and start viewing a summary of student responses to knowledge.
+            Through this, they can pinpoint gaps in the collective student knowledge, drawing
+            unbiased conclusions, and making necessary changes of pace for later lectures.  This then
+            improves the quality and consistency of lectures, leading to a better teaching experience.
+            \\\hline
+
+            \textbf{Actors:}\\
+
+            Students, Faculty, RPI, Server, OpenAI\\\hline
+
+            \textbf{Preconditions:} \\\makecell[l]{
+                \tabitem The User has a valid RPI ID.
+                \tabitem The User is enrolled in the class either as the professor or student.
+                \tabitem The User is connected to the internet.
+                \tabitem The Server is running.
+                \tabitem OpenAI is accessible.
+                \tabitem DataBase is accessible.
+            }\\\hline
+
+        \end{tabular}
+        \end{table}
+
+        \begin{table}[H]
+        \label{tab:useCaseDoc2}
+        \centering
+        \def\arraystretch{1.4}
+        \begin{tabular}{|p{13cm}|}
+            \hline
+
+            \textbf{Triggers:} \\\makecell[l]{
+                \tabitem User sends a request to load the homepage.
+                \tabitem User sends a chat request to the model.
+                \tabitem User selects a lesson from the list.
+                \tabitem User submits a quiz from a lesson.
+                \tabitem Faculty user submits a request to generate a new question.
+                \tabitem Faculty user saves a quiz configuration
+                \tabitem Faculty requests student performance report.
+            }\\\hline
+
+            \textbf{Basic Flow:} \\\makecell[l]{
+                \\1. The user logs in via his RPI account.
+                \\2. Server checks if the information matches and if the student is
+                    \\\quad~enrolled in the class or not.
+                \\3. Server create response to the user.
+                \\4. Users interprets the response and send request to the server.
+                \\5. Server interprets the result and send request to OpenAI API.
+                \\6. OpenAI send request to the pretune agent and send response back
+                    \\\quad~to the server.
+                \\7. Server pushes the response back to the user and the database.
+                \\8. User interprets the response and terminates the use case.
+                \\9. Database records the response.
+            }\\\hline
+
+            \textbf{Alternate Flow:} \\\makecell[l]{
+                \\1. The user logs in via his RPI account.
+                \\2. Server checks if the information matches and if the student is
+                    \\\quad~enrolled in the class or not.
+                \\3. User performs actions beyond the normal usage of \textit{Mathesis}.
+                \\4. \textit{Mathesis} detects malicious behavior.
+                \\5. User interaction redirected and actions are taken to either mitigate
+                    \\\quad~or terminate this incident.
+            }\\\hline
+
+            \textbf{Postconditions:} \\\makecell[l]{
+                \tabitem Students have gained further course knowledge.
+                \tabitem Students have their knowledge tested with results recorded.
+                \tabitem Faculty has observed student performance.
+                \tabitem Faculty has modified lessons to account for students' knowledge.
+            }\\\hline
+
+        \end{tabular}
+        \end{table}
+
+        \begin{table}[H]
+        \label{tab:useCaseDoc3}
+        \centering
+        \def\arraystretch{1.4}
+        \begin{tabular}{|p{13cm}|}
+            \hline
+
+            \textbf{Activity Diagram:}\\
+
+            \includegraphics[width=\linewidth]{images/activityDiagram}\\\hline
+
+            \textbf{Questions and Answers:} \\\makecell[l]{
+                \tabitem What role does the success of \textit{Intro to Biology} trial play in this
+                    \\\quad~use case?
+                    \\\quad~The success of Mathesis in the \textit{Introduction to Biology}
+                    \\\quad~course at RPI will serve as a stepping stone for its future
+                    \\\quad~integration into various other university courses.\\
+                \tabitem How can faculty/professors draw conclusions from student responses?
+                    \\\quad~The student feedback report will contain important information
+                    \\\quad~about which students struggle the most on certain topics
+                    \\\quad~along with the areas that the class as a whole is the least
+                    \\\quad~knowledgeable in.  This will hopefully help faculty to decide
+                    \\\quad~how to best allocate their time during course lectures or assignments.
+            }\\\hline
+        \end{tabular}
+        \end{table}
+
+    \end{appendices}
+
 \end{document}
