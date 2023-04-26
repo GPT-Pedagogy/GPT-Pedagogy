@@ -1,0 +1,21 @@
+input{
+  margin-top: 8%;
+}
+a{
+  text-decoration: none;
+}
+#loginform{
+  text-align: center;
+  margin-left: min(35vh, 35vw);
+  margin-right: min(35vh, 35vw);
+  margin-top: min(20vh, 20vw);
+  margin-bottom: min(20vh, 20vw);
+  height: min(60vh, 60vw);
+  background-color: aquamarine;
+  font-size: 5vh;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+#login{
+  margin-top: 5%;
+  text-decoration: none;
+}
