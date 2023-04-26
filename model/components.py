@@ -14,7 +14,7 @@ class Chat:
     CHAT_MODE = 0
     MODEL_NAME = "text-davinci-003"
     chat_history = []
-    MIN_CHAT_TOKENS = 30
+    MIN_CHAT_TOKENS = 70
 
     def __init__(self):
         self.model: Model = Model(self.MODEL_NAME)
@@ -98,8 +98,8 @@ class Evaluate:
         score = self.model.complete(prompt).strip().split()
 
         for word in score:
-            if word.split(".")[0].isnumeric():
-                return int(word.split(".")[0])
+            if word.split("/")[0].split(".")[0].isnumeric():
+                return int(word.split("/")[0].split(".")[0])
 
         raise ValueError("No string within the response was a score!")
 

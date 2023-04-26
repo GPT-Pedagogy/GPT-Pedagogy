@@ -91,7 +91,8 @@ def request_grades():
     df.to_csv(temp_file, index=False)
 
     # Use Flask's send_file function to return the CSV file as a download
-    return send_file(temp_file, mimetype='text/csv', as_attachment=True)
+    # return send_file(temp_file, mimetype='text/csv', as_attachment=True)
+    return {"grades": df.to_csv(index=False)}
 
 @app.route('/input', methods=['POST'])
 def get_input():
