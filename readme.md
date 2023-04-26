@@ -36,10 +36,11 @@ This details the usage and qualities of all important functions, classes, and va
 both the front and back ends of this project.  This documentation is in html format and can be 
 found in these locations:
 
-| Docs             | Location                                         |
-|------------------|--------------------------------------------------|
-| Frontend - JSDoc | [docs/jsdoc/index.html](docs/jsdoc/index.html)   |
-| Backend - Sphinx | [docs/sphinx/index.html](docs/sphinx/index.html) |
+| Docs             | Location                                                                                 |
+|------------------|------------------------------------------------------------------------------------------|
+| Frontend - JSDoc | [docs/jsdoc/index.html](docs/jsdoc/index.html)                                           |
+| Backend - Sphinx | [docs/sphinx/index.html](docs/sphinx/index.html)                                         |
+| Project Report   | [docs/finalReport/out/gptPedagogyReport.pdf](docs/finalReport/out/gptPedagogyReport.pdf) |
 
 For the best viewing experience, we recommend cloning the repository and opening up the 
 index.html files locally in a web browser.

@@ -51,7 +51,7 @@
         fine-tuning the underlying large language model (LLM) with domain expertise. The current
         fine-tuned model can perform several tasks that achieve this goal.  These include: the generation
         of course-relevant multiple choice and free response questions, the assessment of student
-        responses, and the generation of tailored critical and constructive student feedback.
+        responses, and the generation of tailored, critical, and constructive feedback to students.
         Future model iterations will leverage human-in-the-loop reinforcement learning, drawing from
         previous interactions with students and faculty to expand its proficiency as a learning tool.
 
@@ -104,11 +104,11 @@
     We hypothesize that integration of LLM tutors in higher education will result in an elevated
     level of conceptualization of course material among affected students.
 
-    \let\thefootnote\relax\footnotetext{Our source code can be found at
-    \href{https://github.com/ITWSXInformatics/ChatGPT_Pedagogy_Group2_2023}{github.com/ITWSXInformatics/ChatGPT\_Pedagogy\_Group2\_2023}}
+    \let\thefootnote\relax\footnotetext{Our source code can be found at:
+    \href{https://github.com/ITWSXInformatics/ChatGPT_Pedagogy_Group2_2023}{\textit{github.com/ITWSXInformatics/ChatGPT\_Pedagogy\_Group2\_2023}}}
 
-    \let\thefootnote\relax\footnotetext{A demo video can be found at
-    \href{https://drive.google.com/file/d/139m_XDbhoRpS4L9yhUWEu-zSxkCSfSdE/view?resourcekey}{drive.google.com/file/d/139m\_XDbhoRpS4L9yhUWEu-zSxkCSfSdE}}
+    \let\thefootnote\relax\footnotetext{A demo video can be found at:
+    \href{https://drive.google.com/file/d/139m_XDbhoRpS4L9yhUWEu-zSxkCSfSdE/view?resourcekey}{\textit{drive.google.com/file/d/139m\_XDbhoRpS4L9yhUWEu-zSxkCSfSdE}}}
 
     \section{Project Use Case}
 
@@ -145,7 +145,11 @@
     however, that the GPT model will always introduce some amount of extra uncertainty.
 
     One of the areas where we worked to minimize uncertainty is through the fine-tuning of the model on our
-    own, customized, training data. The use of a GPT model introduces some uncertainty in user experience. However, we have minimized uncertainty associated with use of the model by employing fine-tuning and prompt engineering techniques. Fine-tuning enables confidence in our model to provide accurate information on course-related concepts. Whereas prompt engineering tailors model outputs to fit within designed specifications which are amenable to integration within our user interface. 
+    own, customized, training data. The use of a GPT model introduces some uncertainty in user experience.
+    However, we have minimized uncertainty associated with use of the model by employing fine-tuning
+    and prompt engineering techniques. Fine-tuning enables confidence in our model's ability to provide
+    accurate information on course-related concepts. Whereas prompt engineering tailors model outputs
+    to fit within designed specifications which are amenable to integration within our user interface.
 
     We also minimized uncertainty by careful user interface design.  Our UI has
      two views corresponding to the student and administrator users.  In both of these cases, our design
@@ -181,7 +185,7 @@
     not need to be.  In place of these signs we instead have text descriptions.  While this may be
     less visually appealing, it offers a lower uncertainty as many elements have their descriptions
     written on them.  An example of a sign that we \textit{do} use can be found in the 'send' icon for the
-    chat functionality.  This sign is an icon, specifically as it does not physically resemble anything
+    chat functionality.  This sign is an icon, specifically, as it does not physically resemble anything
     being sent.  We chose this icon to be that of a paper airplane, as is standard across most
     massaging applications.  Through the use of this, and other icons, we hope to make all functionality
     clear while maintaining familiarity.  Another icon that we use in our interface is the \textit{Mathesis}
@@ -256,10 +260,10 @@
     its foundational role. It is important to include this component in our diagram as it is the main
     generator of content for the project.  This content can be anything from novel quiz questions to
     feedback for students. In our diagram, \textit{Mathesis} is shown as a wrapper with a core of
-    GPT-3.  This is because our implementation is an extension and customization of GPT-3, created
-    to achieve the project's specific goals. As the base model, GPT-3 provides the core language
-    understanding and generation capabilities that the \textit{Mathesis} Learning Assistant will build
-    upon.
+    GPT-3.  This is because our implementation is an extension and customization of OpenAI's model, created
+    to achieve the project's specific goals. In our case, the base model provides the core language
+    understanding and generation capabilities that the \textit{Mathesis} Learning Assistant builds
+    upon with its own knowledge and understanding.
 
     \paragraph{Key Learning Objectives}
     Also in our model, we include key learning objectives as an object.  This object represents the
@@ -287,7 +291,7 @@
     \subsection{Logical Model}
     
     Our logical model both maintains the objects and relations of the conceptual model and builds upon
-    them through extra details about attributes any typing.
+    them through extra details about attributes and typing.
 
     \begin{figure}[H]
         \centering
@@ -299,7 +303,7 @@
     \paragraph{Mathesis and Output}
     Our learning assistant comprises two main functionalities: Conversation and Quiz Evaluation.
     The model's conversational capabilities enable students to ask questions related to the learning
-    topics, expanding their knowledge before formal evaluation. Quiz Evaluation is a functionality
+    topics, expanding their knowledge before formal evaluation. \textit{Quiz Evaluation} is a functionality
     that grades chapter quizzes for students and records their performance. The 'Generated Questions
     \& Feedback' item in the Output object represents the quiz question generation process and the
     responses provided by the conversation functionality of the \textit{Mathesis} Learning Assistant. The
@@ -310,7 +314,7 @@
 
     \paragraph{Key Learning Objectives}
     For the faculty, the key learning
-    objectives are stored in Excel sheets containing units, topics, questions, and answers that
+    objectives are stored in Excel sheets/CSV files that contain the units, topics, questions, and answers that
     go into the internal representation that will guide our learning assistant.  Internally, this
     information is represented by a JSON file.  Within this file, we store each lesson, the core
     concepts that the lesson aims to teach, and any questions that \textit{Mathesis} generates based
@@ -318,10 +322,9 @@
 
     \paragraph{User Information System}
     The UserInfo Database, with a student's RCS ID as the primary key, stores student information
-    including Name, past chat logs, and Performance.  This information is stored, ready to be put to
+    including name, past chat logs, and performance.  This information is stored, ready to be put to
     use by the faculty.  In the web interface, faculty have the ability to download a summary of
-    student performances in either a csv or Excel format.
-
+    student performances in either a CSV or Excel format.
 
     \section{Prototype Implementation}
 
@@ -344,10 +347,10 @@
     it is cheaper, but has the drawback of not being pre-trainable.  Due to these factors, we
     decided to keep using \textit{text-davinci-003} after the announcement of \textit{gpt-3.5-turbo}
     that came mid-way through the project.  This decision helps us to fulfil the first four of our
-    \hyperref[functionalReqs]{functional requirements}.
+    \hyperref[functionalReqs]{functional requirements} while keeping our overall goal in mind.
 
     \begin{table}[H]
-        \caption{Model Comparison\cite{openAiDocs}}
+        \caption{Model Comparison\cite{openAiPricing}}
         \label{tab:modelComparison}
         \centering
         \begin{tabular}{|p{3cm}|p{3cm}|p{5cm}|}
@@ -367,15 +370,15 @@
         \end{tabular}
     \end{table}
 
-    \subsection{Alternate Flows}
+    \subsection{Alternate and Exception Flows}
 
     Another important decision that we made was our decision to exclude particular alternative or
-    error flows from our design.  From the beginning of this project, we have been aware that
+    exception flows from our design.  From the beginning of this project, we have been aware that
     large language models, like the GPT series, can both be incredibly helpful and somewhat volatile.
     Notably, we considered the possibility that users could perform adversarial attacks on the model.
     While these attacks would only affect that particular student, it is important to make sure
     our model provides all students with an appropriate learning environment, regardless of their actions.
-    This decision was influenced primarily by the \textit{DAN}~\cite{danThread} (Do Anything Now)
+    This decision was influenced primarily by the \textit{DAN}~\cite{danThread, danReadme} (Do Anything Now)
     exploit and its many iterations.  This exploit allows users to convince the ChatGPT model to
     ignore its alignment and safety training.  Attacks like these would likely also be able to
     bypass the fine-tuning of \textit{Mathesis}.  We partially confirmed this assumption by testing
@@ -383,11 +386,11 @@
     similar if they wished to do so.  At present, we have decided to not focus on measures
     specifically preventing this type of attack.  The reason for this is the relatively quick
     patches OpenAI sends out when exploits are discovered, combined with the difficulty of the
-    problem.  Our hope is that this will not impact the functional requirements of the project,
-    especially as OpenAI continues to work against the issue.  Regardless, we do have future plans
-    to mitigate these risks.  Chief among which is hard-coding an extra alignment layer that checks
-    for misaligned topics.  When encountering prompts of this nature, the model will respond in a
-    manner that redirects the conversation to a safer topic.
+    problem.  Our hope is that we will not have to change the \hyperref[nonFunctionalReqs]{non-functional requirements}
+    of the project, especially as OpenAI continues to work against the issue.  Regardless, we do
+    have future plans to mitigate these risks.  Chief among which is hard-coding an extra alignment
+    layer that checks for misaligned topics.  When encountering prompts of this nature, the model
+    will respond in a manner that redirects the conversation to a safer topic.
 
     \begin{figure}[H]
         \begin{center}
@@ -463,14 +466,7 @@
             Develop a model, \textit{Mathesis}, that maintains its conversational abilities,
             while embedding additional knowledge about faculty defined key learning objectives.
             This model will generate a series of topic-relevant questions, evaluate the answers of
-            those questions, and give useful feedback or counterexamples to the student.
-
-            This model will be able to be generalizable for other classes and disciplines,
-            working especially well for courses where it is difficult to give personalized
-            feedback to each learner during class. This often happens in classes that
-            have a high student to faculty ratio. It will also work well for courses with students,
-            interested in AI, who cannot adequately engage with that interest through the course
-            material.\\\hline
+            those questions, and give useful feedback or counterexamples to the student.\\\hline
 
             \textbf{Summary:}\\
 
@@ -487,7 +483,7 @@
 
             \textbf{Actors:}\\
 
-            Students, Faculty, RPI, Server, OpenAI\\\hline
+            Students, Faculty, Server, \textit{Mathesis} model, Database\\\hline
 
             \textbf{Preconditions:} \\\makecell[l]{
                 \tabitem The User has a valid RPI ID.
@@ -519,34 +515,40 @@
             }\\\hline
 
             \textbf{Basic Flow:} \\\makecell[l]{
-                \\1. The user logs in via his RPI account.
-                \\2. Server checks if the information matches and if the student is
+                \\1. The user logs in via their RPI account.
+                \\2. Server checks if the information matches and if the user is
                     \\\quad~enrolled in the class or not.
                 \\3. Server create response to the user.
-                \\4. Users interprets the response and send request to the server.
-                \\5. Server interprets the result and send request to OpenAI API.
-                \\6. OpenAI send request to the pretune agent and send response back
-                    \\\quad~to the server.
+                \\4. Users interprets the response and sends a request to the server.
+                \\5. Server interprets the result and sends a request to OpenAI API.
+                \\6. OpenAI sends the generated result back to the server.
                 \\7. Server pushes the response back to the user and the database.
-                \\8. User interprets the response and terminates the use case.
-                \\9. Database records the response.
+                \\8. User interprets the response.
+                \\9. Database records the response and terminates the use case.
             }\\\hline
 
             \textbf{Alternate Flow:} \\\makecell[l]{
-                \\1. The user logs in via his RPI account.
-                \\2. Server checks if the information matches and if the student is
+                \\1. A faculty user logs in via their RPI account.
+                \\2. Server checks if the information matches and if the faculty is
+                    \\\quad~enrolled in the class or not.
+                \\3. Faculty member requests the generation of a new question for a
+                    \\\quad~lesson quiz.
+                \\4. \textit{Mathesis} generates the selected question and it is returned
+                    \\\quad~to the UI.
+                \\5. Faculty member removes quiz questions, inserts generated qustions,
+                    \\\quad~or both.
+                \\6. Faculty saves the lesson quiz to the database.
+                \\7. Database records the new quiz and terminates the use case.
+            }\\\hline
+
+            \textbf{Exception Flow:} \\\makecell[l]{
+                \\1. The user logs in via their RPI account.
+                \\2. Server checks if the information matches and if the user is
                     \\\quad~enrolled in the class or not.
                 \\3. User performs actions beyond the normal usage of \textit{Mathesis}.
                 \\4. \textit{Mathesis} detects malicious behavior.
                 \\5. User interaction redirected and actions are taken to either mitigate
                     \\\quad~or terminate this incident.
-            }\\\hline
-
-            \textbf{Postconditions:} \\\makecell[l]{
-                \tabitem Students have gained further course knowledge.
-                \tabitem Students have their knowledge tested with results recorded.
-                \tabitem Faculty has observed student performance.
-                \tabitem Faculty has modified lessons to account for students' knowledge.
             }\\\hline
 
         \end{tabular}
@@ -559,17 +561,24 @@
         \begin{tabular}{|p{13cm}|}
             \hline
 
+            \textbf{Postconditions:} \\\makecell[l]{
+                \tabitem Students have gained further course knowledge.
+                \tabitem Students have their knowledge tested with results recorded.
+                \tabitem Faculty has observed student performance.
+                \tabitem Faculty has modified lessons to account for students' knowledge.
+            }\\\hline
+
             \textbf{Activity Diagram:}\\
 
             \includegraphics[width=\linewidth]{images/newActivityDiagram}\\\hline
 
             \textbf{Questions and Answers:} \\\makecell[l]{
                 \tabitem What role does the success of \textit{Intro to Biology} trial play in this
-                    \\\quad~use case?
+                    \\\quad~use case?\\
                     \\\quad~The success of Mathesis in the \textit{Introduction to Biology}
                     \\\quad~course at RPI will serve as a stepping stone for its future
                     \\\quad~integration into various other university courses.\\
-                \tabitem How can faculty/professors draw conclusions from student responses?
+                \tabitem How can faculty/professors draw conclusions from student responses?\\
                     \\\quad~The student feedback report will contain important information
                     \\\quad~about which students struggle the most on certain topics
                     \\\quad~along with the areas that the class as a whole is the least
@@ -581,4 +590,3 @@
 
     \end{appendices}
 \end{document}
-

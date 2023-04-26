@@ -7,6 +7,9 @@ static/*.xcf
 *.aux
 *.fdb_latexmk
 *.fls
+*.bbl
+*.blg
+*.out
 *.synctex.gz
 docs/*/*.log
 **/*.pickle
